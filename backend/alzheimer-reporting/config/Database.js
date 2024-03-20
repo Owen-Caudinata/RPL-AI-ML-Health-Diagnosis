@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
 //membuat konfigurasi database
-const db = new Sequelize('reporting_alzheimer','root', '', {
+const db = new Sequelize('reporting_alzheimer', 'root', '', {
     host: "localhost",
     dialect: "mysql"
 });

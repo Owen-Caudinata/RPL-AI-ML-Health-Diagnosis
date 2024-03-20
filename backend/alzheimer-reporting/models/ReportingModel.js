@@ -1,24 +1,23 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
-import { text } from "express";
 
 const { DataTypes } = Sequelize;
 
 const Reporting = db.define('reporting', {
     id: {
-        type : DataTypes.UUID,
-        defaultValue : Sequelize.UUIDV4,
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true
     },
     namaPasien: DataTypes.STRING,
     hasildiagnosis: DataTypes.TEXT,
     linkpdf: DataTypes.STRING
-},{
-    freezeTableName:true
+}, {
+    freezeTableName: true
 });
 
 export default Reporting;
 
-(async()=> {
+(async () => {
     await db.sync();
 })();

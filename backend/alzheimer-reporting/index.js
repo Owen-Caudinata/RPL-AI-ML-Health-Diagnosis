@@ -1,11 +1,11 @@
-import express from "express";
-import cors from "cors";
-import router from "./routes/ReportingRoute";
+import express, { json } from 'express';
+import cors from 'cors';
+import router from './routes/ReportingRoute.js';
 
 const app = express();
 //menambahkan middleware
 app.use(cors());
-app.use(express.json());
-app.use(router());
+app.use(json());
+app.use(router);
 
-app.listen(5000, ()=> console.log('Server Berjalan Pada Port 5000'))
+app.listen(5000, () => console.log('Server Berjalan Pada Port 5000'));
