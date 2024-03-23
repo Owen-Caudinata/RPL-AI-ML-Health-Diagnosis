@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const router = Router();
 const prisma = new PrismaClient();
 
-router.get("/get/ehr", async (req, res) => {
+router.get("/get", async (req, res) => {
     try {
         const ehrRecords = await prisma.ehr.findMany();
 
