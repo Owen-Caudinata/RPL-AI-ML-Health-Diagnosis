@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 router.get("/get", async (req, res) => {
     try {
-        const ehrRecords = await prisma.ehr.findMany();
+        const ehrRecords = await prisma.electronicHealthRecord.find;
 
         res.status(200).json(ehrRecords);
     } catch (error) {
