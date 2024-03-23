@@ -1,36 +1,15 @@
-const { PrismaClient } = require('@prisma/client');
+import express from 'express';
+import { PrismaClient } from '@prisma/client';
+import ehrRouter from "./routes/EHRRoutes.js";
 
 const prisma = new PrismaClient();
+const app = express();
 
-async function main() {
-    await prisma.user.create({
-        data: {
-            name: 'Alice',
-            email: 'alice@prisma.io',
-            posts: {
-                create: { title: 'Hello World' },
-            },
-            profile: {
-                create: { bio: 'I like turtles' },
-            },
-        },
-    });
+app.use(express.json());
 
-    const allUsers = await prisma.user.findMany({
-        include: {
-            posts: true,
-            profile: true,
-        },
-    });
-    console.dir(allUsers, { depth: null });
-}
+app.use("/ehr", ehrRouter);
 
-main()
-    .then(async () => {
-        await prisma.$disconnect();
-    })
-    .catch(async (e) => {
-        console.error(e);
-        await prisma.$disconnect();
-        process.exit(1);
-    });
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
