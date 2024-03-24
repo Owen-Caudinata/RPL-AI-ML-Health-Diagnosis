@@ -6,11 +6,11 @@ const prisma = new PrismaClient();
 
 router.get("/get", async (req, res) => {
   try {
-    const ehrRecords = await prisma.electronicHealthRecord.findMany();
+    const reminderRecords = await prisma.reminderRecords.findMany();
 
-    res.status(200).json(ehrRecords);
+    res.status(200).json(reminderRecords);
   } catch (error) {
-    console.error("Error fetching EHR records:", error);
+    console.error("Error fetching reminder:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -34,7 +34,7 @@ router.post("/create", async (req, res) => {
 
     res.status(201).json(createReminder);
   } catch (error) {
-    console.error("Error creating reminder :", error);
+    console.error("Error creating reminder:", error);
     res.status(500).send("Internal Server Error");
   }
 });
