@@ -27,7 +27,7 @@ router.delete("/delete/:id", async (req, res) => {
   // TODO: admin delete daily newsletter
 });
 
-router.broadcast("/broadcast", async (req, res) => {
+router.get("/broadcast", async (req, res) => {
   // TODO: admin broadcast daily newsletter
 });
 

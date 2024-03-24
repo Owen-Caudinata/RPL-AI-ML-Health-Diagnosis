@@ -1,13 +1,15 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
-import triggerRouter from "./routes/TriggerRoutes.js";
+import ehrRouter from "./routes/EHRRoutes.js";
+import dailyNewsLetterRouter from "./routes/DailyNewsletterRoutes.js";
 
 const prisma = new PrismaClient();
 const app = express();
 
 app.use(express.json());
 
-app.use("/trigger", triggerRouter);
+app.use("/ehr", ehrRouter);
+app.use("/dailyNewsletter", dailyNewsLetterRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
