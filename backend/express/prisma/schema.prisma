@@ -35,7 +35,8 @@ model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
   name    String?
-  posts   ElectronicHealthRecord[]
+  ehr   ElectronicHealthRecord[]
+  reminder Reminder[]
   profile Profile?
 }
 
@@ -45,4 +46,15 @@ model DailyNewsLetter {
   createdAt DateTime
   title      String?
   content    String?
+}
+
+model Reminder{
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(255)
+  content   String?
+  published Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
