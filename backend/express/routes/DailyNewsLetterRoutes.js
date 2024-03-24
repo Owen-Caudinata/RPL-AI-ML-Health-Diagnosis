@@ -6,11 +6,11 @@ const prisma = new PrismaClient();
 
 router.get("/get", async (req, res) => {
   try {
-    const triggerRecords = await prisma.electronicHealthRecord.findMany();
+    const dailyNewsLetterRecords = await prisma.dailyNewsLetter.findMany();
 
-    res.status(200).json(triggerRecords);
+    res.status(200).json(dailyNewsLetterRecords);
   } catch (error) {
-    console.error("Error fetching Trigger records:", error);
+    console.error("Error fetching DailyNewsLetter records:", error);
     res.status(500).send("Internal Server Error");
   }
 });

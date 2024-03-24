@@ -39,9 +39,10 @@ model User {
   profile Profile?
 }
 
-model Trigger {
+model DailyNewsLetter {
   id        Int    @id @default(autoincrement()) 
   updatedAt DateTime
   createdAt DateTime
-  name      String?
+  title      String?
+  content    String?
 }
