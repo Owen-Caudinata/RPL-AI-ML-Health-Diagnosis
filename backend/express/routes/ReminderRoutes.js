@@ -41,33 +41,37 @@ router.post("/create", async (req, res) => {
 
 router.put("/edit/:id", async (req, res) => {
   try {
-    const ehrId = parseInt(req.params.id);
-    const { title, content, published, userId } = req.body;
+    const reminderId = parseInt(req.params.id);
+    const { id, createdAt, updatedAt, title, content, published, user, userId } = req.body;
 
-    const existingEHR = await prisma.electronicHealthRecord.findUnique({
+    const existingReminder = await prisma.reminder.findUnique({
       where: {
-        id: ehrId,
+        id: reminderId,
       },
     });
 
-    if (!existingEHR) {
-      return res.status(404).send("EHR record from current ID not found");
+    if (!existingReminder) {
+      return res.status(404).send("Reminder from current ID not found");
     }
 
-    const editEHR = await prisma.electronicHealthRecord.update({
+    const editReminder = await prisma.reminderRecords.update({
       where: {
-        id: ehrId,
+        id: reminderId,
       },
       data: {
+        createdAt: createdAt || existingReminder.createdAt,
+        updatedAt: updatedAt || existingReminder.updatedAt,
         title: title || existingEHR.title,
         content: content || existingEHR.content,
         published: published !== undefined ? published : existingEHR.published,
+        user: user || existingReminder.user,
+        userId: userId || existingReminder.userId,
       },
     });
 
-    res.status(200).json(editEHR);
+    res.status(200).json(editReminder);
   } catch (error) {
-    console.error("Error updating EHR record:", error);
+    console.error("Error updating Reminder:", error);
     res.status(500).send("Internal Server Error");
   }
 });
