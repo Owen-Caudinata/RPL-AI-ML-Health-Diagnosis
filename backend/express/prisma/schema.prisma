@@ -38,6 +38,7 @@ model User {
   ehr   ElectronicHealthRecord[]
   reminder Reminder[]
   profile Profile?
+  alzheimerReports alzheimerReporting[]
 }
 
 model DailyNewsLetter {
@@ -57,4 +58,14 @@ model Reminder{
   published Boolean  @default(false)
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
+}
+
+model alzheimerReporting {
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  classification  String @db.VarChar(255)
+  deskription     String @db.VarChar(255)
+  user            User     @relation(fields: [userId], references: [id])
+  userId          Int
 }
