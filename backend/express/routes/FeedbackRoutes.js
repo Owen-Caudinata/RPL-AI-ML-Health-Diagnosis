@@ -17,7 +17,7 @@ router.get("/get", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   try {
-    const { title, content, published, user, userId } = req.body;
+    const { title, content, published, admin, adminId } = req.body;
 
     const createFeedback = await prisma.feedback.create({
       data: {
