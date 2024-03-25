@@ -1,6 +1,6 @@
 {
   "name": "express",
-  "type":"module",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.11.0",
+    "cors": "^2.8.5",
     "express": "^4.19.1"
   }
 }
