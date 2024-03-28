@@ -38,6 +38,7 @@ model User {
   ehr   ElectronicHealthRecord[]
   reminder Reminder[]
   profile Profile?
+  alzheimerReports alzheimerReporting[]
 }
 
 model DailyNewsLetter {
@@ -59,6 +60,17 @@ model Reminder{
   userId    Int
 }
 
+<<<<<<< HEAD
+model alzheimerReporting {
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  classification  String @db.VarChar(255)
+  deskription     String @db.VarChar(255)
+  status          String @db.VarChar(255)
+  user            User     @relation(fields: [userId], references: [id])
+  userId          Int
+=======
 model Feedback {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -66,4 +78,5 @@ model Feedback {
   content   String?
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
+>>>>>>> 45a1549355627c8f6836a649b13702e48da48ffb
 }
