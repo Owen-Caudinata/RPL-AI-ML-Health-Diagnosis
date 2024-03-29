@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ElectronicHealthRecord {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(255)
+  content   String?
+  published Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+model Profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  user   User    @relation(fields: [userId], references: [id])
+  userId Int     @unique
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  ehr   ElectronicHealthRecord[]
+  reminder Reminder[]
+  profile Profile?
+  alzheimerReports alzheimerReporting[]
+}
+
+model DailyNewsLetter {
+  id        Int    @id @default(autoincrement()) 
+  updatedAt DateTime
+  createdAt DateTime
+  title      String?
+  content    String?
+}
+
+model Reminder{
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(255)
+  content   String?
+  published Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+<<<<<<< HEAD
+model alzheimerReporting {
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  classification  String @db.VarChar(255)
+  deskription     String @db.VarChar(255)
+  status          String @db.VarChar(255)
+  user            User     @relation(fields: [userId], references: [id])
+  userId          Int
+=======
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  title     String   @db.VarChar(255)
+  content   String?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+>>>>>>> 45a1549355627c8f6836a649b13702e48da48ffb
+}
