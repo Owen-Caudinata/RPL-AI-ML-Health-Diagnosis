@@ -5,6 +5,7 @@ import ehrRouter from "./routes/EHRRoutes.js";
 import dailyNewsLetterRouter from "./routes/DailyNewsLetterRoutes.js";
 import reminderRouter from "./routes/ReminderRoutes.js";
 import feedbackRouter from "./routes/FeedbackRoutes.js";
+import alzheimerReporting from "./routes/AlzheimerReporting.js"
 import pneuomaniaReport from "./routes/PneuomaniaReport.js"
 
 const prisma = new PrismaClient();
@@ -16,6 +17,7 @@ app.use(cors());
 app.use("/ehr", ehrRouter);
 app.use("/dailyNewsletter", dailyNewsLetterRouter);
 app.use("/reminder", reminderRouter);
+app.use("/alzheimerReport", alzheimerReporting);
 app.use("/feedback", feedbackRouter);
 app.use("/pneuomania", pneuomaniaReport);
 

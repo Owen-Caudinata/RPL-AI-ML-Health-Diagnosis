@@ -16,7 +16,23 @@ router.get("/get", async (req, res) => {
 })
 
 router.post("/create", async (req, res) => {
-    
+    try {
+        const { classification, deskription, status, user, userID} = req.body;
+
+        const createPnmania = await prisma.pneuomaniaRpt.create({
+            data: {
+                classification: classification,
+                deskription: deskription,
+                status: status,
+                userId: userId,
+            },
+        })
+
+        res.status(201).json(createPnmania);
+    } catch (error) {
+        console.error("Error creating Pneuomania record:", error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 router.put("/edit/:id", async (req, res) => {
