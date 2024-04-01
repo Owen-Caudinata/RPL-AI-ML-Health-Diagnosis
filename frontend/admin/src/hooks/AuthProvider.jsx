@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
                     return;
                 } else {
                     alert("Wrong username or password");
-                    console.error("User request failed:", userResponse.statusText);
+                    console.error("User request failed:", adminResponse.statusText);
                 }
             }
             throw new Error(res.message);

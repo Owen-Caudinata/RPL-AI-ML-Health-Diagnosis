@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, FormControl, FormLabel, Input, VStack, CircularProgress, Heading } from "@chakra-ui/react"; // Added Heading import
 import { useAuth } from "../hooks/AuthProvider.jsx";
-import { Logo } from "./logo.jsx";
+import { Logo } from "../../components/Logo.jsx";
 
 const Login = () => {
   // Accessing authentication context
@@ -14,30 +14,7 @@ const Login = () => {
     password: "",
   });
 
-  useEffect(() => {
-    const backgroundBox = document.getElementById("background-box");
-
-    const handleMouseMove = (event) => {
-      // Get the position of the mouse pointer
-      const mouseX = event.clientX;
-      const mouseY = event.clientY;
-
-      // Calculate opacity based on mouse position
-      const opacity = Math.abs(mouseX - window.innerWidth / 2) / (window.innerWidth / 2);
-
-      // Set opacity of background box
-      backgroundBox.style.opacity = opacity;
-    };
-
-    // Add event listener to track mouse movement
-    document.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      // Remove event listener when component unmounts
-      document.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
+ 
   // Function to handle form submission
   const handleSubmitEvent = async (e) => {
     e.preventDefault();
@@ -83,7 +60,7 @@ const Login = () => {
         left="0"
         width="100%"
         height="100%"
-        bgGradient="linear(to-r, #F5F5F5, #D3D3D3)" // Changed gradient color to light grey
+        // bgGradient="linear(to-r, #F5F5F5, #D3D3D3)" // Changed gradient color to light grey
         transition="opacity 0.3s ease"
         pointerEvents="none" // Ensure background box doesn't interfere with form interaction
       />
