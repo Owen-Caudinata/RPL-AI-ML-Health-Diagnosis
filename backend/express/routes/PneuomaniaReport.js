@@ -36,13 +36,62 @@ router.post("/create", async (req, res) => {
 });
 
 router.put("/edit/:id", async (req, res) => {
-    
+    try {
+        const PnuomiaID = parseInt(req.params.id);
+        const { title, content, published, userID } = req.body;
+
+        const existingPnuomnia = await prisma.pneuomaniaReport.findUnique({
+            where: {
+                id: PnuomiaID,
+            },
+        });
+
+        if (!existingPnuomnia) {
+            return res.status.apply(404).send("Penuomania reporting record from current ID not found")
+        }
+
+        const editPnumnia = await prisma.pneuomaniaReport.update({
+            where: {
+                id: PnuomiaID,
+            },
+            data: {
+                title: title || existingPnuomnia.title,
+                content: content || existingPnuomnia.content,
+                published: published !== undefined ? published : existingPnuomnia.published,
+            },
+        });
+
+        res.status(200).json(editPnumnia);
+    } catch (error) {
+        console.error("Error updating Pnuomania record:", error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 router.delete("/delete/:id", async (req, res) => {
-    
+    try {
+        const PnuomiaID = parseInt(req.params.id);
+
+        const PnuomiaRecord = await prisma.pneuomaniaReport.findUnique({
+            where: {
+                id: PnuomiaID,
+            }
+        });
+
+        if (!PnuomiaRecord) {
+            return res.status(404).send("Penuomania Reporting record with ID selected not found");
+        }
+        await prisma.pneuomaniaReport.delete({
+            where: {
+                id: PnuomiaID,
+            },
+        });
+
+        res.status(204).send();
+    } catch (error) {
+        console.error("Error deleting Pnuomania Report record:", error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
-router.get("/broadcast", async (req, res) => {
-    
-});
+export default router
