@@ -41,13 +41,14 @@ model User {
   reminders        Reminder[]
   alzheimerReports AlzheimerReport[]
   feedbacks        Feedback[]
+  pneumoniaReports PneumoniaReport[]
 }
 
 model Admin {
-  id               Int                      @id @default(autoincrement())
-  email            String                   @unique
-  name             String?
-  hashedPassword   String
+  id             Int     @id @default(autoincrement())
+  email          String  @unique
+  name           String?
+  hashedPassword String
 }
 
 model DailyNewsLetter {
@@ -87,18 +88,15 @@ model Feedback {
   content   String?
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
-
 }
 
-model pneuomaniaReporting {
-  id              Int      @id @default(autoincrement())
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  classification  String   @db.VarChar(255)
-  deskription     String   @db.VarChar(255)
-  status          String   @db.VarChar(255)
-  user            User     @relation(fields: [userId], references: [id])
-  userId          Int
-
-
+model PneumoniaReport {
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  classification String   @db.VarChar(255)
+  deskription    String   @db.VarChar(255)
+  status         String   @db.VarChar(255)
+  user           User     @relation(fields: [userId], references: [id])
+  userId         Int
 }
