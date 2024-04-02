@@ -5,6 +5,7 @@ import PrivateRoute from './router/PrivateRoute';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import WithAction from './components/Navbar';
+import EHR from './pages/EHR';
 
 function App() {
 
@@ -18,6 +19,12 @@ function App() {
               
               <Route element={<PrivateRoute />}>
                   <Route index element={<Home />} />
+                  <Route path='/alzheimer' element={<EHR />} />
+                  <Route path='/pneumonia' element={<EHR />} />
+                  <Route path='/ehr' element={<EHR />} />
+                  <Route path='/daily-newsletter' element={<EHR />} />
+                  <Route path='/feedbacks' element={<EHR />} />
+                  <Route path='/ehr' element={<EHR />} />
               </Route>
             </Routes>
           </AuthProvider>

@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Box,
   Flex,
@@ -16,14 +14,14 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-} from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 
 
-const Links = ['Dashboard', 'Projects', 'Team']
+const Links = ['Dashboard', 'Projects', 'Team'];
 
 const NavLink = (props) => {
-  const { children } = props
+  const { children } = props;
   return (
     <Box
       as="a"
@@ -37,11 +35,11 @@ const NavLink = (props) => {
       href={'#'}>
       {children}
     </Box>
-  )
-}
+  );
+};
 
 export default function Navbar() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -106,5 +104,5 @@ export default function Navbar() {
         ) : null}
       </Box>
     </>
-  )
+  );
 }

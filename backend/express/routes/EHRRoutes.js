@@ -104,4 +104,15 @@ router.delete("/delete/:id", authenticateUser, async (req, res) => {
     }
 });
 
+router.get("/get-all", authenticateAdmin, async (req, res) => {
+    try {
+        const ehrRecords = await prisma.electronicHealthRecord.findMany();
+
+        res.status(200).json(ehrRecords);
+    } catch (error) {
+        console.error("Error fetching EHR records:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 export default router;

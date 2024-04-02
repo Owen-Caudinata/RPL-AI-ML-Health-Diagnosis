@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useAuth } from '../hooks/AuthProvider';
 
 const EHR = () => {
+    const auth = useAuth();
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/ehr/get');
+                const response = await fetch('http://localhost:3000/ehr/get-all', {
+                    headers: {
+                        Authorization: `Bearer ${auth.token}`
+                    }
+                });
                 const jsonData = await response.json();
                 setData(jsonData);
             } catch (error) {
