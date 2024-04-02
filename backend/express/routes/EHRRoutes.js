@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
+import { authenticateUser, authenticateAdmin } from "../middleware/auth.js";
 
 const router = Router();
 const prisma = new PrismaClient();
 
-router.get("/get", async (req, res) => {
+router.get("/get", authenticateUser, async (req, res) => {
     try {
-        const ehrRecords = await prisma.electronicHealthRecord.findMany();
+        const userId = req.user.userId;
+        const ehrRecords = await prisma.electronicHealthRecord.findMany({ where: { userId } });
 
         res.status(200).json(ehrRecords);
     } catch (error) {
@@ -15,9 +17,10 @@ router.get("/get", async (req, res) => {
     }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", authenticateUser, async (req, res) => {
     try {
-        const { title, content, published, user, userId } = req.body;
+        const userId = req.user.userId;
+        const { title, content, published } = req.body;
 
         const createEHR = await prisma.electronicHealthRecord.create({
             data: {
@@ -35,13 +38,15 @@ router.post("/create", async (req, res) => {
     }
 });
 
-router.put("/edit/:id", async (req, res) => {
+router.put("/edit/:id", authenticateUser, async (req, res) => {
     try {
+        const userId = req.user.userId;
         const ehrId = parseInt(req.params.id);
-        const { title, content, published, userId } = req.body;
+        const { title, content, published } = req.body;
 
         const existingEHR = await prisma.electronicHealthRecord.findUnique({
             where: {
+                userId: userId,
                 id: ehrId,
             },
         });
@@ -52,6 +57,7 @@ router.put("/edit/:id", async (req, res) => {
 
         const editEHR = await prisma.electronicHealthRecord.update({
             where: {
+                userId: userId,
                 id: ehrId,
             },
             data: {
@@ -68,12 +74,14 @@ router.put("/edit/:id", async (req, res) => {
     }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", authenticateUser, async (req, res) => {
     try {
+        const userId = req.user.userId;
         const ehrId = parseInt(req.params.id);
 
         const ehrRecord = await prisma.electronicHealthRecord.findUnique({
             where: {
+                userId: userId,
                 id: ehrId,
             },
         });
@@ -84,6 +92,7 @@ router.delete("/delete/:id", async (req, res) => {
 
         await prisma.electronicHealthRecord.delete({
             where: {
+                userId: userId,
                 id: ehrId,
             },
         });
@@ -91,6 +100,17 @@ router.delete("/delete/:id", async (req, res) => {
         res.status(204).send();
     } catch (error) {
         console.error("Error deleting EHR record:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+router.get("/get-all", authenticateAdmin, async (req, res) => {
+    try {
+        const ehrRecords = await prisma.electronicHealthRecord.findMany();
+
+        res.status(200).json(ehrRecords);
+    } catch (error) {
+        console.error("Error fetching EHR records:", error);
         res.status(500).send("Internal Server Error");
     }
 });
