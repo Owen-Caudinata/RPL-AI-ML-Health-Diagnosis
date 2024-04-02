@@ -19,6 +19,10 @@ const theme = extendTheme({
       900: '#006064',
     },
   },
+  fonts: {
+    body: "Inter, sans-serif",
+    heading: "Poppins, sans-serif", 
+  },
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(

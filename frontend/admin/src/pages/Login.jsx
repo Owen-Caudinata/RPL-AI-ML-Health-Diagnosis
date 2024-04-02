@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, FormControl, FormLabel, Input, VStack, CircularProgress, Heading } from "@chakra-ui/react"; // Added Heading import
 import { useAuth } from "../hooks/AuthProvider.jsx";
-import { Logo } from "./logo.jsx";
+import { Logo } from "../components/Logo.jsx"
 
 const Login = () => {
   // Accessing authentication context
@@ -48,24 +48,19 @@ const Login = () => {
       return;
     }
 
-    // Set loading state to true while processing
     setIsLoading(true);
     try {
-      // Call login action from authentication context
       await auth.loginAction(input);
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred during login. Please try again.");
     }
-    // Reset loading state after processing
     setIsLoading(false);
   };
 
-  // Function to handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    // Update input state
     setInput((prevInput) => ({
       ...prevInput,
       [name]: value,
@@ -73,7 +68,6 @@ const Login = () => {
   };
 
   return (
-    // Interactive background with login form
     <Box display="flex" justifyContent="center" alignItems="center" height="100vh" position="relative" overflow="hidden">
       {/* Background box */}
       <Box
