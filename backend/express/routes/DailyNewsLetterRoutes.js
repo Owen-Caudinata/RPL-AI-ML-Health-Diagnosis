@@ -1,34 +1,94 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
+import { authenticateAdmin } from "../middleware/auth.js";
 
 const router = Router();
 const prisma = new PrismaClient();
 
-router.get("/get", async (req, res) => {
+router.get("/get-all", authenticateAdmin, async (req, res) => {
   try {
-    const dailyNewsLetterRecords = await prisma.dailyNewsLetter.findMany();
-
-    res.status(200).json(dailyNewsLetterRecords);
+    const dailyNewsletterRecords = await prisma.dailyNewsLetter.findMany();
+    res.status(200).json(dailyNewsletterRecords);
   } catch (error) {
-    console.error("Error fetching DailyNewsLetter records:", error);
+    console.error("Error fetching Daily Newsletter Records:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-router.post("/create", async (req, res) => {
-  // TODO: admin create daily newsletter
+router.post("/create", authenticateAdmin, async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const createDailyNewsletter = await prisma.dailyNewsLetter.create({
+      data: {
+        title: title,
+        content: content,
+      },
+    });
+    res.status(201).json(createDailyNewsletter);
+  } catch (error) {
+    console.error("Error creating Daily Newsletter Record:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
-router.put("/edit/:id", async (req, res) => {
-  // TODO: admin edit daily newsletter
+router.put("/edit/:id", authenticateAdmin, async (req, res) => {
+  try {
+    const dailyNewsletterId = parseInt(req.params.id);
+    const { title, content } = req.body;
+
+    const existingDailyNewsletter = await prisma.dailyNewsLetter.findUnique({
+      where: {
+        id: dailyNewsletterId,
+      },
+    });
+
+    if (!existingDailyNewsletter) {
+      return res.status(404).send("Daily Newsletter Record not found");
+    }
+
+    const editDailyNewsletter = await prisma.dailyNewsLetter.update({
+      where: {
+        id: dailyNewsletterId,
+      },
+      data: {
+        title: title || existingDailyNewsletter.title,
+        content: content || existingDailyNewsletter.content,
+        updatedAt: new Date(),
+      },
+    });
+
+    res.status(200).json(editDailyNewsletter);
+  } catch (error) {
+    console.error("Error updating Daily Newsletter Record:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
-router.delete("/delete/:id", async (req, res) => {
-  // TODO: admin delete daily newsletter
-});
+router.delete("/delete/:id", authenticateAdmin, async (req, res) => {
+  try {
+    const dailyNewsletterId = parseInt(req.params.id);
 
-router.get("/broadcast", async (req, res) => {
-  // TODO: admin broadcast daily newsletter
+    const dailyNewsletterRecord = await prisma.dailyNewsLetter.findUnique({
+      where: {
+        id: dailyNewsletterId,
+      },
+    });
+
+    if (!dailyNewsletterRecord) {
+      return res.status(404).send("Daily Newsletter Record not found");
+    }
+
+    await prisma.dailyNewsLetter.delete({
+      where: {
+        id: dailyNewsletterId,
+      },
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting Daily Newsletter Record:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 export default router;
