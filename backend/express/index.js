@@ -16,9 +16,9 @@ app.use(cors());
 app.use("/admin", adminRouter);
 app.use("/user", userRouter);
 app.use("/ehr", ehrRouter);
-app.use("/dailyNewsletter", dailyNewsLetterRouter);
+app.use("/daily-newsletter", dailyNewsLetterRouter);
 app.use("/reminder", reminderRouter);
-app.use("/alzheimerReport", alzheimerReportRouter);
+app.use("/alzheimer-report", alzheimerReportRouter);
 app.use("/feedback", feedbackRouter);
 
 const PORT = process.env.PORT || 3000;

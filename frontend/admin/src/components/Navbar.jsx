@@ -16,6 +16,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { useAuth } from '../hooks/AuthProvider';
 
 
 const Links = ['Dashboard', 'Projects', 'Team'];
@@ -39,6 +40,7 @@ const NavLink = (props) => {
 };
 
 export default function Navbar() {
+  const auth = useAuth()
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -62,12 +64,13 @@ export default function Navbar() {
           </HStack>
           <Flex alignItems={'center'}>
             <Button
+              onClick={auth.logOut}
               variant={'solid'}
               colorScheme={'cyan'}
               size={'sm'}
               mr={4}
-              leftIcon={<AddIcon />}>
-              Action
+              leftIcon={<CloseIcon />}>
+              Logout
             </Button>
             <Menu>
               <MenuButton
