@@ -46,14 +46,14 @@ const Home = () => {
           <Heading
             as="h1"
             fontSize={"5xl"}
-            color={theme.colors.cyan[800]}
+            color={theme.colors.cyan[600]}
             textAlign="left"
             ml={{ base: 5, md: 10 }}
             opacity={fadeIn ? 1 : 0}
             transition="opacity 0.5s ease-in-out"
             fontFamily="heading"
             fontWeight="bold"
-            letterSpacing="5px"
+            letterSpacing="7px"
             lineHeight="60px"
           >
             Optimize Your Health <br />
