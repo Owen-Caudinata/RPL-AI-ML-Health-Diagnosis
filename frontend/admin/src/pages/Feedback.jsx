@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
-const EHR = () => {
+const Feedback = () => {
     const auth = useAuth();
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/ehr/get-all', {
+                const response = await fetch('http://localhost:3000/feedback/get-all', {
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
@@ -17,7 +17,7 @@ const EHR = () => {
 
                 if (!response.ok) {
                     if (response.status === 401) {
-                        auth.logOut()
+                        auth.logOut();
                         return;
                     } else {
                         throw new Error('Failed to fetch data');
@@ -57,4 +57,4 @@ const EHR = () => {
     );
 };
 
-export default EHR;
+export default Feedback;

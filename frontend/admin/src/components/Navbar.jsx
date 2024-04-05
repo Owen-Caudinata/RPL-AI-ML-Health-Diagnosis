@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Box,
   Flex,
@@ -16,14 +14,15 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-} from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { useAuth } from '../hooks/AuthProvider';
 
 
-const Links = ['Dashboard', 'Projects', 'Team']
+const Links = ['Dashboard', 'Projects', 'Team'];
 
 const NavLink = (props) => {
-  const { children } = props
+  const { children } = props;
   return (
     <Box
       as="a"
@@ -37,11 +36,12 @@ const NavLink = (props) => {
       href={'#'}>
       {children}
     </Box>
-  )
-}
+  );
+};
 
 export default function Navbar() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const auth = useAuth()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -64,12 +64,13 @@ export default function Navbar() {
           </HStack>
           <Flex alignItems={'center'}>
             <Button
+              onClick={auth.logOut}
               variant={'solid'}
               colorScheme={'cyan'}
               size={'sm'}
               mr={4}
-              leftIcon={<AddIcon />}>
-              Action
+              leftIcon={<CloseIcon />}>
+              Logout
             </Button>
             <Menu>
               <MenuButton
@@ -106,5 +107,5 @@ export default function Navbar() {
         ) : null}
       </Box>
     </>
-  )
+  );
 }
