@@ -6,9 +6,11 @@ const Feedback = () => {
     const auth = useAuth();
     const [data, setData] = useState([]);
     const [feedbackText, setFeedbackText] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         fetchData();
+        checkAdminStatus();
     }, []);
 
     const fetchData = async () => {
@@ -36,6 +38,10 @@ const Feedback = () => {
         }
     };
 
+    const checkAdminStatus = () => {
+        setIsAdmin(auth.user && auth.user.role === 'admin');
+    };
+
     const handleFeedbackSubmit = async () => {
         try {
             const response = await fetch('http://localhost:3000/feedback/submit', {
@@ -51,16 +57,18 @@ const Feedback = () => {
                 throw new Error('Failed to submit feedback');
             }
 
-            // Clear feedback text after successful submission
             setFeedbackText('');
             
-            // Refetch data to update the table
             fetchData();
 
         } catch (error) {
             console.error('Error submitting feedback:', error);
         }
     };
+
+    if (isAdmin) {
+        return <p>Halaman ini hanya dapat diakses oleh pengguna.</p>;
+    }
 
     return (
         <>
