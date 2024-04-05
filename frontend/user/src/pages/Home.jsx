@@ -23,7 +23,7 @@ const Home = () => {
       <Flex bg={theme.colors.cyan[500]} w="100%" p={4} align="center" justify="space-between">
         <Flex align="center" mr={5}>
           <Heading as="h1" size="lg" color="white">
-            RPL-2 User Side
+            Web Logo
           </Heading>
         </Flex>
         <Flex>
