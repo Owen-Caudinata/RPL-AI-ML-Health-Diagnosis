@@ -46,25 +46,25 @@ const Home = () => {
           <Heading
             as="h1"
             fontSize={"5xl"}
-            color={theme.colors.cyan[800]}
+            color={theme.colors.cyan[600]}
             textAlign="left"
             ml={{ base: 5, md: 10 }}
             opacity={fadeIn ? 1 : 0}
             transition="opacity 0.5s ease-in-out"
             fontFamily="heading"
             fontWeight="bold"
-            letterSpacing="5px"
+            letterSpacing="7px"
             lineHeight="60px"
           >
             Optimize Your Health <br />
             Care: Easily obtain <br />
             accurate health results.
           </Heading>
-          <Text lineHeight="27px" letterSpacing="1px" mt={10} ml={{ base: 5, md: 10 }} color={theme.colors.cyan[700]} fontSize="md">
+          <Text lineHeight="25px" letterSpacing="0.5px" mt={10} ml={{ base: 5, md: 10 }} color={theme.colors.cyan[700]} fontSize="md">
             Our user-friendly platform enables you to manage your health more <br />
             easily, providing a convenient way to obtain the care you need. Take <br />
-            control of your health with ease and precision - because your well-being <br />
-            deserves the best.
+            control of your health with ease and precision - because your well- <br />
+            being deserves the best.
           </Text>
         </Box>
         <Box opacity={fadeIn ? 1 : 0} transition="opacity 0.5s ease-in-out" ml={{ md: 20 }}>
