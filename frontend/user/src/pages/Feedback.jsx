@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td, Input, Button } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, Input, Button, Box, Text } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
 const Feedback = () => {
     const auth = useAuth();
     const [data, setData] = useState([]);
     const [feedbackText, setFeedbackText] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+    const [feedbackError, setFeedbackError] = useState('');
 
     useEffect(() => {
         fetchData();
-        checkAdminStatus();
     }, []);
 
     const fetchData = async () => {
         try {
+            setLoading(true);
             const response = await fetch('http://localhost:3000/feedback/get-all', {
                 headers: {
                     Authorization: `Bearer ${auth.token}`
@@ -35,15 +37,14 @@ const Feedback = () => {
 
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
         }
-    };
-
-    const checkAdminStatus = () => {
-        setIsAdmin(auth.user && auth.user.role === 'admin');
     };
 
     const handleFeedbackSubmit = async () => {
         try {
+            setLoading(true);
             const response = await fetch('http://localhost:3000/feedback/submit', {
                 method: 'POST',
                 headers: {
@@ -57,48 +58,67 @@ const Feedback = () => {
                 throw new Error('Failed to submit feedback');
             }
 
+            // Clear feedback text after successful submission
             setFeedbackText('');
+            setFeedbackSubmitted(true);
             
+            // Refetch data to update the table
             fetchData();
 
         } catch (error) {
             console.error('Error submitting feedback:', error);
+            setFeedbackError('Failed to submit feedback. Please try again later.');
+        } finally {
+            setLoading(false);
         }
     };
 
-    if (isAdmin) {
-        return <p>Halaman ini hanya dapat diakses oleh pengguna.</p>;
-    }
+    const handleInputChange = (e) => {
+        setFeedbackText(e.target.value);
+        setFeedbackError('');
+    };
 
     return (
-        <>
-            <Table variant="simple">
-                <Thead>
-                    <Tr>
-                        {data.length > 0 &&
-                            Object.keys(data[0]).map((key) => (
-                                <Th key={key}>{key}</Th>
-                            ))}
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {data.map((item, index) => (
-                        <Tr key={index}>
-                            {Object.values(item).map((value, index) => (
-                                <Td key={index}>{value}</Td>
-                            ))}
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
+        <Box>
             <Input
                 placeholder="Enter your feedback"
                 value={feedbackText}
-                onChange={(e) => setFeedbackText(e.target.value)}
+                onChange={handleInputChange}
                 marginBottom="1rem"
+                isDisabled={loading || feedbackSubmitted}
             />
-            <Button onClick={handleFeedbackSubmit}>Submit Feedback</Button>
-        </>
+            {feedbackError && (
+                <Text color="red.500" marginBottom="1rem">
+                    {feedbackError}
+                </Text>
+            )}
+            <Button onClick={handleFeedbackSubmit} isLoading={loading} isDisabled={!feedbackText || loading || feedbackSubmitted}>
+                {feedbackSubmitted ? "Feedback Submitted" : "Submit Feedback"}
+            </Button>
+
+            {loading && <Text>Loading...</Text>}
+
+            {data.length > 0 && (
+                <Table variant="simple" marginTop="2rem">
+                    <Thead>
+                        <Tr>
+                            {Object.keys(data[0]).map((key) => (
+                                <Th key={key}>{key}</Th>
+                            ))}
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        {data.map((item, index) => (
+                            <Tr key={index}>
+                                {Object.values(item).map((value, index) => (
+                                    <Td key={index}>{value}</Td>
+                                ))}
+                            </Tr>
+                        ))}
+                    </Tbody>
+                </Table>
+            )}
+        </Box>
     );
 };
 
