@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, Box } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
-const EHR = () => {
+const Alzheimer = () => {
     const auth = useAuth();
     const [data, setData] = useState([]);
 
@@ -35,26 +35,10 @@ const EHR = () => {
     }, []);
 
     return (
-        <Table variant="simple">
-            <Thead>
-                <Tr>
-                    {data.length > 0 &&
-                        Object.keys(data[0]).map((key) => (
-                            <Th key={key}>{key}</Th>
-                        ))}
-                </Tr>
-            </Thead>
-            <Tbody>
-                {data.map((item, index) => (
-                    <Tr key={index}>
-                        {Object.values(item).map((value, index) => (
-                            <Td key={index}>{value}</Td>
-                        ))}
-                    </Tr>
-                ))}
-            </Tbody>
-        </Table>
+        <Box>
+            Alzheimer Inference
+        </Box>
     );
 };
 
-export default EHR;
+export default Alzheimer;

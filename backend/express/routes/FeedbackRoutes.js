@@ -1,33 +1,31 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
+import { authenticateUser, authenticateAdmin } from "../middleware/auth.js";
 
 const router = Router();
 const prisma = new PrismaClient();
 
-router.get("/get", async (req, res) => {
+router.get("/get", authenticateUser, async (req, res) => {
   try {
-    const feedbackRecords = await prisma.feedbackRecords.findMany();
+    const userId = req.user.userId;
+    const feedbackRecords = await prisma.feedback.findMany({ where: { userId } });
 
     res.status(200).json(feedbackRecords);
   } catch (error) {
-    console.error("Error fetching Feedback Record:", error);
+    console.error("Error fetching Feedback Records:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", authenticateUser, async (req, res) => {
   try {
-    const { title, content, published, admin, adminId } = req.body;
+    const { title, content } = req.body;
 
     const createFeedback = await prisma.feedback.create({
       data: {
-        id: id,
-        createdAt: createdAt,
         title: title,
         content: content,
-        published: published,
-        user: user,
-        userId: userId,
+        userId: req.user.userId, // Assuming userId is stored in req.user
       },
     });
 
@@ -38,33 +36,32 @@ router.post("/create", async (req, res) => {
   }
 });
 
-router.put("/edit/:id", async (req, res) => {
+router.put("/edit/:id", authenticateUser, async (req, res) => {
   try {
-    const FeedbackId = parseInt(req.params.id);
-    const { id, createdAt, updatedAt, title, content, published, user, userId } = req.body;
+    const userId = req.user.userId;
+    const feedbackId = parseInt(req.params.id);
+    const { title, content, published } = req.body;
 
-    const existingFeedback = await prisma.Feedback.findUnique({
+    const existingFeedback = await prisma.feedback.findUnique({
       where: {
-        id: FeedbackId,
+        userId: userId,
+        id: feedbackId,
       },
     });
 
     if (!existingFeedback) {
-      return res.status(404).send("Feedback Record from current ID not found");
+      return res.status(404).send("Feedback Record not found");
     }
 
-    const editFeedback = await prisma.FeedbackRecords.update({
+    const editFeedback = await prisma.feedback.update({
       where: {
-        id: FeedbackId,
+        userId: req.user.userId,
+        id: feedbackId,
       },
       data: {
-        createdAt: createdAt || existingFeedback.createdAt,
-        updatedAt: updatedAt || existingFeedback.updatedAt,
-        title: title || existingEHR.title,
-        content: content || existingEHR.content,
-        published: published !== undefined ? published : existingEHR.published,
-        user: user || existingFeedback.user,
-        userId: userId || existingFeedback.userId,
+        title: title || existingFeedback.title,
+        content: content || existingFeedback.content,
+        published: published !== undefined ? published : existingFeedback.published,
       },
     });
 
@@ -75,21 +72,23 @@ router.put("/edit/:id", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", authenticateUser, async (req, res) => {
   try {
+    const userId = req.user.userId;
     const feedbackId = parseInt(req.params.id);
 
-    const feedbackRecord = await prisma.feedbackRecord.findUnique({
+    const feedbackRecord = await prisma.feedback.findUnique({
       where: {
         id: feedbackId,
+        userId: userId,
       },
     });
 
     if (!feedbackRecord) {
-      return res.status(404).send("Feedback Record with ID selected not found");
+      return res.status(404).send("Feedback Record not found");
     }
 
-    await prisma.feedbackRecord.delete({
+    await prisma.feedback.delete({
       where: {
         id: feedbackId,
       },
@@ -97,7 +96,18 @@ router.delete("/delete/:id", async (req, res) => {
 
     res.status(204).send();
   } catch (error) {
-    console.error("Error deleting Feedback record:", error);
+    console.error("Error deleting Feedback Record:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/get-all", authenticateAdmin, async (req, res) => {
+  try {
+    const feedbackRecords = await prisma.feedback.findMany();
+
+    res.status(200).json(feedbackRecords);
+  } catch (error) {
+    console.error("Error fetching EHR records:", error);
     res.status(500).send("Internal Server Error");
   }
 });

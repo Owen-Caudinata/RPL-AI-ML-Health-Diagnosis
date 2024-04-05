@@ -53,8 +53,8 @@ model Admin {
 
 model DailyNewsLetter {
   id        Int      @id @default(autoincrement())
-  updatedAt DateTime
-  createdAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   title     String?
   content   String?
 }
