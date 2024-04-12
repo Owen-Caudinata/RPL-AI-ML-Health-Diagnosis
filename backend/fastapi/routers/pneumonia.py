@@ -1,15 +1,25 @@
 import io
+import os
 
 import torch
 import torch.nn.functional as F
 import torchvision.transforms as T
+from dotenv import load_dotenv
+from jose import JWTError, jwt
 from mobilenetv3 import MobilenetV3
 from neural_compressor.utils.pytorch import load
 from PIL import Image
 
-from fastapi import APIRouter, File, UploadFile
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi.security import HTTPBearer
+
+load_dotenv()
 
 router = APIRouter()
+security = HTTPBearer()
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
 
 mean = [0.4823, 0.4823, 0.4823]
 std = [0.2456, 0.2456, 0.2456]
@@ -34,7 +44,11 @@ transforms = T.Compose(
 
 
 @router.post("/predict")
-async def predict(file: UploadFile = File(...)):
+async def predict(file: UploadFile = File(...), auth: str = Depends(security)):
+    try:
+        admin_id = jwt.decode(auth.credentials, key=SECRET_KEY, algorithms=[ALGORITHM])
+    except JWTError:
+        raise HTTPException(401, "Invalid JWT Token")
     image_bytes = await file.read()
 
     image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
