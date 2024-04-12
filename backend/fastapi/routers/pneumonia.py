@@ -11,19 +11,16 @@ from fastapi import APIRouter, File, UploadFile
 
 router = APIRouter()
 
-mean = [0.2951, 0.2955, 0.2957]
-std = [0.3167, 0.3168, 0.3168]
+mean = [0.4823, 0.4823, 0.4823]
+std = [0.2456, 0.2456, 0.2456]
 class_names = [
-    "Mildly Demented",
-    "Moderately Demented",
-    "Non Demented",
-    "Very Mildly Demented",
+    "Normal",
+    "Pneumonia",
 ]
-
 
 model = MobilenetV3()
 
-int8_model = load("./torch_model/alzheimer", model=model)
+int8_model = load("./torch_model/pneumonia", model=model)
 int8_model.eval()
 
 transforms = T.Compose(

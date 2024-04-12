@@ -1,6 +1,6 @@
 from fastapi.applications import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import alzheimer
+from routers import alzheimer, pneumonia
 
 app = FastAPI(
     title="RPL",
@@ -17,4 +17,5 @@ app.add_middleware(
     expose_headers=["*"],
 )
 
-app.include_router(alzheimer.router)
+app.include_router(router=alzheimer.router, prefix="/alzheimer")
+app.include_router(router=pneumonia.router, prefix="/pneumonia")
