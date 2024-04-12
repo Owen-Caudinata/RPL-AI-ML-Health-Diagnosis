@@ -7,6 +7,7 @@ import feedbackRouter from "./routes/FeedbackRoutes.js";
 import alzheimerReportRouter from "./routes/AlzheimerReportRoutes.js";
 import userRouter from "./routes/UserRoutes.js";
 import adminRouter from "./routes/AdminRoutes.js";
+import pneuomaniaReport from "./routes/PneuomaniaReport.js"
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/daily-newsletter", dailyNewsLetterRouter);
 app.use("/reminder", reminderRouter);
 app.use("/alzheimer-report", alzheimerReportRouter);
 app.use("/feedback", feedbackRouter);
+app.use("/pneuomania", pneuomaniaReport);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
