@@ -21,20 +21,16 @@ security = HTTPBearer()
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 
-
-mean = [0.2951, 0.2955, 0.2957]
-std = [0.3167, 0.3168, 0.3168]
+mean = [0.4823, 0.4823, 0.4823]
+std = [0.2456, 0.2456, 0.2456]
 class_names = [
-    "Mildly Demented",
-    "Moderately Demented",
-    "Non Demented",
-    "Very Mildly Demented",
+    "Normal",
+    "Pneumonia",
 ]
-
 
 model = MobilenetV3()
 
-int8_model = load("./torch_model/alzheimer", model=model)
+int8_model = load("./torch_model/pneumonia", model=model)
 int8_model.eval()
 
 transforms = T.Compose(
@@ -53,7 +49,6 @@ async def predict(file: UploadFile = File(...), auth: str = Depends(security)):
         admin_id = jwt.decode(auth.credentials, key=SECRET_KEY, algorithms=[ALGORITHM])
     except JWTError:
         raise HTTPException(401, "Invalid JWT Token")
-
     image_bytes = await file.read()
 
     image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
@@ -69,4 +64,3 @@ async def predict(file: UploadFile = File(...), auth: str = Depends(security)):
     }
 
     return response
-    
