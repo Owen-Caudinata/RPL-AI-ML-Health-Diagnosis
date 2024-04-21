@@ -1,11 +1,11 @@
 import React, {  } from 'react';
-import PredictionForm from '../components/PredictionForm';
+import PneumoniaPredictionForm from '../components/PneumoniaPredictionForm';
 
 const Pneumonia = () => {
    
 
     return (
-        <PredictionForm/>
+        <PneumoniaPredictionForm api={"http://localhost:8000/pneumonia/predict"} />
     );
 };
 

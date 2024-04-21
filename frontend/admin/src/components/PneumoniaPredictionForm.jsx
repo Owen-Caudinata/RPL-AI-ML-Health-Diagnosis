@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Box, Button, FormControl, Input, Image, Heading, Text, Grid, VStack } from '@chakra-ui/react';
+import { useAuth } from '../hooks/AuthProvider';
 
-const PredictionForm = () => {
+const PredictionForm = ({ api }) => {
+    const auth = useAuth();
+
     const [file, setFile] = useState(null);
     const [imageURL, setImageURL] = useState(null);
     const [prediction, setPrediction] = useState(null);
@@ -23,8 +26,11 @@ const PredictionForm = () => {
         formData.append('file', file);
 
         try {
-            const response = await fetch('http://localhost:8000/predict', {
+            const response = await fetch(api, {
                 method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                },
                 body: formData
             });
 
@@ -37,7 +43,7 @@ const PredictionForm = () => {
 
     return (
         <Box p={6} borderWidth="1px" borderRadius="lg">
-            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+            <Grid display="flex" alignItems="center" templateColumns="repeat(2, 1fr)" gap={6}>
                 <Box>
                     <FormControl>
                         <Input
@@ -63,6 +69,7 @@ const PredictionForm = () => {
                         Predict
                     </Button>
                 </Box>
+
             </Grid>
             {imageURL && (
                 <Grid templateColumns="repeat(2, 1fr)" gap={6} mt={4}>
@@ -76,12 +83,29 @@ const PredictionForm = () => {
                                     Prediction Results
                                 </Heading>
                                 <VStack align="stretch" mt={2}>
-                                    {Object.entries(prediction).map(([className, probability]) => (
-                                        <Box key={className} p={2} borderWidth="1px" borderRadius="md">
-                                            <Text fontWeight="bold">{className}</Text>
-                                            <Text>{(probability * 100).toFixed(2)}%</Text>
-                                        </Box>
-                                    ))}
+                                    <Box p={2} borderWidth="1px" borderRadius="md">
+                                        <Text fontWeight="bold">ID</Text>
+                                        <Text>{(prediction.id)}</Text>
+                                    </Box>
+                                    <Box p={2} borderWidth="1px" borderRadius="md">
+                                        <Text fontWeight="bold">Timestamp</Text>
+                                        <Text>{new Date(prediction.timestamp).toLocaleString()}</Text>
+                                    </Box>
+
+                                    <Box p={2} borderWidth="1px" borderRadius="md">
+                                        <Text fontWeight="bold">Admin ID</Text>
+                                        <Text>{(prediction.admin_id)}</Text>
+                                    </Box>
+
+                                    <Box p={2} borderWidth="1px" borderRadius="md">
+                                        <Text fontWeight="bold">Normal</Text>
+                                        <Text>{(prediction.normal * 100).toFixed(2)}%</Text>
+                                    </Box>
+                                    <Box p={2} borderWidth="1px" borderRadius="md">
+                                        <Text fontWeight="bold">Pneumonia</Text>
+                                        <Text>{(prediction.pneumonia * 100).toFixed(2)}%</Text>
+                                    </Box>
+
                                 </VStack>
                             </Box>
                         )}

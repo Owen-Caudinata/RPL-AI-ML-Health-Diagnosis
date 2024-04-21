@@ -1,12 +1,17 @@
 import io
 import os
+import datetime
+import uuid
+# from datetime import datetime
 
 import torch
 import torch.nn.functional as F
 import torchvision.transforms as T
+from database import alzheimer_preds
 from dotenv import load_dotenv
 from jose import JWTError, jwt
 from mobilenetv3 import MobilenetV3
+from models import AlzheimerPredsModel
 from neural_compressor.utils.pytorch import load
 from PIL import Image
 
@@ -24,12 +29,12 @@ ALGORITHM = os.getenv("ALGORITHM")
 
 mean = [0.2951, 0.2955, 0.2957]
 std = [0.3167, 0.3168, 0.3168]
-class_names = [
-    "Mildly Demented",
-    "Moderately Demented",
-    "Non Demented",
-    "Very Mildly Demented",
-]
+# class_names = [
+#     "Mildly Demented",
+#     "Moderately Demented",
+#     "Non Demented",
+#     "Very Mildly Demented",
+# ]
 
 
 model = MobilenetV3()
@@ -50,7 +55,8 @@ transforms = T.Compose(
 @router.post("/predict")
 async def predict(file: UploadFile = File(...), auth: str = Depends(security)):
     try:
-        admin_id = jwt.decode(auth.credentials, key=SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(auth.credentials, key=SECRET_KEY, algorithms=[ALGORITHM])
+        admin_id = payload["adminId"]
     except JWTError:
         raise HTTPException(401, "Invalid JWT Token")
 
@@ -63,10 +69,23 @@ async def predict(file: UploadFile = File(...), auth: str = Depends(security)):
         predictions = int8_model(input_tensor).data.cpu().squeeze()
     probabilities = F.softmax(predictions, dim=0).numpy()
 
-    response = {
-        class_name: float(probability)
-        for class_name, probability in zip(class_names, probabilities)
-    }
+    response = AlzheimerPredsModel(
+        # id=str(uuid.uuid4()),
+        timestamp=datetime.datetime.now(datetime.UTC),
+        admin_id=admin_id,
+        mildly_demented=float(probabilities[0]),
+        moderately_demented=float(probabilities[1]),
+        non_demented=float(probabilities[2]),
+        very_mildly_demented=float(probabilities[3])
+    )
 
+    print(response.model_dump())
+
+    inserted = await alzheimer_preds.insert_one(response.model_dump())
+    inserted_id = str(inserted.inserted_id)
+    response.id = inserted_id
+    
     return response
+
+    
     

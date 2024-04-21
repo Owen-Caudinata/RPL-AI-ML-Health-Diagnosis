@@ -43,8 +43,8 @@ CREATE TABLE "Admin" (
 -- CreateTable
 CREATE TABLE "DailyNewsLetter" (
     "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL,
     "title" TEXT,
     "content" TEXT,
 
@@ -69,9 +69,8 @@ CREATE TABLE "AlzheimerReport" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "classification" VARCHAR(255) NOT NULL,
+    "predictionId" VARCHAR(255) NOT NULL,
     "description" VARCHAR(255) NOT NULL,
-    "status" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "AlzheimerReport_pkey" PRIMARY KEY ("id")
@@ -86,6 +85,19 @@ CREATE TABLE "Feedback" (
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "Feedback_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PneumoniaReport" (
+    "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "classification" VARCHAR(255) NOT NULL,
+    "description" VARCHAR(255) NOT NULL,
+    "status" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
+
+    CONSTRAINT "PneumoniaReport_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -111,3 +123,6 @@ ALTER TABLE "AlzheimerReport" ADD CONSTRAINT "AlzheimerReport_userId_fkey" FOREI
 
 -- AddForeignKey
 ALTER TABLE "Feedback" ADD CONSTRAINT "Feedback_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PneumoniaReport" ADD CONSTRAINT "PneumoniaReport_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

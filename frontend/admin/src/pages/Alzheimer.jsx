@@ -1,11 +1,12 @@
 import React, {  } from 'react';
-import PredictionForm from '../components/PredictionForm';
+
+import AlzheimerPredictionForm from '../components/AlzheimerPredictionForm'
 
 const Alzheimer = () => {
    
 
     return (
-        <PredictionForm/>
+        <AlzheimerPredictionForm inferenceAPI={"http://localhost:8000/alzheimer/predict"} reportAPI={"http://localhost:3000/alzheimer-report/create"} />
     );
 };
 
