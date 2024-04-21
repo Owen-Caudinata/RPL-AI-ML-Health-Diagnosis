@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Checkbox, Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
-const Feedback = () => {
-    const [formData, setFormData] = useState({ title: '', content: '' });
+const AddEHR = () => {
+    const [formData, setFormData] = useState({ title: '', content: '', published: '' });
     const auth = useAuth();
 
     const handleChange = (e) => {
@@ -17,7 +17,7 @@ const Feedback = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/feedback/create', {
+            const response = await fetch('http://localhost:3000/daily-newsletter/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,10 +58,25 @@ const Feedback = () => {
                     onChange={handleChange}
                 />
             </FormControl>
-
+            <FormControl>
+                <FormLabel htmlFor="published">Published</FormLabel>
+                <Checkbox
+                    id="published"
+                    name="published"
+                    isChecked={formData.published} // Setting the checkbox state based on `formData.published`
+                    onChange={(e) => {
+                        // Toggle the boolean value when the checkbox changes
+                        handleChange({
+                            target: { name: 'published', value: e.target.checked },
+                        });
+                    }}
+                >
+                    Is Published
+                </Checkbox>
+            </FormControl>
             <Button type="submit">Add Data</Button>
         </Box>
     );
 };
 
-export default Feedback;
+export default AddEHR;

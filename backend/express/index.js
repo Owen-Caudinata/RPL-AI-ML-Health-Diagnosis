@@ -21,7 +21,7 @@ app.use("/daily-newsletter", dailyNewsLetterRouter);
 app.use("/reminder", reminderRouter);
 app.use("/alzheimer-report", alzheimerReportRouter);
 app.use("/feedback", feedbackRouter);
-app.use("/pneuomania", pneuomaniaReport);
+app.use("/pneuomania-report", pneuomaniaReport);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

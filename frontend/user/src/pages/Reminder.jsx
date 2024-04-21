@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useToast, Box, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Button, Box, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { IconButton } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
-
-
-const DailyNewsletter = () => {
-    const toast = useToast()
+const EHR = () => {
     const navigate = useNavigate();
     const auth = useAuth();
     const [data, setData] = useState([]);
@@ -14,24 +12,13 @@ const DailyNewsletter = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/daily-newsletter/get-all', {
+                const response = await fetch('http://localhost:3000/reminder/get', {
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
                 });
-
-                if (!response.ok) {
-                    if (response.status === 401) {
-                        auth.logOut();
-                        return;
-                    } else {
-                        throw new Error('Failed to fetch data');
-                    }
-                }
-
                 const jsonData = await response.json();
                 setData(jsonData);
-
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -40,13 +27,13 @@ const DailyNewsletter = () => {
     }, []);
 
     const onEdit = async (id) => {
-        navigate(`/daily-newsletter/edit/${id}`);
+        navigate(`/reminder/edit/${id}`);
     };
 
     const onDelete = async (id) => {
         if (confirm('Are you sure you want to delete this record?')) {
             try {
-                const response = await fetch(`http://localhost:3000/daily-newsletter/delete/${id}`, {
+                const response = await fetch(`http://localhost:3000/reminder/delete/${id}`, {
                     method: 'DELETE',
                     headers: {
                         Authorization: `Bearer ${auth.token}`,
@@ -60,7 +47,7 @@ const DailyNewsletter = () => {
                         status: 'success',
                         duration: 5000,
                         isClosable: true,
-                    }); // fix
+                    });
                 } else {
                     console.error('Error deleting data:', await response.text());
                 }
@@ -72,9 +59,10 @@ const DailyNewsletter = () => {
 
     return (
         <Box>
-            <Button as="a" href="/daily-newsletter/add" colorScheme="teal" mb={4}>
-                Add Daily Newsletter
+            <Button as="a" href="/reminder-add" colorScheme="teal" mb={4}>
+                Add EHR
             </Button>
+
             <Table variant="simple">
                 <Thead>
                     <Tr>
@@ -106,7 +94,7 @@ const DailyNewsletter = () => {
                                 <Button
                                     colorScheme="red"
                                     size="sm"
-                                    onClick={() => onDelete(item.id)}
+                                    onClick={() => onDelete(item.id)} 
                                 >
                                     Delete
                                 </Button>
@@ -119,4 +107,4 @@ const DailyNewsletter = () => {
     );
 };
 
-export default DailyNewsletter;
+export default EHR;
