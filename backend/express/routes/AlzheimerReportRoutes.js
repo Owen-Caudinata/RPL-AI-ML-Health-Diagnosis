@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 router.get("/get", async (req, res) => {
     try {
-        const alzheimerReporting = await prisma.alzheimerReporting.findMany();
+        const alzheimerReporting = await prisma.alzheimerReport.findMany();
 
         res.status(200).json(alzheimerReporting);
     } catch (error) {

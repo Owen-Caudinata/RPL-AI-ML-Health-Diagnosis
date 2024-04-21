@@ -8,6 +8,9 @@ import Alzheimer from './pages/Alzheimer';
 import Pneumonia from "./pages/Pneumonia";
 import Feedback from "./pages/Feedback";
 import DailyNewsletter from "./pages/DailyNewsletter";
+import AddDailyNewsletter from './pages/AddDailyNewsletter'
+import EditDailyNewsletter from "./pages/EditDailyNewsletter"
+
 
 function App() {
 
@@ -24,7 +27,13 @@ function App() {
                   <Route path='/alzheimer' element={<Alzheimer />} />
                   <Route path='/pneumonia' element={<Pneumonia />} />
                   <Route path='/ehr' element={<EHR />} />
+
+
                   <Route path='/daily-newsletter' element={<DailyNewsletter />} />
+                  <Route path='/daily-newsletter/add' element={<AddDailyNewsletter />} />
+                  <Route path='/daily-newsletter/edit/:id' element={<EditDailyNewsletter />} />
+
+
                   <Route path='/feedback' element={<Feedback />} />
                   
               </Route>
