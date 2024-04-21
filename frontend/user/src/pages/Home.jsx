@@ -42,7 +42,7 @@ const Home = () => {
         </Flex>
       </Flex>
       <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={8} p={4} mt={20}>
-        <Box>
+        <Box alignContent="center">
           <Heading
             as="h1"
             fontSize={"5xl"}
@@ -67,7 +67,7 @@ const Home = () => {
             being deserves the best.
           </Text>
         </Box>
-        <Box opacity={fadeIn ? 1 : 0} transition="opacity 0.5s ease-in-out" ml={{ md: 20 }}>
+        <Box opacity={fadeIn ? 1 : 0} transition="opacity 0.5s ease-in-out" ml={{ md: 20 }} alignItems="center">
           <img src={landingpagedoctor} style={{ width: "90%", height: "auto" }} />
         </Box>
       </Grid>

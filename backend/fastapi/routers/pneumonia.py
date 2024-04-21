@@ -1,3 +1,4 @@
+import datetime
 import io
 import os
 
@@ -6,6 +7,7 @@ import torch.nn.functional as F
 import torchvision.transforms as T
 from dotenv import load_dotenv
 from jose import JWTError, jwt
+from models import PneumoniaPredsModel
 from mobilenetv3 import MobilenetV3
 from neural_compressor.utils.pytorch import load
 from PIL import Image
@@ -13,6 +15,8 @@ from PIL import Image
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from fastapi.security import HTTPBearer
 
+
+from database import pneumonia_preds
 load_dotenv()
 
 router = APIRouter()
@@ -23,10 +27,12 @@ ALGORITHM = os.getenv("ALGORITHM")
 
 mean = [0.4823, 0.4823, 0.4823]
 std = [0.2456, 0.2456, 0.2456]
-class_names = [
-    "Normal",
-    "Pneumonia",
-]
+
+
+# class_names = [
+#     "Normal",
+#     "Pneumonia",
+# ]
 
 model = MobilenetV3()
 
@@ -46,9 +52,11 @@ transforms = T.Compose(
 @router.post("/predict")
 async def predict(file: UploadFile = File(...), auth: str = Depends(security)):
     try:
-        admin_id = jwt.decode(auth.credentials, key=SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(auth.credentials, key=SECRET_KEY, algorithms=[ALGORITHM])
+        admin_id = payload["adminId"]
     except JWTError:
         raise HTTPException(401, "Invalid JWT Token")
+    
     image_bytes = await file.read()
 
     image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
@@ -58,9 +66,18 @@ async def predict(file: UploadFile = File(...), auth: str = Depends(security)):
         predictions = int8_model(input_tensor).data.cpu().squeeze()
     probabilities = F.softmax(predictions, dim=0).numpy()
 
-    response = {
-        class_name: float(probability)
-        for class_name, probability in zip(class_names, probabilities)
-    }
+    response = PneumoniaPredsModel(
+        # id=str(uuid.uuid4()),
+        timestamp=datetime.datetime.now(datetime.UTC),
+        admin_id=admin_id,
+        normal=float(probabilities[0]),
+        pneumonia=float(probabilities[1]),
+    )
 
+    print(response.model_dump())
+
+    inserted = await pneumonia_preds.insert_one(response.model_dump())
+    inserted_id = str(inserted.inserted_id)
+    response.id = inserted_id
+    
     return response
