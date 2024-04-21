@@ -27,6 +27,9 @@ const Home = () => {
           </Heading>
         </Flex>
         <Flex>
+        <Button as="a" href="/reminder" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
+            Reminder
+          </Button>
           <Button as="a" href="/alzheimer" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Alzheimer
           </Button>

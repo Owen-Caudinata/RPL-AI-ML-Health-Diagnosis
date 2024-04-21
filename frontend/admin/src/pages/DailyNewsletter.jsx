@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Box, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
 const DailyNewsletter = () => {
@@ -17,7 +17,7 @@ const DailyNewsletter = () => {
 
                 if (!response.ok) {
                     if (response.status === 401) {
-                        auth.logOut()
+                        auth.logOut();
                         return;
                     } else {
                         throw new Error('Failed to fetch data');
@@ -35,25 +35,30 @@ const DailyNewsletter = () => {
     }, []);
 
     return (
-        <Table variant="simple">
-            <Thead>
-                <Tr>
-                    {data.length > 0 &&
-                        Object.keys(data[0]).map((key) => (
-                            <Th key={key}>{key}</Th>
-                        ))}
-                </Tr>
-            </Thead>
-            <Tbody>
-                {data.map((item, index) => (
-                    <Tr key={index}>
-                        {Object.values(item).map((value, index) => (
-                            <Td key={index}>{value}</Td>
-                        ))}
+        <Box>
+            <Button as="a" href="/newsletter-add" colorScheme="teal" mb={4}>
+                Add Daily Newsletter
+            </Button>
+            <Table variant="simple">
+                <Thead>
+                    <Tr>
+                        {data.length > 0 &&
+                            Object.keys(data[0]).map((key) => (
+                                <Th key={key}>{key}</Th>
+                            ))}
                     </Tr>
-                ))}
-            </Tbody>
-        </Table>
+                </Thead>
+                <Tbody>
+                    {data.map((item, index) => (
+                        <Tr key={index}>
+                            {Object.values(item).map((value, index) => (
+                                <Td key={index}>{value}</Td>
+                            ))}
+                        </Tr>
+                    ))}
+                </Tbody>
+            </Table>
+        </Box>
     );
 };
 

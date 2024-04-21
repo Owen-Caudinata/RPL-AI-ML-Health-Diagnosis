@@ -8,6 +8,10 @@ import EHR from './pages/EHR';
 import AddEHR from './pages/AddEHR';
 import EditEHR from './pages/EditEHR';
 
+import Reminder from './pages/Reminder'
+import AddReminder from './pages/AddReminder'
+import EditReminder from './pages/EditReminder'
+
 function App() {
 
   return (
@@ -19,9 +23,15 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/" element={<Home />} />
+
                 <Route path="/ehr" element={<EHR />} />
                 <Route path="/ehr-add" element={<AddEHR />} />
                 <Route path="/ehr/edit/:id" element={<EditEHR />} />
+
+                <Route path="/reminder" element={<Reminder />} />
+                <Route path="/reminder-add" element={<AddReminder />} />
+                <Route path="/reminder/edit/:id" element={<EditReminder />} />
+
               </Route>
             </Routes>
           </AuthProvider>

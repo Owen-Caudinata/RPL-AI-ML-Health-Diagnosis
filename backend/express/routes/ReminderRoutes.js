@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
+import { authenticateUser } from "../middleware/auth.js";
 
 const router = Router();
 const prisma = new PrismaClient();
 
-router.get("/get", async (req, res) => {
+router.get("/get", authenticateUser, async (req, res) => {
   try {
-    const reminderRecords = await prisma.reminderRecords.findMany();
+    const userId = req.user.userId;
+    const reminderRecords = await prisma.reminder.findMany({ where: { userId } });
 
     res.status(200).json(reminderRecords);
   } catch (error) {
@@ -15,38 +17,37 @@ router.get("/get", async (req, res) => {
   }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", authenticateUser, async (req, res) => {
   try {
-    const { title, content, published, user, userId } = req.body;
+    const userId = req.user.userId;
+    const { title, content, published } = req.body;
 
     const createReminder = await prisma.reminder.create({
       data: {
-        id: id,
-        createdAt: createdAt,
-        updatedAt: updatedAt,
         title: title,
         content: content,
         published: published,
-        user: user,
         userId: userId,
       },
     });
 
     res.status(201).json(createReminder);
   } catch (error) {
-    console.error("Error creating Reminder Record:", error);
+    console.error("Error creating Reminder record:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-router.put("/edit/:id", async (req, res) => {
+router.put("/edit/:id", authenticateUser, async (req, res) => {
   try {
+    const userId = req.user.userId;
     const reminderId = parseInt(req.params.id);
-    const { id, createdAt, updatedAt, title, content, published, user, userId } = req.body;
+    const { title, content, published } = req.body;
 
     const existingReminder = await prisma.reminder.findUnique({
       where: {
         id: reminderId,
+        userId: userId,
       },
     });
 
@@ -54,18 +55,16 @@ router.put("/edit/:id", async (req, res) => {
       return res.status(404).send("Reminder Record from current ID not found");
     }
 
-    const editReminder = await prisma.reminderRecords.update({
+    const editReminder = await prisma.reminder.update({
       where: {
         id: reminderId,
+        userId: userId,
       },
       data: {
-        createdAt: createdAt || existingReminder.createdAt,
-        updatedAt: updatedAt || existingReminder.updatedAt,
-        title: title || existingEHR.title,
-        content: content || existingEHR.content,
-        published: published !== undefined ? published : existingEHR.published,
-        user: user || existingReminder.user,
-        userId: userId || existingReminder.userId,
+        title: title || existingReminder.title,
+        content: content || existingReminder.content,
+        published: published !== undefined ? published : existingReminder.published,
+
       },
     });
 
@@ -76,13 +75,15 @@ router.put("/edit/:id", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", authenticateUser, async (req, res) => {
   try {
+    const userId = req.user.userId;
     const reminderId = parseInt(req.params.id);
 
-    const reminderRecord = await prisma.reminderRecord.findUnique({
+    const reminderRecord = await prisma.reminder.findUnique({
       where: {
         id: reminderId,
+        userId: userId,
       },
     });
 
@@ -90,9 +91,10 @@ router.delete("/delete/:id", async (req, res) => {
       return res.status(404).send("Reminder Record with ID selected not found");
     }
 
-    await prisma.reminderRecord.delete({
+    await prisma.reminder.delete({
       where: {
         id: reminderId,
+        userId: userId,
       },
     });
 
