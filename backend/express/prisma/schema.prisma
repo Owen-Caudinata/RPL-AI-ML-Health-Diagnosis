@@ -42,6 +42,7 @@ model User {
   alzheimerReports AlzheimerReport[]
   feedbacks        Feedback[]
   pneumoniaReports PneumoniaReport[]
+  FetalHealth      FetalHealth[]
 }
 
 model Admin {
@@ -71,13 +72,13 @@ model Reminder {
 }
 
 model AlzheimerReport {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
   predictionId String   @db.VarChar(255)
-  description String   @db.VarChar(255)
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
+  description  String   @db.VarChar(255)
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
 }
 
 model Feedback {
@@ -90,10 +91,21 @@ model Feedback {
 }
 
 model PneumoniaReport {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  predictionId String   @db.VarChar(255)
+  description  String   @db.VarChar(255)
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
+}
+
+model FetalHealth {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  predictionId String   @db.VarChar(255)
+  fetalID     String   @db.VarChar(255)
+  Age         String   @db.VarChar(255)
   description String   @db.VarChar(255)
   user        User     @relation(fields: [userId], references: [id])
   userId      Int
