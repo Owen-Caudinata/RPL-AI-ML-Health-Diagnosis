@@ -1,0 +1,33 @@
+# Node.js runtime
+node_modules
+
+# NPM/Yarn lock files
+package-lock.json
+yarn.lock
+
+# Editor-specific files
+.vscode
+.idea
+*.sublime-workspace
+*.sublime-project
+*.iml
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+*.tmp
+
+# Build output
+/build
+/dist
+/out
+
+# Dependency directories
+bower_components
+jspm_packages
+
+# OS-generated files
+.DS_Store
+Thumbs.db
