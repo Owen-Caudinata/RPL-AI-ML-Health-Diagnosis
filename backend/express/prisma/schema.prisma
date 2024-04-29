@@ -110,3 +110,13 @@ model FetalHealth {
   user        User     @relation(fields: [userId], references: [id])
   userId      Int
 }
+
+model drugs {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  drugsID     Int      @db.unique
+  nameDrugs   String   @db.VarChar(255)
+  expired     DateTime @DateTime
+  category    String   @db.VarChar(255)
+}
