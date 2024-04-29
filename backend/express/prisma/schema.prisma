@@ -133,3 +133,15 @@ model RetrievalAugmented {
   description String   @db.VarChar(255)
 }
 
+
+model AppointmentScheduling {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(255)
+  content   String?
+  description String   @db.VarChar(255)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
