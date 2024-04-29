@@ -111,6 +111,18 @@ model FetalHealth {
   userId      Int
 }
 
+
+model Drugs {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  drugsID     Int      @db.unique
+  nameDrugs   String   @db.VarChar(255)
+  expired     DateTime @DateTime
+  category    String   @db.VarChar(255)
+}
+
+
 model RetrievalAugmented {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
@@ -120,3 +132,4 @@ model RetrievalAugmented {
   content   String?
   description String   @db.VarChar(255)
 }
+
