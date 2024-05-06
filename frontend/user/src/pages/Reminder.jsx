@@ -4,7 +4,7 @@ import { IconButton } from "@chakra-ui/react";
 import { useAuth } from "../hooks/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-const EHR = () => {
+const Reminder = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const [data, setData] = useState([]);
@@ -60,7 +60,7 @@ const EHR = () => {
   return (
     <Box>
       <Button as="a" href="/reminder-add" colorScheme="teal" mb={4}>
-        Add EHR
+        Add REMINDER
       </Button>
 
       <Table variant="simple">
@@ -99,4 +99,4 @@ const EHR = () => {
   );
 };
 
-export default EHR;
+export default Reminder;
