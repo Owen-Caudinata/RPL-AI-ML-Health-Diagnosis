@@ -40,34 +40,4 @@ router.post("/create", authenticateUser, async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", authenticateUser, async (req, res) => {
-  try {
-    const userId = req.user.userId;
-    const scheduleId = parseInt(req.params.id);
-
-    const scheduleRecord = await prisma.schedule.findUnique({
-      where: {
-        id: scheduleId,
-        userId: userId,
-      },
-    });
-
-    if (!scheduleRecord) {
-      return res.status(404).send("Schedule Record with ID selected not found");
-    }
-
-    await prisma.schedule.delete({
-      where: {
-        id: scheduleId,
-        userId: userId,
-      },
-    });
-
-    res.status(204).send();
-  } catch (error) {
-    console.error("Error deleting Schedule record:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
 export default router;
