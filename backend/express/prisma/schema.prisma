@@ -104,44 +104,40 @@ model FetalHealth {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  fetalID     String   @db.VarChar(255)
+  fetalId     String   @db.VarChar(255)
   Age         String   @db.VarChar(255)
   description String   @db.VarChar(255)
   user        User     @relation(fields: [userId], references: [id])
   userId      Int
 }
 
-
 model Drugs {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  drugsID     Int      @db.unique
-  nameDrugs   String   @db.VarChar(255)
-  expired     DateTime @DateTime
-  category    String   @db.VarChar(255)
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  drugsID   Int      @db.unique
+  nameDrugs String   @db.VarChar(255)
+  expired   DateTime @DateTime
+  category  String   @db.VarChar(255)
 }
-
 
 model RetrievalAugmented {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  RetrievalID     String   @db.VarChar(255)
-  title     String   @db.VarChar(255)
-  content   String?
+  RetrievalID String   @db.VarChar(255)
+  title       String   @db.VarChar(255)
+  content     String?
   description String   @db.VarChar(255)
 }
-
 
 model AppointmentScheduling {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String   @db.VarChar(255)
+  content     String?
   description String   @db.VarChar(255)
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
 }
-
