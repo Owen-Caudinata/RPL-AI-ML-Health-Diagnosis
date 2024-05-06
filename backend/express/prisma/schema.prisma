@@ -43,6 +43,7 @@ model User {
   feedbacks        Feedback[]
   pneumoniaReports PneumoniaReport[]
   FetalHealth      FetalHealth[]
+  appointments     AppointmentScheduling[]
 }
 
 model Admin {
@@ -116,10 +117,10 @@ model Drugs {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  drugsID     Int      @db.unique
+  drugsID     String   @db.VarChar(255)
   nameDrugs   String   @db.VarChar(255)
-  expired     DateTime @DateTime
   category    String   @db.VarChar(255)
+  description String   @db.VarChar(255)
 }
 
 
