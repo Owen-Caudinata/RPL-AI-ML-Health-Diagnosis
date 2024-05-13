@@ -11,7 +11,7 @@ load_dotenv()
 USER_URL = os.getenv("USER_URL")
 
 
-class UserCreateReminder(unittest.TestCase):
+class UserCreateAppointment(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
 
