@@ -64,7 +64,6 @@ router.put("/edit/:id", authenticateUser, async (req, res) => {
         title: title || existingReminder.title,
         content: content || existingReminder.content,
         published: published !== undefined ? published : existingReminder.published,
-
       },
     });
 

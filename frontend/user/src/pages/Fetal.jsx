@@ -4,7 +4,7 @@ import { IconButton } from "@chakra-ui/react";
 import { useAuth } from "../hooks/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-const Reminder = () => {
+const Fetal = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const [data, setData] = useState([]);
@@ -12,7 +12,7 @@ const Reminder = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/reminder/get", {
+        const response = await fetch("http://localhost:3000/fetal/get", {
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },
@@ -27,13 +27,13 @@ const Reminder = () => {
   }, []);
 
   const onEdit = async (id) => {
-    navigate(`/reminder/edit/${id}`);
+    navigate(`/fetal/edit/${id}`);
   };
 
   const onDelete = async (id) => {
     if (confirm("Are you sure you want to delete this record?")) {
       try {
-        const response = await fetch(`http://localhost:3000/reminder/delete/${id}`, {
+        const response = await fetch(`http://localhost:3000/fetal/delete/${id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${auth.token}`,
@@ -59,8 +59,8 @@ const Reminder = () => {
 
   return (
     <Box>
-      <Button as="a" href="/reminder-add" colorScheme="teal" mb={4}>
-        Add REMINDER
+      <Button as="a" href="/fetal-add" colorScheme="teal" mb={4}>
+        Add fetal
       </Button>
 
       <Table variant="simple">
@@ -69,8 +69,10 @@ const Reminder = () => {
             <Th key="id">ID</Th>
             <Th key="createdAt">Created At</Th>
             <Th key="updatedAt">Updated At</Th>
-            <Th key="title">Title</Th>
-            <Th key="content">Content</Th>
+            <Th key="fetalId">Fetal ID</Th>
+            <Th key="age">Age</Th>
+            <Th key="description">Description</Th>
+            <Th key="userId">UserID</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -79,8 +81,10 @@ const Reminder = () => {
               <Td>{item.id}</Td>
               <Td>{item.createdAt}</Td>
               <Td>{item.updatedAt}</Td>
-              <Td>{item.title}</Td>
-              <Td>{item.content}</Td>
+              <Td>{item.fetalId}</Td>
+              <Td>{item.age}</Td>
+              <Td>{item.description}</Td>
+              <Td>{item.userId}</Td>
 
               <Td>
                 <Button colorScheme="blue" size="sm" onClick={() => onEdit(item.id)}>
@@ -99,4 +103,4 @@ const Reminder = () => {
   );
 };
 
-export default Reminder;
+export default Fetal;
