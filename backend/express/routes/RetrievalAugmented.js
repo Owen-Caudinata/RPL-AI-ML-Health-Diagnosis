@@ -5,7 +5,6 @@ import { PrismaClient } from "@prisma/client";
 const router = Router();
 const prisma = new PrismaClient();
 
-// ... existing code ...
 
 // Function to find the most relevant document
 async function findMostRelevantDocument(query) {
@@ -36,5 +35,42 @@ router.post('/getDocument', async (req, res) => {
   }
 });
 
+// Endpoint to update a document
+router.put('/updateDocument/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { RetrievalID, title, content, description } = req.body;
+
+    const document = await prisma.retrievalAugmented.update({
+      where: { id: Number(id) },
+      data: {
+        RetrievalID,
+        title,
+        content,
+        description,
+      },
+    });
+
+    res.json(document);
+  } catch (error) {
+    console.error('Error during document update:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Endpoint to delete a document
+router.delete('/deleteDocument/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const document = await prisma.retrievalAugmented.delete({
+      where: { id: Number(id) },
+    });
+
+    res.json(document);
+  } catch (error) {
+    console.error('Error during document deletion:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 export default router;

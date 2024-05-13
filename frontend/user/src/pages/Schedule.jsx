@@ -4,7 +4,7 @@ import { IconButton } from "@chakra-ui/react";
 import { useAuth } from "../hooks/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-const Reminder = () => {
+const Schedule = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const [data, setData] = useState([]);
@@ -12,7 +12,7 @@ const Reminder = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/reminder/get", {
+        const response = await fetch("http://localhost:3000/schedule/get", {
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },
@@ -27,13 +27,13 @@ const Reminder = () => {
   }, []);
 
   const onEdit = async (id) => {
-    navigate(`/reminder/edit/${id}`);
+    navigate(`/schedule/edit/${id}`);
   };
 
   const onDelete = async (id) => {
     if (confirm("Are you sure you want to delete this record?")) {
       try {
-        const response = await fetch(`http://localhost:3000/reminder/delete/${id}`, {
+        const response = await fetch(`http://localhost:3000/schedule/delete/${id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${auth.token}`,
@@ -59,8 +59,8 @@ const Reminder = () => {
 
   return (
     <Box>
-      <Button as="a" href="/reminder-add" colorScheme="teal" mb={4}>
-        Add REMINDER
+      <Button as="a" href="/schedule-add" colorScheme="teal" mb={4}>
+        Add SCHEDULE
       </Button>
 
       <Table variant="simple">
@@ -99,4 +99,4 @@ const Reminder = () => {
   );
 };
 
-export default Reminder;
+export default Schedule;

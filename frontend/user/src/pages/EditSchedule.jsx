@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import { Input, Button } from "@chakra-ui/react"; // Or other form components
 import { useAuth } from "../hooks/AuthProvider";
 
-const EditReminder = () => {
+const EditSchedule = () => {
   const auth = useAuth();
   const { id } = useParams(); // Get the ID parameter from the URL
   const [data, setData] = useState({ title: "", content: "" });
 
   const handleSave = async () => {
-    const response = await fetch(`http://localhost:3000/reminder/edit/${id}`, {
+    const response = await fetch(`http://localhost:3000/schedule/edit/${id}`, {
       method: "PUT", // Or appropriate HTTP method
       headers: {
         "Content-Type": "application/json",
@@ -44,4 +44,4 @@ const EditReminder = () => {
   );
 };
 
-export default EditReminder;
+export default EditSchedule;

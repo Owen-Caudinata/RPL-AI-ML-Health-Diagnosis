@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Checkbox, Box, Input, Button, FormControl, FormLabel } from "@chakra-ui/react";
 import { useAuth } from "../hooks/AuthProvider";
 
-const AddReminder = () => {
+const AddSchedule = () => {
   const [formData, setFormData] = useState({ title: "", content: "", published: "" });
   const auth = useAuth();
 
@@ -17,7 +17,7 @@ const AddReminder = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/reminder/create", {
+      const response = await fetch("http://localhost:3000/schedule/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,4 +67,4 @@ const AddReminder = () => {
   );
 };
 
-export default AddReminder;
+export default AddSchedule;
