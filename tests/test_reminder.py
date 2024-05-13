@@ -34,7 +34,13 @@ class UserCreateReminder(unittest.TestCase):
         driver.get(USER_URL + "/reminder")
         time.sleep(1)
 
-        driver.get(USER_URL + "/reminder-add")
+        driver.get(USER_URL + "/reminder-create")
+        time.sleep(1)
+        driver.get(USER_URL + "/reminder-read")
+        time.sleep(1)
+        driver.get(USER_URL + "/reminder-update")
+        time.sleep(1)
+        driver.get(USER_URL + "/reminder-delete")
         time.sleep(1)
 
         self.assertIn("Add Data", driver.page_source)
