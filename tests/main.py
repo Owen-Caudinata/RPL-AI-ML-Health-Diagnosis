@@ -2,6 +2,7 @@ import unittest
 
 # Import test modules
 from test_login import UserLogin, AdminLogin
+from test_ehr import UserCreateEHR
 
 # Add more imports if you have additional test files
 
@@ -10,7 +11,8 @@ if __name__ == "__main__":
 
     test_suite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(UserLogin))
     test_suite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(AdminLogin))
-    
+
+    test_suite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(UserCreateEHR))
 
     runner = unittest.TextTestRunner()
 
