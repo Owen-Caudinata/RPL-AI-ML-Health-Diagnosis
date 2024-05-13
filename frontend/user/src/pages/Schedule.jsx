@@ -40,7 +40,7 @@ const Schedule = () => {
           },
         });
         if (response.ok) {
-          setData(data.filter((item) => item.id !== id)); // Remove the deleted item from the state
+          setData(data.filter((item) => item.id !== id));
           toast({
             title: "Record deleted.",
             description: `Record with ID ${id} has been deleted.`,
