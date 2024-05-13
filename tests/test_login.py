@@ -1,8 +1,6 @@
 import unittest
 import os
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
 from dotenv import load_dotenv
 
 load_dotenv()
