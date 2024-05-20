@@ -51,9 +51,8 @@ const AddSchedule = () => {
         <Checkbox
           id="published"
           name="published"
-          isChecked={formData.published} // Setting the checkbox state based on `formData.published`
+          isChecked={formData.published}
           onChange={(e) => {
-            // Toggle the boolean value when the checkbox changes
             handleChange({
               target: { name: "published", value: e.target.checked },
             });
@@ -62,7 +61,7 @@ const AddSchedule = () => {
           Is Published
         </Checkbox>
       </FormControl>
-      <Button type="submit">Add Data</Button>
+      <Button type="submit">Add Schedule</Button>
     </Box>
   );
 };
