@@ -17,7 +17,7 @@ const AddEHR = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/daily-newsletter/create', {
+            const response = await fetch('http://localhost:3000/daily-newsletter/create', { // TODO: change api URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
