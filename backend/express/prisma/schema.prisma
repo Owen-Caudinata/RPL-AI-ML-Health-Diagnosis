@@ -106,7 +106,7 @@ model FetalHealth {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   fetalId     String   @db.VarChar(255)
-  Age         String   @db.VarChar(255)
+  age         String   @db.VarChar(255)
   description String   @db.VarChar(255)
   user        User     @relation(fields: [userId], references: [id])
   userId      Int

@@ -7,13 +7,15 @@ import Login from './pages/Login';
 import EHR from './pages/EHR';
 import AddEHR from './pages/AddEHR';
 import EditEHR from './pages/EditEHR';
-
 import Reminder from './pages/Reminder'
 import AddReminder from './pages/AddReminder'
 import EditReminder from './pages/EditReminder'
 import Feedback from './pages/Feedback';
 import Alzheimer from './pages/Alzheimer';
 import Pneumonia from './pages/Pneumonia';
+import Fetal from './pages/Fetal';
+import AddFetal from './pages/AddFetal';
+import EditFetal from './pages/EditFetal';
 
 function App() {
 
@@ -34,6 +36,10 @@ function App() {
                 <Route path="/ehr" element={<EHR />} />
                 <Route path="/ehr-add" element={<AddEHR />} />
                 <Route path="/ehr/edit/:id" element={<EditEHR />} />
+
+                <Route path="/fetal" element={<Fetal />} />
+                <Route path="/fetal-add" element={<AddFetal />} />
+                <Route path="/fetal/edit/:id" element={<EditFetal />} />
 
                 <Route path="/reminder" element={<Reminder />} />
                 <Route path="/reminder-add" element={<AddReminder />} />
