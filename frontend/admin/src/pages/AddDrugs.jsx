@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Checkbox, Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
-const AddEHR = () => {
+const AddDrugs = () => {
     const [formData, setFormData] = useState({ nameDrugs: '', category: '', description: '' });
     const auth = useAuth();
 
@@ -39,7 +39,7 @@ const AddEHR = () => {
     return (
         <Box as="form" onSubmit={handleSubmit}>
             <FormControl>
-                <FormLabel htmlFor="nameDrugs">nameDrugs</FormLabel>
+                <FormLabel htmlFor="nameDrugs">Name Drugs</FormLabel>
                 <Input
                     id="nameDrugs"
                     name="nameDrugs"
@@ -49,7 +49,7 @@ const AddEHR = () => {
                 />
             </FormControl>
             <FormControl>
-                <FormLabel htmlFor="category">category</FormLabel>
+                <FormLabel htmlFor="category">Category</FormLabel>
                 <Input
                     id="category"
                     name="category"
@@ -59,7 +59,7 @@ const AddEHR = () => {
                 />
             </FormControl>
             <FormControl>
-                <FormLabel htmlFor="description">description</FormLabel>
+                <FormLabel htmlFor="description">Description</FormLabel>
                 <Input
                     id="description"
                     name="description"
@@ -73,4 +73,4 @@ const AddEHR = () => {
     );
 };
 
-export default AddEHR;
+export default AddDrugs;

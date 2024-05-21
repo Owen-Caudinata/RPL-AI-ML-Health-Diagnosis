@@ -17,6 +17,7 @@ import Fetal from './pages/Fetal';
 import AddFetal from './pages/AddFetal';
 import EditFetal from './pages/EditFetal';
 
+
 function App() {
 
   return (
@@ -44,6 +45,10 @@ function App() {
                 <Route path="/reminder" element={<Reminder />} />
                 <Route path="/reminder-add" element={<AddReminder />} />
                 <Route path="/reminder/edit/:id" element={<EditReminder />} />
+
+                <Route path="/drugs" element={<Drugs />} />
+                <Route path="/drugs-add" element={<AddDrugs />} />
+                <Route path="/drugs/edit/:id" element={<EditDrugs />} />
 
                 <Route path="/feedback" element={<Feedback />} />
 

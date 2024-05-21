@@ -28,7 +28,7 @@ const Home = () => {
                     <MenuBox path={"/daily-newsletter"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Daily Newsletter"} />
                     <MenuBox path={"/feedback"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"User Feedbacks"} />
                     <MenuBox path={"/fetal"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Fetal Health"} />
-                    <MenuBox path={"/#"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Coming Soon"} />
+                    <MenuBox path={"/Drugs"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Drugs Database"} />
                     <MenuBox path={"/#"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Coming Soon"} />
 
                 </Grid>

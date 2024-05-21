@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import { Input, Button } from '@chakra-ui/react'; // Or other form components
 import { useAuth } from '../hooks/AuthProvider';
 
-const EditEHR = () => {
+const EditDrugs = () => {
     const auth = useAuth();
     const { id } = useParams(); // Get the ID parameter from the URL
-    const [data, setData] = useState({ nameDrugs: '', category: '' });
+    const [data, setData] = useState({ nameDrugs: '', category: '', description: '' });
 
     const handleSave = async () => {
         const response = await fetch(`http://localhost:3000/drugs/edit/${id}`, {
@@ -39,9 +39,14 @@ const EditEHR = () => {
                 onChange={(e) => setData({ ...data, category: e.target.value })}
                 placeholder="category"
             />
+            <Input
+                // value={data.description}
+                onChange={(e) => setData({ ...data, description: e.target.value })}
+                placeholder="description"
+            />
             <Button onClick={handleSave}>Save</Button>
         </div>
     );
 };
 
-export default EditEHR;
+export default EditDrugs;
