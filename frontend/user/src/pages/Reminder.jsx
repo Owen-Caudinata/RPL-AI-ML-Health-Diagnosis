@@ -12,7 +12,7 @@ const Reminder = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/reminder/get", {
+        const response = await fetch("http://localhost:3000/reminder/get", { //TODO: CHANGE API URL
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },
@@ -33,7 +33,7 @@ const Reminder = () => {
   const onDelete = async (id) => {
     if (confirm("Are you sure you want to delete this record?")) {
       try {
-        const response = await fetch(`http://localhost:3000/reminder/delete/${id}`, {
+        const response = await fetch(`http://localhost:3000/reminder/delete/${id}`, { //TODO: CHANGE API URL
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${auth.token}`,

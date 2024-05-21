@@ -9,7 +9,7 @@ const EditEHR = () => {
     const [data, setData] = useState({ title: '', content: '' });
 
     const handleSave = async () => {
-        const response = await fetch(`http://localhost:3000/daily-newsletter/edit/${id}`, {
+        const response = await fetch(`http://localhost:3000/daily-newsletter/edit/${id}`, { //TODO: CHANGE API URL
             method: 'PUT', // Or appropriate HTTP method
             headers: {
                 'Content-Type': 'application/json',

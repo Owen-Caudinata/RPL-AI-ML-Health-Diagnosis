@@ -12,7 +12,7 @@ const Alzheimer = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/alzheimer-report/get', {
+                const response = await fetch('http://localhost:3000/alzheimer-report/get', { //TODO: CHANGE API URL
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }

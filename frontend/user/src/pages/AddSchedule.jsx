@@ -17,7 +17,7 @@ const AddSchedule = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/schedule/create", {
+      const response = await fetch("http://localhost:3000/schedule/create", { //TODO: CHANGE API URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
