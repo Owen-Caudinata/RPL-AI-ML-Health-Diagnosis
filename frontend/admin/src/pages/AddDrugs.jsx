@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Checkbox, Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
+import { Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
 const AddDrugs = () => {
@@ -17,7 +17,7 @@ const AddDrugs = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/Drugs/create', {
+            const response = await fetch('http://localhost:3000/drugs/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
