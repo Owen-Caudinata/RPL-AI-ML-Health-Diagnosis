@@ -1,9 +1,61 @@
 import React, { useState } from 'react';
-import { Checkbox, Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Input, Checkbox, Button, Stack, Textarea } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
+const MyForm = ({ formData, handleChange, handleSubmit }) => {
+    return (
+        <Box
+            as="form"
+            onSubmit={handleSubmit}
+            p={6}
+            boxShadow="md"
+            borderRadius="md"
+            bg="white"
+            maxW="md"
+            width="100%"
+        >
+            <Stack spacing={4}>
+                <FormControl>
+                    <FormLabel htmlFor="title">Title</FormLabel>
+                    <Input
+                        id="title"
+                        name="title"
+                        type="text"
+                        value={formData.title}
+                        onChange={handleChange}
+                        placeholder="Enter the title"
+                    />
+                </FormControl>
+                <FormControl>
+                    <FormLabel htmlFor="content">Content</FormLabel>
+                    <Textarea
+                        id="content"
+                        name="content"
+                        value={formData.content}
+                        onChange={handleChange}
+                        placeholder="Enter the content"
+                    />
+                </FormControl>
+                <FormControl display="flex" alignItems="center">
+                    <Checkbox
+                        id="published"
+                        name="published"
+                        isChecked={formData.published}
+                        onChange={(e) => handleChange({ target: { name: 'published', value: e.target.checked } })}
+                    >
+                        Is Published
+                    </Checkbox>
+                </FormControl>
+                <Button type="submit" colorScheme="blue" size="lg">
+                    Add Data
+                </Button>
+            </Stack>
+        </Box>
+    );
+};
+
 const AddEHR = () => {
-    const [formData, setFormData] = useState({ title: '', content: '', published: '' });
+    const [formData, setFormData] = useState({ title: '', content: '', published: false });
     const auth = useAuth();
 
     const handleChange = (e) => {
@@ -17,7 +69,7 @@ const AddEHR = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/ehr/create', { //TODO: CHANGE API URL
+            const response = await fetch('http://localhost:3000/ehr-add', { // TODO: CHANGE API URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,44 +89,14 @@ const AddEHR = () => {
     };
 
     return (
-        <Box as="form" onSubmit={handleSubmit}>
-            <FormControl>
-                <FormLabel htmlFor="title">Title</FormLabel>
-                <Input
-                    id="title"
-                    name="title"
-                    type="text"
-                    value={formData.title}
-                    onChange={handleChange}
-                />
-            </FormControl>
-            <FormControl>
-                <FormLabel htmlFor="content">Content</FormLabel>
-                <Input
-                    id="content"
-                    name="content"
-                    type="text"
-                    value={formData.content}
-                    onChange={handleChange}
-                />
-            </FormControl>
-            <FormControl>
-                <FormLabel htmlFor="published">Published</FormLabel>
-                <Checkbox
-                    id="published"
-                    name="published"
-                    isChecked={formData.published} // Setting the checkbox state based on `formData.published`
-                    onChange={(e) => {
-                        // Toggle the boolean value when the checkbox changes
-                        handleChange({
-                            target: { name: 'published', value: e.target.checked },
-                        });
-                    }}
-                >
-                    Is Published
-                </Checkbox>
-            </FormControl>
-            <Button type="submit">Add Data</Button>
+        <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="100vh"
+            bg="gray.100"
+        >
+            <MyForm formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
         </Box>
     );
 };
