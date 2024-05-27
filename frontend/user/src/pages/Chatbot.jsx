@@ -108,8 +108,8 @@ const Chat = () => {
                     </VStack>
                 </Box>
             ) : (
-                <Box display="flex" justifyContent="center" alignItems="center" h="full">
-                    <Heading as="h1" size="2xl" color="gray.800">Ask ChatRec</Heading>
+                <Box display="flex" justifyContent="center" alignItems="center" border="solid red" height="60vh">
+                    <Heading as="h1" size="2xl" color="gray.800">Ask Doc.ai</Heading>
                 </Box>
             )}
 
