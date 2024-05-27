@@ -1,15 +1,69 @@
 import os
-# from datetime import datetime
-
 from dotenv import load_dotenv
-
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import HTTPBearer
+from jose import jwt, JWTError
+from pydantic import BaseModel
+from catboost import CatBoostClassifier
+import numpy as np
 
+# Load environment variables
 load_dotenv()
 
+# Initialize FastAPI router and security
 router = APIRouter()
 security = HTTPBearer()
 
+# Get the secret key and algorithm from environment variables
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
+
+# Load the trained CatBoost model
+model = CatBoostClassifier()
+model.load_model("./catboost_model/fetal_health_classifier.cbm")
+
+
+# Define a Pydantic model for the input data
+class PredictionInput(BaseModel):
+    mean_stv: float
+    percent_altv: float
+    astv: float
+    mean_hist: float
+    prolongued_decelerations: float
+
+
+# Define the prediction route
+@router.post("/predict")
+async def predict(input_data: PredictionInput, auth: str = Depends(security)):
+    # Verify JWT token
+    try:
+        payload = jwt.decode(auth.credentials, key=SECRET_KEY, algorithms=[ALGORITHM])
+        admin_id = payload["adminId"]
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Invalid JWT Token")
+
+    # Prepare the input data for prediction
+    features = np.array(
+        [
+            [
+                input_data.mean_stv,
+                input_data.percent_altv,
+                input_data.astv,
+                input_data.mean_hist,
+                input_data.prolongued_decelerations,
+            ]
+        ]
+    )
+
+    # Make prediction
+    # prediction = model.predict(features)
+    prediction_proba = model.predict_proba(features).tolist()
+
+    # Create response
+    response = {
+        "normal": prediction_proba[0][0],
+        "suspect": prediction_proba[0][1],
+        "pathological": prediction_proba[0][2],
+    }
+
+    return response
