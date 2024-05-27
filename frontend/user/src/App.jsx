@@ -16,6 +16,7 @@ import Pneumonia from './pages/Pneumonia';
 import Fetal from './pages/Fetal';
 import AddFetal from './pages/AddFetal';
 import EditFetal from './pages/EditFetal';
+import Chatbot from './pages/Chatbot';
 
 function App() {
 
@@ -44,6 +45,8 @@ function App() {
                 <Route path="/reminder" element={<Reminder />} />
                 <Route path="/reminder-add" element={<AddReminder />} />
                 <Route path="/reminder/edit/:id" element={<EditReminder />} />
+
+                <Route path="/chatbot" element={<Chatbot />} />
 
                 <Route path="/feedback" element={<Feedback />} />
 
