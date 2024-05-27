@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './DocumentPage.css'; // Importing a CSS file
 
 const DocumentPage = () => {
   const [id, setId] = useState('');
@@ -23,31 +22,29 @@ const DocumentPage = () => {
   };
 
   return (
-    <div className="document-page">
+    <div>
       <h1>Document Page</h1>
 
       <input
-        className="input-field"
         type="text"
         value={id}
         onChange={e => setId(e.target.value)}
         placeholder="Enter document ID"
       />
 
-      <button className="button" onClick={updateDocument}>Update Document</button>
-      <button className="button" onClick={deleteDocument}>Delete Document</button>
+      <button onClick={updateDocument}>Update Document</button>
+      <button onClick={deleteDocument}>Delete Document</button>
 
       <textarea
-        className="input-field"
         value={query}
         onChange={e => setQuery(e.target.value)}
         placeholder="Enter query"
       />
 
-      <button className="button" onClick={getDocument}>Get Document</button>
+      <button onClick={getDocument}>Get Document</button>
 
       {document && (
-        <div className="document-display">
+        <div>
           <h2>Document</h2>
           <p>{JSON.stringify(document)}</p>
         </div>

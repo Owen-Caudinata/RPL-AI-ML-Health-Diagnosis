@@ -6,7 +6,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 
-// Function to find the most relevant document
+
 async function findMostRelevantDocument(query) {
   const documents = await prisma.retrievalAugmented.findMany();
   let maxAccuracy = 0;
@@ -23,7 +23,7 @@ async function findMostRelevantDocument(query) {
   return mostRelevantDocument;
 }
 
-// Endpoint to get the most relevant document
+
 router.post('/getDocument', async (req, res) => {
   try {
     const query = req.body.query;
@@ -35,7 +35,7 @@ router.post('/getDocument', async (req, res) => {
   }
 });
 
-// Endpoint to update a document
+
 router.put('/updateDocument/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -58,7 +58,7 @@ router.put('/updateDocument/:id', async (req, res) => {
   }
 });
 
-// Endpoint to delete a document
+
 router.delete('/deleteDocument/:id', async (req, res) => {
   try {
     const { id } = req.params;
