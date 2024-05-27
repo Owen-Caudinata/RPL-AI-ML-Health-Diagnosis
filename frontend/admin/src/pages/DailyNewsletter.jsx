@@ -14,7 +14,7 @@ const DailyNewsletter = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/daily-newsletter/get-all', {
+                const response = await fetch('http://localhost:3000/daily-newsletter/get-all', { //TODO: CHANGE API URL
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
@@ -46,7 +46,7 @@ const DailyNewsletter = () => {
     const onDelete = async (id) => {
         if (confirm('Are you sure you want to delete this record?')) {
             try {
-                const response = await fetch(`http://localhost:3000/daily-newsletter/delete/${id}`, {
+                const response = await fetch(`http://localhost:3000/daily-newsletter/delete/${id}`, { //TODO: CHANGE API URL
                     method: 'DELETE',
                     headers: {
                         Authorization: `Bearer ${auth.token}`,

@@ -9,7 +9,7 @@ const EHR = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/ehr/get-all', {
+                const response = await fetch('http://localhost:3000/ehr/get-all', { //TODO: CHANGE API URL
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }

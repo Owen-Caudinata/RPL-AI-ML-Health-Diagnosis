@@ -38,7 +38,7 @@ function App() {
                 <Route path="/ehr/edit/:id" element={<EditEHR />} />
 
                 <Route path="/fetal" element={<Fetal />} />
-                <Route path="/fetal-add" element={<AddFetal />} />
+                <Route path="/fetal/create" element={<AddFetal />} />
                 <Route path="/fetal/edit/:id" element={<EditFetal />} />
 
                 <Route path="/reminder" element={<Reminder />} />

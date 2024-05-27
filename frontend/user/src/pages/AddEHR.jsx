@@ -17,7 +17,7 @@ const AddEHR = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/ehr/create', {
+            const response = await fetch('http://localhost:3000/ehr/create', { //TODO: CHANGE API URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

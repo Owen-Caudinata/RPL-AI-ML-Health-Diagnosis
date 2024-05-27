@@ -17,7 +17,7 @@ const AddReminder = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/reminder/create", {
+      const response = await fetch("http://localhost:3000/reminder/create", { //TODO: CHANGE API URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
