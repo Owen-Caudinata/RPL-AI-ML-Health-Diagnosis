@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
+
 const EHR = () => {
     const auth = useAuth();
     const [data, setData] = useState([]);
@@ -9,7 +11,7 @@ const EHR = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/ehr/get-all', { //TODO: CHANGE API URL
+                const response = await fetch(mainApiUrl + '/ehr/get-all', { //TODO: CHANGE API URL
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }

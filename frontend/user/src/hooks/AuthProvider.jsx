@@ -2,16 +2,17 @@ import { useContext, createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
 const AuthProvider = ({ children }) => {
-    const apiUrl = import.meta.env.VITE_API_URL;
+    
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem("site") || "");
     const navigate = useNavigate();
 
     const loginAction = async (formData) => {
         try {
-            const response = await fetch(apiUrl + "/user/login", {
+            const response = await fetch(mainApiUrl + "/user/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -27,7 +28,7 @@ const AuthProvider = ({ children }) => {
                 localStorage.setItem("site", res.token);
                 setToken(res.token);
 
-                const userResponse = await fetch(apiUrl + "/user/me", {
+                const userResponse = await fetch(mainApiUrl + "/user/me", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

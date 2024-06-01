@@ -19,9 +19,9 @@ import {
 import { RemoteRunnable } from "@langchain/core/runnables/remote";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 
-const Chat = () => {
-    const apiUrl = "http://localhost:8000/chat";
+const chatbotApiUrl = import.meta.env.VITE_CHATBOT_API_URL;
 
+const Chat = () => {
     const auth = useAuth();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -47,7 +47,7 @@ const Chat = () => {
 
 
             const chain = new RemoteRunnable({
-                url: `http://localhost:8000/chat`,
+                url: chatbotApiUrl + '/chat',
             });
 
             const result = await chain.invoke({ text: inputText });
