@@ -12,7 +12,7 @@ const Pneumonia = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/pneuomania-report/get', { //TODO: CHANGE API URL
+                const response = await fetch('http://localhost:3000/pneumonia-report/get', { //TODO: CHANGE API URL
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
