@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Checkbox, Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
+
 const AddFetal = () => {
     const [formData, setFormData] = useState({ title: '', content: '', published: '' });
     const auth = useAuth();
@@ -17,7 +19,7 @@ const AddFetal = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/fetal/create', { //TODO: CHANGE API URL
+            const response = await fetch(mainApiUrl + '/fetal/create', { //TODO: CHANGE API URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

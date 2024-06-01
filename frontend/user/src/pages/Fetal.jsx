@@ -4,6 +4,8 @@ import { IconButton } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
+
 const Fetal = () => {
     const navigate = useNavigate();
     const auth = useAuth();
@@ -12,7 +14,7 @@ const Fetal = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/fetal/get', { //TODO: CHANGE API URL
+                const response = await fetch(mainApiUrl + '/fetal/get', { //TODO: CHANGE API URL
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
@@ -33,7 +35,7 @@ const Fetal = () => {
     const onDelete = async (id) => {
         if (confirm('Are you sure you want to delete this record?')) {
             try {
-                const response = await fetch(`http://localhost:3000/fetal/delete/${id}`, { //TODO: CHANGE API URL
+                const response = await fetch(mainApiUrl + `/fetal/delete/${id}`, { //TODO: CHANGE API URL
                     method: 'DELETE',
                     headers: {
                         Authorization: `Bearer ${auth.token}`,

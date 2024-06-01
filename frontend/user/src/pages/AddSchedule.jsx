@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Checkbox, Box, Input, Button, FormControl, FormLabel } from "@chakra-ui/react";
 import { useAuth } from "../hooks/AuthProvider";
 
-const AddSchedule = () => {
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
+
+const AdddAppointment = () => {
   const [formData, setFormData] = useState({ title: "", content: "", published: "" });
   const auth = useAuth();
 
@@ -17,7 +19,7 @@ const AddSchedule = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/schedule/create", { //TODO: CHANGE API URL
+      const response = await fetch(mainApiUrl + "/appointment/create", { //TODO: CHANGE API URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,9 +63,9 @@ const AddSchedule = () => {
           Is Published
         </Checkbox>
       </FormControl>
-      <Button type="submit">Add Schedule</Button>
+      <Button type="submit">Add dAppointment</Button>
     </Box>
   );
 };
 
-export default AddSchedule;
+export default AdddAppointment;

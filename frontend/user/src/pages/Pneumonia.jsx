@@ -4,6 +4,8 @@ import { IconButton } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
+
 const Pneumonia = () => {
     const navigate = useNavigate();
     const auth = useAuth();
@@ -12,7 +14,7 @@ const Pneumonia = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/pneuomania-report/get', { //TODO: CHANGE API URL
+                const response = await fetch(mainApiUrl + '/pneumonia-report/get', { //TODO: CHANGE API URL
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
