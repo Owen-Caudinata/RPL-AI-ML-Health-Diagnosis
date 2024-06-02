@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, Input, Heading, Text, Grid, VStack, FormLabel} from '@chakra-ui/react';
+import { Box, Button, FormControl, Input, Heading, Text, Grid, VStack, FormLabel } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
 const PredictionForm = ({ inferenceAPI, reportAPI }) => {
@@ -68,6 +68,17 @@ const PredictionForm = ({ inferenceAPI, reportAPI }) => {
     return (
         <Box p={6} borderWidth="1px" borderRadius="lg">
             <Grid templateColumns="1fr" gap={6}>
+                <FormControl mb={4}>
+                    <FormLabel htmlFor="userId">User ID</FormLabel>
+                    <Input
+                        type="number"
+                        name="userId"
+                        value={inputData.userId}
+                        onChange={handleUserIdChange}
+                        placeholder="User ID"
+                    />
+                </FormControl>
+
                 <FormControl mb={4}>
                     <FormLabel htmlFor="mean_stv">Mean STV</FormLabel>
                     <Input

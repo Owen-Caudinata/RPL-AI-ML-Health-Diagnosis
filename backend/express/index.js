@@ -11,6 +11,7 @@ import pneumoniaReportRouter from "./routes/PneumoniaReport.js"
 import drugRouter from "./routes/DrugRoutes.js"
 import appointmentRouter from "./routes/AppointmentRoutes.js"
 import healthEducationRouter from "./routes/HealthEducationRoutes.js"
+import fetalHealthReportRouter from './routes/FetalHealthReportRoutes.js'
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/reminder", reminderRouter);
 app.use("/alzheimer-report", alzheimerReportRouter);
 app.use("/feedback", feedbackRouter);
 app.use("/pneumonia-report", pneumoniaReportRouter);
+app.use("/fetal-report", fetalHealthReportRouter);
 app.use("/drug", drugRouter)
 app.use("/appointment", appointmentRouter)
 app.use("/blog", healthEducationRouter)
