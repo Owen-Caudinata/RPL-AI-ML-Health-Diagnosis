@@ -12,7 +12,7 @@ load_dotenv()
 USER_URL = os.getenv("USER_URL")
 ADMIN_URL = os.getenv("ADMIN_URL")
 
-class UserVisitEHR(unittest.TestCase):
+class UserVisitFetal(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
 
@@ -31,11 +31,11 @@ class UserVisitEHR(unittest.TestCase):
         time.sleep(1)
         
         self.assertIn("Optimize Your Health", driver.page_source)
-        fetal_button= driver.find_element(By.ID, "ehr")
+        fetal_button= driver.find_element(By.ID, "fetal")
         fetal_button.click()
         time.sleep(1)
     
-        add_fetal= driver.find_element(By.ID, "AddEHR")
+        add_fetal= driver.find_element(By.ID, "Addfetal")
         add_fetal.click()
         time.sleep(1)
         
@@ -45,7 +45,7 @@ class UserVisitEHR(unittest.TestCase):
         self.driver.quit()
 
 
-class AdminVisitEHR(unittest.TestCase):
+class AdminVisitFetal(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
 
@@ -62,10 +62,10 @@ class AdminVisitEHR(unittest.TestCase):
 
         login_button.click()
     
-        time.sleep(1)
+        time.sleep(2)
         
         heading1 = driver.find_element(By.TAG_NAME, 'h1')
-        driver.get(ADMIN_URL + "/ehr")   
+        driver.get(ADMIN_URL + "/fetal")   
         self.assertIn("Logo", driver.page_source)  
            
 
