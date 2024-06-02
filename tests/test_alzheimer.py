@@ -9,8 +9,12 @@ import time
 load_dotenv()
 
 USER_URL = os.getenv("USER_URL")
-ADMIN_URL = os.getenv("ADMIN_URL")
+USER_EMAIL = os.getenv("USER_EMAIL")
+USER_PASSWORD = os.getenv("USER_PASSWORD")
 
+ADMIN_URL = os.getenv("ADMIN_URL")
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
 class UserVisitAlzheimer(unittest.TestCase):
     def setUp(self):
@@ -24,8 +28,8 @@ class UserVisitAlzheimer(unittest.TestCase):
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
 
-        username_field.send_keys("jamesmichael0555@gmail.com")
-        password_field.send_keys("GekkoMain")
+        username_field.send_keys(USER_EMAIL)
+        password_field.send_keys(USER_PASSWORD)
 
         login_button.submit()
 
@@ -49,8 +53,8 @@ class AdminVisitAlzheimer(unittest.TestCase):
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
 
-        username_field.send_keys("admin@admin.com")
-        password_field.send_keys("admin")
+        username_field.send_keys(ADMIN_EMAIL)
+        password_field.send_keys(ADMIN_PASSWORD)
 
         login_button.submit()
 

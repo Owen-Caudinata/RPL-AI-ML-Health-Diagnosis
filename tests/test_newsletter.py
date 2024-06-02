@@ -8,37 +8,30 @@ import time
 
 load_dotenv()
 
-USER_URL = os.getenv("USER_URL")
-USER_EMAIL = os.getenv("USER_EMAIL")
-USER_PASSWORD = os.getenv("USER_PASSWORD")
+ADMIN_URL = os.getenv("ADMIN_URL")
 
-class UserCreateEHR(unittest.TestCase):
+class AdminVisitNewsletter(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
 
     def test_login(self):
         driver = self.driver
-        driver.get(USER_URL)
+        driver.get(ADMIN_URL)
 
         username_field = driver.find_element(By.ID, "email")
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
 
-        username_field.send_keys(USER_EMAIL)
-        password_field.send_keys(USER_PASSWORD)
+        username_field.send_keys("admin@admin.com")
+        password_field.send_keys("admin")
 
         login_button.submit()
 
-        time.sleep(1)
-        self.assertIn("Optimize Your Health ", driver.page_source)
-
-        driver.get(USER_URL + "/ehr")
+        driver.get(ADMIN_URL + "/daily-newsletter")
         time.sleep(1)
 
-        driver.get(USER_URL + "/ehr-add")
-        time.sleep(1)
+        self.assertIn("Add Daily Newsletter", driver.page_source)
 
-        self.assertIn("Add Data", driver.page_source)
 
 
     def tearDown(self):
