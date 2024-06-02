@@ -9,7 +9,7 @@ const Fetal = () => {
     return (
         <FetalPredictionForm 
             inferenceAPI={mlApiUrl + "/fetal/predict"} 
-            reportAPI={mainApiUrl + "/alzheimer-report/create"} /> // TODO: fix
+            reportAPI={mainApiUrl + "/fetal-report/create"} /> // TODO: fix
     );
 };
 
