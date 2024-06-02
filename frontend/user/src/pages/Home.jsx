@@ -27,28 +27,24 @@ const Home = () => {
           </Heading>
         </Flex>
         <Flex>
-        <Button as="a" href="/reminder" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
+        <Button as="a" id="reminder" href="/reminder" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Reminder
           </Button>
-          <Button as="a" href="/alzheimer" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
+          <Button as="a" id="alzheimer" href="/alzheimer" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Alzheimer
           </Button>
-          <Button as="a" href="/pneumonia" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
+          <Button as="a" id="pneumonia" href="/pneumonia" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Pneumonia
           </Button>
-          <Button as="a" href="/fetal" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
+          <Button as="a" id="fetal" href="/fetal" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Fetal Health
           </Button>
 
-          <Button as="a" href="/chatbot" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
+          <Button as="a" id="chatbot" href="/chatbot" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Chatbot
           </Button>
-
-          <Button as="a" href="/ehr" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
+          <Button as="a" id="ehr" href="/ehr" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Electronic Health Record
-          </Button>
-          <Button as="a" href="/fetal" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
-            Fetal Health
           </Button>
           <Button onClick={() => auth.logOut()} mr={4} bg={theme.colors.cyan[900]} color={theme.colors.cyan[50]} _hover={{ bg: theme.colors.cyan[800] }}>
             Logout

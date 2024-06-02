@@ -24,8 +24,8 @@ class UserVisitPneumonia(unittest.TestCase):
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
 
-        username_field.send_keys("jamesmichael0555@gmail.com")
-        password_field.send_keys("GekkoMain")
+        username_field.send_keys("user@user.com")
+        password_field.send_keys("user")
 
         login_button.submit()
 
@@ -54,7 +54,7 @@ class AdminVisitPneumonia(unittest.TestCase):
 
         login_button.submit()
 
-        driver.get(USER_URL + "/Pneumonia")
+        driver.get(ADMIN_URL + "/Pneumonia")
         time.sleep(1)
 
         self.assertIn("Select an image", driver.page_source)

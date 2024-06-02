@@ -1,16 +1,62 @@
-import React, {  } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useAuth } from '../hooks/AuthProvider';
 
-import FetalPredictionForm from '../components/FetalPredictionForm'
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
-const Fetal = () => {
-    const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
-    const mlApiUrl = import.meta.env.VITE_ML_API_URL;
+const EHR = () => {
+    const auth = useAuth();
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(mainApiUrl + '/ehr/get-all', { //TODO: CHANGE API URL
+                    headers: {
+                        Authorization: `Bearer ${auth.token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        auth.logOut()
+                        return;
+                    } else {
+                        throw new Error('Failed to fetch data');
+                    }
+                }
+
+                const jsonData = await response.json();
+                setData(jsonData);
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     return (
-        <FetalPredictionForm 
-            inferenceAPI={mlApiUrl + "/fetal/predict"} 
-            reportAPI={mainApiUrl + "/alzheimer-report/create"} /> // TODO: fix
+        <Table variant="simple">
+            <Thead>
+                <Tr>
+                    {data.length > 0 &&
+                        Object.keys(data[0]).map((key) => (
+                            <Th key={key}>{key}</Th>
+                        ))}
+                </Tr>
+            </Thead>
+            <Tbody>
+                {data.map((item, index) => (
+                    <Tr key={index}>
+                        {Object.values(item).map((value, index) => (
+                            <Td key={index}>{value}</Td>
+                        ))}
+                    </Tr>
+                ))}
+            </Tbody>
+        </Table>
     );
 };
 
-export default Fetal;
+export default EHR;

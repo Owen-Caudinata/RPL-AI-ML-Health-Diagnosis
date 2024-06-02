@@ -61,7 +61,7 @@ const Fetal = () => {
 
     return (
         <Box>
-            <Button as="a" href="/fetal/create" colorScheme="teal" mb={4}>
+            <Button as="a" id="Addfetal" href="/fetal/create" colorScheme="teal" mb={4}>
                 Add Fetal
             </Button>
 
