@@ -61,7 +61,7 @@ async def predict(input_data: PredictionInput, auth: str = Depends(security)):
 
     # Make prediction
     # prediction = model.predict(features)
-    probabilities = model.predict_proba(features).tolist()[0]
+    probabilities = model.predict_proba(features).tolist()[0]   
     print(probabilities)
 
     response = FetalPredsModel(
