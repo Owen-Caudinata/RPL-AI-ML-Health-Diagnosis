@@ -61,7 +61,7 @@ const Reminder = () => {
 
   return (
     <Box>
-      <Button as="a" href="/reminder-add" colorScheme="teal" mb={4}>
+      <Button as="a" href="/reminder-add" colorScheme="teal" mb={4} mt={32}>
         Add REMINDER
       </Button>
 

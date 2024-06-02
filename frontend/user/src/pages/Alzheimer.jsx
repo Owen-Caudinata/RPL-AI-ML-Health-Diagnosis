@@ -30,7 +30,7 @@ const Alzheimer = () => {
 
    
     return (
-        <Box>
+        <Box mt={32}>
             <Table variant="simple">
                 <Thead>
                     <Tr>
