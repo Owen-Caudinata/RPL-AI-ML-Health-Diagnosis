@@ -8,18 +8,24 @@ import Alzheimer from './pages/Alzheimer';
 import Pneumonia from "./pages/Pneumonia";
 import Fetal from "./pages/Fetal";
 import Feedback from "./pages/Feedback";
-import DailyNewsletter from "./pages/DailyNewsletter";
-import AddDailyNewsletter from './pages/AddDailyNewsletter';
-import EditDailyNewsletter from "./pages/EditDailyNewsletter";
-<<<<<<< HEAD
+import DailyNewsletter from "./pages/DailyNewsletter/DailyNewsletter";
+import AddDailyNewsletter from './pages/DailyNewsletter/AddDailyNewsletter';
+import EditDailyNewsletter from "./pages/DailyNewsletter/EditDailyNewsletter";
+
 import Drugs from "./pages/Drugs";
 import AddDrugs from "./pages/AddDrugs";
 import EditDrugs from "./pages/EditDrugs";
 
 
-=======
-import Chatbot from "./pages/Chatbot"
->>>>>>> 2b6dea9f0e1d2706b2a41b3f631c5a52c55d8def
+
+import Chatbot from "./pages/Chatbot";
+import DrugsDatabank from './pages/DrugsDatabank/DrugsDatabank';
+import AddDrugsDatabank from './pages/DrugsDatabank/AddDrugsDatabank';
+import EditDrugsDatabank from "./pages/DrugsDatabank/EditDrugsDatabank";
+import HealthEducation from './pages/HealthEducation/HealthEducation';
+import AddHealthEducation from './pages/HealthEducation/AddHealthEducation';
+import EditHealthEducation from "./pages/HealthEducation/EditHealthEducation";
+
 
 function App() {
 
@@ -48,7 +54,16 @@ function App() {
 
                 <Route path='/feedback' element={<Feedback />} />
 
-<<<<<<< HEAD
+                <Route path='/drugsdatabank' element={<DrugsDatabank />} />
+                <Route path='/drugsdatabank/add' element={<AddDrugsDatabank />} />
+                <Route path='/drugsdatabank/edit/:id' element={<EditDrugsDatabank />} />
+
+                <Route path='/blog' element={<HealthEducation />} />
+                <Route path='/blog/add' element={<AddHealthEducation />} />
+                <Route path='/blog/edit/:id' element={<EditHealthEducation />} />
+
+
+
                   <Route path='/drugs' element={<Drugs />} />
                   <Route path='/drugs/add' element={<AddDrugs />} />
                   <Route path='/drugs/edit/:id' element={<EditDrugs />} />
@@ -56,7 +71,7 @@ function App() {
                   <Route path='/feedback' element={<Feedback />} />
                   
 =======
->>>>>>> 2b6dea9f0e1d2706b2a41b3f631c5a52c55d8def
+
               </Route>
             </Routes>
           </AuthProvider>
