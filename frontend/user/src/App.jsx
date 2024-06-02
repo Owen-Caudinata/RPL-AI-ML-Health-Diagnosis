@@ -18,9 +18,14 @@ import Alzheimer from './pages/Alzheimer';
 import Pneumonia from './pages/Pneumonia';
 
 import Fetal from './pages/Fetal';
-// import AddFetal from './pages/AddFetal';
-// import EditFetal from './pages/EditFetal';
 import Chatbot from './pages/Chatbot';
+import DrugsDatabank from './pages/DrugsDatabank';
+
+import Appointment from './pages/Appointment/Appointment'
+import AddAppointment from './pages/Appointment/AddAppointment'
+import EditAppointment from './pages/Appointment/EditAppointment'
+
+import Blog from './pages/Blog';
 
 function App() {
 
@@ -52,7 +57,13 @@ function App() {
 
                 <Route path="/chatbot" element={<Chatbot />} />
 
-                {/* <Route path="/blog" element={<Blog />} /> */}
+                <Route path="/drugsdatabank" element={<DrugsDatabank />} />
+
+                <Route path="/appointment" element={<Appointment />} />
+                <Route path="/appointment-add" element={<AddAppointment />} />
+                <Route path="/appointment/edit/:id" element={<EditAppointment />} />
+
+                <Route path="/blog" element={<Blog />} />
 
                 <Route path="/feedback" element={<Feedback />} />
 
