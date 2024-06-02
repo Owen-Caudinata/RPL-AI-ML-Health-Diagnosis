@@ -35,3 +35,18 @@ class PneumoniaPredsModel(BaseModel):
     class Config:
         arbitrary_types_allowed = True
 
+
+class FetalPredsModel(BaseModel):
+    """
+    Container for Fetal Health's predictions document.
+    """
+    id: Optional[str] = None
+    timestamp: datetime
+    admin_id: int
+    normal: float
+    suspect: float
+    pathological: float
+
+    class Config:
+        arbitrary_types_allowed = True
+

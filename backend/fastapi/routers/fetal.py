@@ -1,3 +1,4 @@
+import datetime
 import os
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException
@@ -6,6 +7,9 @@ from jose import jwt, JWTError
 from pydantic import BaseModel
 from catboost import CatBoostClassifier
 import numpy as np
+
+from models import FetalPredsModel
+from database import fetal_preds
 
 # Load environment variables
 load_dotenv()
@@ -57,13 +61,22 @@ async def predict(input_data: PredictionInput, auth: str = Depends(security)):
 
     # Make prediction
     # prediction = model.predict(features)
-    prediction_proba = model.predict_proba(features).tolist()
+    probabilities = model.predict_proba(features).tolist()[0]
+    print(probabilities)
 
-    # Create response
-    response = {
-        "normal": prediction_proba[0][0],
-        "suspect": prediction_proba[0][1],
-        "pathological": prediction_proba[0][2],
-    }
+    response = FetalPredsModel(
+        # id=str(uuid.uuid4()),
+        timestamp=datetime.datetime.now(datetime.UTC),
+        admin_id=admin_id,
+        normal=float(probabilities[0]),
+        suspect=float(probabilities[1]),
+        pathological=float(probabilities[2]),
+    )
 
+    print(response.model_dump())
+
+    inserted = await fetal_preds.insert_one(response.model_dump())
+    inserted_id = str(inserted.inserted_id)
+    response.id = inserted_id
+    
     return response
