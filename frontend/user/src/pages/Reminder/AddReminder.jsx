@@ -39,7 +39,7 @@ const AddReminder = () => {
   };
 
   return (
-    <Box as="form" onSubmit={handleSubmit}>
+    <Box as="form" onSubmit={handleSubmit} mt={32}>
       <FormControl>
         <FormLabel htmlFor="title">Title</FormLabel>
         <Input id="title" name="title" type="text" value={formData.title} onChange={handleChange} />

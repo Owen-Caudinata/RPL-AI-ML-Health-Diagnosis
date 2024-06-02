@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Input, Button } from "@chakra-ui/react"; // Or other form components
+import { Input, Button, Box } from "@chakra-ui/react"; // Or other form components
 import { useAuth } from "../../hooks/AuthProvider";
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
@@ -28,21 +28,22 @@ const EditReminder = () => {
   };
 
   return (
-    <div>
-      <h1>Edit Record {id}</h1>
-
-      <Input
-        // value={data.title}
-        onChange={(e) => setData({ ...data, title: e.target.value })}
-        placeholder="Title"
-      />
-      <Input
-        // value={data.content}
-        onChange={(e) => setData({ ...data, content: e.target.value })}
-        placeholder="Content"
-      />
-      <Button onClick={handleSave}>Save</Button>
-    </div>
+    
+      <Box mt={32}>
+        <h1>Edit Record {id}</h1>
+        <Input
+          // value={data.title}
+          onChange={(e) => setData({ ...data, title: e.target.value })}
+          placeholder="Title"
+        />
+        <Input
+          // value={data.content}
+          onChange={(e) => setData({ ...data, content: e.target.value })}
+          placeholder="Content"
+        />
+        <Button onClick={handleSave}>Save</Button>
+      </Box>
+    
   );
 };
 
