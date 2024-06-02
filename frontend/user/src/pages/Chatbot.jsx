@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../hooks/AuthProvider";
-import { useNavigate } from "react-router-dom";
 import {
     Box,
     Flex,
     Button,
     FormControl,
-    FormLabel,
-    Input,
     Textarea,
     VStack,
     HStack,
-    Spinner,
     Heading,
     Text
 } from "@chakra-ui/react";
 
 import { RemoteRunnable } from "@langchain/core/runnables/remote";
-import { ChatPromptTemplate } from "@langchain/core/prompts";
 
 const chatbotApiUrl = import.meta.env.VITE_CHATBOT_API_URL;
 
 const Chat = () => {
     const auth = useAuth();
-    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -79,15 +73,7 @@ const Chat = () => {
     };
 
     return (
-        <Box className="container" p={8} display="flex" flexDirection="column" justifyContent="space-between" minHeight="90vh">
-            <HStack justifyContent="space-between" alignItems="center" bg="teal.500" p={4} borderRadius="xl">
-                <Heading as="h1" size="lg" color="white">Healthcare Chatbot</Heading>
-                <Button onClick={() => auth.logOut()} colorScheme="teal" bg="teal.700" color="white">
-                    Logout
-                </Button>
-            </HStack>
-
-
+        <Box className="container"  p={4} display="flex" flexDirection="column" justifyContent="space-between" minHeight="80vh">
             {chatHistory.length > 0 ? (
                 <Box bg="white" borderRadius="md" p={8} mb={16} height="500px" overflowY="auto">
                     <VStack spacing={4} align="stretch">
@@ -99,7 +85,7 @@ const Chat = () => {
                             >
                                 <Box bg="gray.200" p={4} borderRadius="md" maxW="lg">
                                     <Text fontWeight="bold" color="gray.800">
-                                        {message.type === 'ai' ? 'ChatRec' : 'Human'}
+                                        {message.type === 'ai' ? 'Doc.ai' : 'Human'}
                                     </Text>
                                     <Text>{message.content}</Text>
                                 </Box>
@@ -108,7 +94,7 @@ const Chat = () => {
                     </VStack>
                 </Box>
             ) : (
-                <Box display="flex" justifyContent="center" alignItems="center" border="solid red" height="60vh">
+                <Box display="flex" justifyContent="center" alignItems="center" height="70vh">
                     <Heading as="h1" size="2xl" color="gray.800">Ask Doc.ai</Heading>
                 </Box>
             )}
