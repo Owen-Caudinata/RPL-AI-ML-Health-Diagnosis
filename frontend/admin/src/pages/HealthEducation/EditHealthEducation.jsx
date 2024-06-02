@@ -9,7 +9,7 @@ const EditEHR = () => {
     const auth = useAuth();
     const { id } = useParams();
     const toast = useToast();
-    const [formData, setFormData] = useState({ title: '', content: '', author: '', author: '', published: false });
+    const [formData, setFormData] = useState({ title: '', content: '', author: '', category: '', published: false });
 
     useEffect(() => {
         const fetchData = async () => {

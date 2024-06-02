@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Input, Button } from '@chakra-ui/react'; // Or other form components
-import { useAuth } from '../hooks/AuthProvider';
+import { useAuth } from '../../hooks/AuthProvider';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
