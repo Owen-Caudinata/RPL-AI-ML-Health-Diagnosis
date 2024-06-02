@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/AuthProvider';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
-const EditEHR = () => {
+const EditDrugs = () => {
     const auth = useAuth();
     const { id } = useParams();
     const toast = useToast();
@@ -151,4 +151,4 @@ const EditEHR = () => {
     );
 };
 
-export default EditEHR;
+export default EditDrugs;

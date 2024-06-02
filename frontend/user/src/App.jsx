@@ -50,13 +50,13 @@ function App() {
                 <Route path="/reminder-add" element={<AddReminder />} />
                 <Route path="/reminder/edit/:id" element={<EditReminder />} />
 
-<<<<<<< HEAD
-                <Route path="/drugs" element={<Drugs />} />
-                <Route path="/drugs-add" element={<AddDrugs />} />
-                <Route path="/drugs/edit/:id" element={<EditDrugs />} />
-=======
+
+                {/* <Route path="/drugs" element={<Drugs />} /> */}
+                {/* <Route path="/drugs-add" element={<AddDrugs />} />
+                <Route path="/drugs/edit/:id" element={<EditDrugs />} /> */}
+
                 <Route path="/chatbot" element={<Chatbot />} />
->>>>>>> 2b6dea9f0e1d2706b2a41b3f631c5a52c55d8def
+
 
                 <Route path="/feedback" element={<Feedback />} />
 

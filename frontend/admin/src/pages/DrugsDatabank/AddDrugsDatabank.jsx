@@ -4,7 +4,7 @@ import { useAuth } from '../../hooks/AuthProvider';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
-const AddEHR = () => {
+const AddDrugs = () => {
     const toast = useToast();
     const [formData, setFormData] = useState({ name: '', manufacturer: '', category: '', description: '', published: false });
     const auth = useAuth();
@@ -130,4 +130,4 @@ const AddEHR = () => {
     );
 };
 
-export default AddEHR;
+export default AddDrugs;

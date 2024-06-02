@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
 
-const DailyNewsletter = () => {
+const Drugs = () => {
     const toast = useToast();
     const navigate = useNavigate();
     const auth = useAuth();
@@ -127,4 +127,4 @@ const DailyNewsletter = () => {
     );
 };
 
-export default DailyNewsletter;
+export default Drugs;
