@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Box, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
-import { useAuth } from "../hooks/AuthProvider";
+import { useAuth } from "../../hooks/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;

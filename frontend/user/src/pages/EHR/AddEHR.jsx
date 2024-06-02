@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Checkbox, Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
-import { useAuth } from '../hooks/AuthProvider';
+import { useAuth } from '../../hooks/AuthProvider';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
