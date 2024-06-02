@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <Box>
-      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={8} p={4} mt={20}>
+      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={8} p={4} mt={32}>
         <Box alignContent="center">
           <Heading
             as="h1"

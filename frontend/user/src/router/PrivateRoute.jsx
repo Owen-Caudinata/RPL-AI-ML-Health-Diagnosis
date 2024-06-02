@@ -11,7 +11,7 @@ const PrivateRoute = () => {
     // return <Outlet />;
 
     return (
-        <Box mx={{ base: "2", md: "32", mt: "4" }}>
+        <Box mx={{ base: "2", md: "32"  }}>
             <Navbar theme={theme} auth={auth} />
             <Box mx="auto" maxW="container.xl" mt="8">
                 <Outlet />
