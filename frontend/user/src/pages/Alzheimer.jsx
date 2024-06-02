@@ -39,7 +39,7 @@ const Alzheimer = () => {
                         <Th key="updatedAt">Updated At</Th>
                         <Th key="title">Title</Th>
                         <Th key="content">Prediction ID</Th>
-                        <Th key="content">Description</Th>
+                        <Th key="description">Description</Th>
                         <Th key="print">Print</Th>
                     </Tr>
                 </Thead>
