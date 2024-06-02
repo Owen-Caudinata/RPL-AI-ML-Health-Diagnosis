@@ -16,6 +16,7 @@ import Pneumonia from './pages/Pneumonia';
 import Fetal from './pages/Fetal';
 import AddFetal from './pages/AddFetal';
 import EditFetal from './pages/EditFetal';
+import Chatbot from './pages/Chatbot';
 
 
 function App() {
@@ -39,16 +40,20 @@ function App() {
                 <Route path="/ehr/edit/:id" element={<EditEHR />} />
 
                 <Route path="/fetal" element={<Fetal />} />
-                <Route path="/fetal-add" element={<AddFetal />} />
+                <Route path="/fetal/create" element={<AddFetal />} />
                 <Route path="/fetal/edit/:id" element={<EditFetal />} />
 
                 <Route path="/reminder" element={<Reminder />} />
                 <Route path="/reminder-add" element={<AddReminder />} />
                 <Route path="/reminder/edit/:id" element={<EditReminder />} />
 
+<<<<<<< HEAD
                 <Route path="/drugs" element={<Drugs />} />
                 <Route path="/drugs-add" element={<AddDrugs />} />
                 <Route path="/drugs/edit/:id" element={<EditDrugs />} />
+=======
+                <Route path="/chatbot" element={<Chatbot />} />
+>>>>>>> 2b6dea9f0e1d2706b2a41b3f631c5a52c55d8def
 
                 <Route path="/feedback" element={<Feedback />} />
 

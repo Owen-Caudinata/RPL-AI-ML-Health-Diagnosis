@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Checkbox, Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
+
 const Feedback = () => {
     const [formData, setFormData] = useState({ title: '', content: '' });
     const auth = useAuth();
@@ -17,7 +19,7 @@ const Feedback = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/feedback/create', { //TODO: CHANGE API URL
+            const response = await fetch(mainApiUrl + '/feedback/create', { //TODO: CHANGE API URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

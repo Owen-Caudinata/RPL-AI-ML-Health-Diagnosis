@@ -36,6 +36,14 @@ const Home = () => {
           <Button as="a" href="/pneumonia" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Pneumonia
           </Button>
+          <Button as="a" href="/fetal" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
+            Fetal Health
+          </Button>
+
+          <Button as="a" href="/chatbot" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
+            Chatbot
+          </Button>
+
           <Button as="a" href="/ehr" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Electronic Health Record
           </Button>
