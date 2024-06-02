@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Checkbox, Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
-import { useAuth } from '../hooks/AuthProvider';
+import { Checkbox, Box, Input, Button, FormControl, FormLabel, useToast } from '@chakra-ui/react';
+import { useAuth } from '../../hooks/AuthProvider';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
-const AddEHR = () => {
+const AddDailyNewsletter = () => {
+    const toast = useToast();
     const [formData, setFormData] = useState({ title: '', content: '', published: '' });
     const auth = useAuth();
 
@@ -19,7 +20,7 @@ const AddEHR = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(mainApiUrl, '/daily-newsletter/create', { //TODO: CHANGE API URL
+            const response = await fetch(mainApiUrl + '/daily-newsletter/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,12 +30,38 @@ const AddEHR = () => {
             });
 
             if (response.ok) {
-                console.log('Data added successfully');
+                toast({
+                    title: 'Success',
+                    description: 'Data added successfully.',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+
+                // Clear the form data
+                setFormData({
+                    // reset to your initial form data structure
+                });
             } else {
-                console.error('Error adding data:', await response.text());
+                const errorMessage = await response.text();
+                console.error('Error adding data:', errorMessage);
+                toast({
+                    title: 'Error',
+                    description: `Error adding data: ${errorMessage}`,
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                });
             }
         } catch (error) {
             console.error('Error submitting form:', error);
+            toast({
+                title: 'Error',
+                description: `Error submitting form: ${error.message}`,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            });
         }
     };
 
@@ -65,9 +92,8 @@ const AddEHR = () => {
                 <Checkbox
                     id="published"
                     name="published"
-                    isChecked={formData.published} // Setting the checkbox state based on `formData.published`
+                    isChecked={formData.published}
                     onChange={(e) => {
-                        // Toggle the boolean value when the checkbox changes
                         handleChange({
                             target: { name: 'published', value: e.target.checked },
                         });
@@ -81,4 +107,4 @@ const AddEHR = () => {
     );
 };
 
-export default AddEHR;
+export default AddDailyNewsletter;

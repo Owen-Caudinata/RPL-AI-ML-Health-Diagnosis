@@ -8,10 +8,16 @@ import Alzheimer from './pages/Alzheimer';
 import Pneumonia from "./pages/Pneumonia";
 import Fetal from "./pages/Fetal";
 import Feedback from "./pages/Feedback";
-import DailyNewsletter from "./pages/DailyNewsletter";
-import AddDailyNewsletter from './pages/AddDailyNewsletter';
-import EditDailyNewsletter from "./pages/EditDailyNewsletter";
-import Chatbot from "./pages/Chatbot"
+import DailyNewsletter from "./pages/DailyNewsletter/DailyNewsletter";
+import AddDailyNewsletter from './pages/DailyNewsletter/AddDailyNewsletter';
+import EditDailyNewsletter from "./pages/DailyNewsletter/EditDailyNewsletter";
+import Chatbot from "./pages/Chatbot";
+import DrugsDatabank from './pages/DrugsDatabank/DrugsDatabank';
+import AddDrugsDatabank from './pages/DrugsDatabank/AddDrugsDatabank';
+import EditDrugsDatabank from "./pages/DrugsDatabank/EditDrugsDatabank";
+import HealthEducation from './pages/HealthEducation/HealthEducation';
+import AddHealthEducation from './pages/HealthEducation/AddHealthEducation';
+import EditHealthEducation from "./pages/HealthEducation/EditHealthEducation";
 
 function App() {
 
@@ -39,6 +45,15 @@ function App() {
 
 
                 <Route path='/feedback' element={<Feedback />} />
+
+                <Route path='/drugsdatabank' element={<DrugsDatabank />} />
+                <Route path='/drugsdatabank/add' element={<AddDrugsDatabank />} />
+                <Route path='/drugsdatabank/edit/:id' element={<EditDrugsDatabank />} />
+
+                <Route path='/blog' element={<HealthEducation />} />
+                <Route path='/blog/add' element={<AddHealthEducation />} />
+                <Route path='/blog/edit/:id' element={<EditHealthEducation />} />
+
 
               </Route>
             </Routes>
