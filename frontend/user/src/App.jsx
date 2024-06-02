@@ -17,9 +17,9 @@ import Feedback from './pages/Feedback';
 import Alzheimer from './pages/Alzheimer';
 import Pneumonia from './pages/Pneumonia';
 
-import Fetal from './pages/Fetal';
-// import AddFetal from './pages/AddFetal';
-// import EditFetal from './pages/EditFetal';
+import Fetal from './pages/Fetal/Fetal';
+import AddFetal from './pages/Fetal/AddFetal';
+import EditFetal from './pages/Fetal/EditFetal';
 import Chatbot from './pages/Chatbot';
 
 function App() {
@@ -44,6 +44,8 @@ function App() {
                 <Route path="/ehr/edit/:id" element={<EditEHR />} />
 
                 <Route path="/fetal" element={<Fetal />} />
+                <Route path="/fetal-add" element={<AddFetal />} />
+                <Route path="/ehr/edit/:id" element={<EditFetal />} />
                 
 
                 <Route path="/reminder" element={<Reminder />} />

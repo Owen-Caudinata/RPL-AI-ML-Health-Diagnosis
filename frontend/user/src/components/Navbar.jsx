@@ -21,7 +21,7 @@ const Navbar = ({ theme, auth }) => {
             <MenuList>
               <MenuItem as="a" href="/alzheimer">Alzheimer</MenuItem>
               <MenuItem as="a" href="/pneumonia">Pneumonia</MenuItem>
-              <MenuItem as="a" href="/fetal">Fetal Health</MenuItem>
+              <MenuItem as="a" id="fetal" href="/fetal">Fetal Health</MenuItem>
               <MenuItem as="a" href="/ehr">Electronic Health Record</MenuItem>
             </MenuList>
           </Menu>

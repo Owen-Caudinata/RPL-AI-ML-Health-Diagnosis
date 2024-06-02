@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Box, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
-import { IconButton } from '@chakra-ui/react';
-import { useAuth } from '../hooks/AuthProvider';
+import { useAuth } from '../../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
@@ -60,11 +59,11 @@ const Fetal = () => {
     };
 
     return (
-        <Box>
-            <Button as="a" href="/fetal/create" colorScheme="teal" mb={4}>
+        <Box mt={100}>
+            <Button as="a" id="Addfetal" href="/fetal-add" colorScheme="teal" mb={4}>
                 Add Fetal
             </Button>
-
+    
             <Table variant="simple">
                 <Thead>
                     <Tr>
@@ -82,22 +81,22 @@ const Fetal = () => {
                             <Td>{item.createdAt}</Td>
                             <Td>{item.updatedAt}</Td>
                             <Td>{item.age}</Td>
-                            <Td>{item.description}</Td>
-                            <Td>{item.age}</Td>
-
                             <Td>
+                                {item.description}
                                 <Button
                                     colorScheme="blue"
                                     size="sm"
                                     onClick={() => onEdit(item.id)}
+                                    ml={2} // Add margin to separate from description
                                 >
                                     Edit
                                 </Button>
-
+    
                                 <Button
                                     colorScheme="red"
                                     size="sm"
                                     onClick={() => onDelete(item.id)} 
+                                    ml={2} // Add margin to separate from description
                                 >
                                     Delete
                                 </Button>

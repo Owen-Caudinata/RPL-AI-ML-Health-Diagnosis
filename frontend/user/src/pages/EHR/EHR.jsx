@@ -61,8 +61,8 @@ const EHR = () => {
     };
 
     return (
-        <Box>
-            <Button as="a" href="/ehr-add" colorScheme="teal" mb={4}>
+        <Box mt={100}>
+            <Button as="a" id="AddEHR" href="/ehr-add" colorScheme="teal" mb={4}>
                 Add EHR
             </Button>
 
