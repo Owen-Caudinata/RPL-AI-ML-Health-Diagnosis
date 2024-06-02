@@ -20,41 +20,6 @@ const Home = () => {
 
   return (
     <Box>
-      <Flex bg={theme.colors.cyan[500]} w="100%" p={4} align="center" justify="space-between">
-        <Flex align="center" mr={5}>
-          <Heading as="h1" size="lg" color="white">
-            Web Logo
-          </Heading>
-        </Flex>
-        <Flex>
-        <Button as="a" href="/reminder" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
-            Reminder
-          </Button>
-          <Button as="a" href="/alzheimer" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
-            Alzheimer
-          </Button>
-          <Button as="a" href="/pneumonia" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
-            Pneumonia
-          </Button>
-          <Button as="a" href="/fetal" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
-            Fetal Health
-          </Button>
-
-          <Button as="a" href="/chatbot" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
-            Chatbot
-          </Button>
-
-          <Button as="a" href="/ehr" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
-            Electronic Health Record
-          </Button>
-          <Button as="a" href="/fetal" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
-            Fetal Health
-          </Button>
-          <Button onClick={() => auth.logOut()} mr={4} bg={theme.colors.cyan[900]} color={theme.colors.cyan[50]} _hover={{ bg: theme.colors.cyan[800] }}>
-            Logout
-          </Button>
-        </Flex>
-      </Flex>
       <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={8} p={4} mt={20}>
         <Box alignContent="center">
           <Heading

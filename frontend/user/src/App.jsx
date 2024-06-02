@@ -31,6 +31,7 @@ function App() {
           <AuthProvider>
             <Routes>
               <Route path="/login" element={<Login />} />
+              
               <Route element={<PrivateRoute />}>
                 <Route path="/" element={<Home />} />
 
@@ -50,6 +51,8 @@ function App() {
                 <Route path="/reminder/edit/:id" element={<EditReminder />} />
 
                 <Route path="/chatbot" element={<Chatbot />} />
+
+                {/* <Route path="/blog" element={<Blog />} /> */}
 
                 <Route path="/feedback" element={<Feedback />} />
 
