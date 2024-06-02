@@ -19,7 +19,7 @@ import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { useAuth } from '../hooks/AuthProvider';
 
 
-const Links = ['Dashboard', 'Projects', 'Team'];
+const Links = ['Dashboard', 'About Us', 'Team'];
 
 const NavLink = (props) => {
   const { children } = props;

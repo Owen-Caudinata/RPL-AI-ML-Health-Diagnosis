@@ -28,8 +28,8 @@ const Home = () => {
                     <MenuBox path={"/daily-newsletter"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Daily Newsletter"} />
                     <MenuBox path={"/feedback"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"User Feedbacks"} />
                     <MenuBox path={"/fetal"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Fetal Health"} />
-                    <MenuBox path={"/#"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Coming Soon"} />
-                    <MenuBox path={"/#"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Coming Soon"} />
+                    <MenuBox path={"/drugsdatabank"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Drugs Databank"} />
+                    <MenuBox path={"/blog"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Blog"} />
 
                 </Grid>
             </Container>
