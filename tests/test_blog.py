@@ -43,3 +43,4 @@ class AdminCreateBlog(unittest.TestCase):
 
     def tearDown(self):
         self.driver.close()
+
