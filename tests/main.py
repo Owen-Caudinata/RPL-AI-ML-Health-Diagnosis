@@ -9,6 +9,9 @@ from test_alzheimer import AdminVisitAlzheimer
 from test_reminder import UserCreateReminder
 from test_appointment import UserCreateAppointment
 
+
+from test_drugs import UserCreateDrugs
+
 # Add more imports if you have additional test files
 
 if __name__ == "__main__":
@@ -23,6 +26,9 @@ if __name__ == "__main__":
     test_suite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(UserCreateReminder))
     test_suite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(UserCreateAppointment))
 
+    
+    test_suite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(UserCreateDrugs))
+    
     runner = unittest.TextTestRunner()
 
     result = runner.run(test_suite)
