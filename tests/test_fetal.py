@@ -30,6 +30,8 @@ class UserVisitFetal(unittest.TestCase):
         login_button.click()
         time.sleep(2)
         
+        
+        driver.get(USER_URL)
         self.assertIn("Optimize Your Health", driver.page_source)
         time.sleep(2)
         
