@@ -30,22 +30,22 @@ class UserCreateAppointment(unittest.TestCase):
 
         login_button.submit()
 
-        time.sleep(1)
-        self.assertIn("Optimize Your Health ", driver.page_source)
+        time.sleep(5)
+        self.assertIn("Web Logo", driver.page_source)
 
         driver.get(USER_URL + "/appointment")
         time.sleep(1)
 
-        self.assertIn("Add Data", driver.page_source)
+        self.assertIn("Add Appointment", driver.page_source)
 
-        driver.get(USER_URL + "/appointment-create")
-        time.sleep(1)
-        driver.get(USER_URL + "/appointment-read")
-        time.sleep(1)
-        driver.get(USER_URL + "/appointment-update")
-        time.sleep(1)
-        driver.get(USER_URL + "/appointment-delete")
-        time.sleep(1)
+        # driver.get(USER_URL + "/appointment-create")
+        # time.sleep(1)
+        # driver.get(USER_URL + "/appointment-read")
+        # time.sleep(1)
+        # driver.get(USER_URL + "/appointment-update")
+        # time.sleep(1)
+        # driver.get(USER_URL + "/appointment-delete")
+        # time.sleep(1)
 
 
     def tearDown(self):

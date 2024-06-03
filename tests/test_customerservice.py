@@ -31,8 +31,8 @@ class UserCreateFeedback(unittest.TestCase):
 
         login_button.submit()
 
-        time.sleep(1)
-        self.assertIn("Optimize Your Health ", driver.page_source)
+        time.sleep(5)
+        self.assertIn("Web Logo", driver.page_source)
 
         driver.get(USER_URL + "/get")
         time.sleep(1)

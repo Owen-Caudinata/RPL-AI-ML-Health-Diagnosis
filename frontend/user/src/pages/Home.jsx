@@ -35,7 +35,7 @@ const Home = () => {
             letterSpacing="7px"
             lineHeight="60px"
           >
-            Optimize Your Health <br />
+            Web Logo<br />
             Care: Easily obtain <br />
             accurate health results.
           </Heading>

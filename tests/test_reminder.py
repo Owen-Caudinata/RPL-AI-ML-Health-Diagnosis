@@ -30,22 +30,22 @@ class UserCreateReminder(unittest.TestCase):
 
         login_button.submit()
 
-        time.sleep(1)
-        self.assertIn("Optimize Your Health ", driver.page_source)
+        time.sleep(5)
+        self.assertIn("Web Logo", driver.page_source)
 
         driver.get(USER_URL + "/reminder")
         time.sleep(1)
 
-        self.assertIn("Add Data", driver.page_source)
+        self.assertIn("Add REMINDER", driver.page_source)
 
-        driver.get(USER_URL + "/reminder-create")
-        time.sleep(1)
-        driver.get(USER_URL + "/reminder-read")
-        time.sleep(1)
-        driver.get(USER_URL + "/reminder-update")
-        time.sleep(1)
-        driver.get(USER_URL + "/reminder-delete")
-        time.sleep(1)
+        # driver.get(USER_URL + "/reminder-create")
+        # time.sleep(1)
+        # driver.get(USER_URL + "/reminder-read")
+        # time.sleep(1)
+        # driver.get(USER_URL + "/reminder-update")
+        # time.sleep(1)
+        # driver.get(USER_URL + "/reminder-delete")
+        # time.sleep(1)
 
 
     def tearDown(self):

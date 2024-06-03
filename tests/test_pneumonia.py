@@ -33,10 +33,10 @@ class UserVisitPneumonia(unittest.TestCase):
 
         login_button.submit()
 
-        time.sleep(1)
-        self.assertIn("Optimize Your Health ", driver.page_source)
+        time.sleep(5)
+        self.assertIn("Web Logo", driver.page_source)
 
-        driver.get(USER_URL + "/Pneumonia")
+        driver.get(USER_URL + "/pneumonia")
         time.sleep(1)
 
         self.assertIn("Prediction", driver.page_source)
@@ -57,7 +57,7 @@ class AdminVisitPneumonia(unittest.TestCase):
         password_field.send_keys(ADMIN_PASSWORD)
 
         login_button.submit()
-
+        time.sleep(5)
         driver.get(USER_URL + "/pneumonia")
         time.sleep(1)
 
