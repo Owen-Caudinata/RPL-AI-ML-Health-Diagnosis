@@ -27,5 +27,25 @@ if __name__ == "__main__":
 
     result = runner.run(test_suite)
     print("Total tests run:", result.testsRun)
+
     print("Failures:", len(result.failures))
+    if result.failures:
+        print("\nFailed Tests:")
+        for test, traceback in result.failures:
+            print(f"Test: {test}")
+            print(traceback)
+
+
     print("Errors:", len(result.errors))
+    if result.errors:
+        print("\nTests with Errors:")
+        for test, traceback in result.errors:
+            print(f"Test: {test}")
+            print(traceback)
+
+
+    
+
+
+    
+

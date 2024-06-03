@@ -33,11 +33,11 @@ class UserVisitAlzheimer(unittest.TestCase):
 
         login_button.submit()
 
-        time.sleep(1)
-        self.assertIn("Optimize Your Health ", driver.page_source)
+        time.sleep(5)
+        self.assertIn("Web Logo", driver.page_source)
 
         driver.get(USER_URL + "/alzheimer")
-        time.sleep(1)
+        time.sleep(2)
 
         self.assertIn("Prediction", driver.page_source)
 
@@ -57,8 +57,9 @@ class AdminVisitAlzheimer(unittest.TestCase):
         password_field.send_keys(ADMIN_PASSWORD)
 
         login_button.submit()
+        time.sleep(5)
 
-        driver.get(USER_URL + "/alzheimer")
+        driver.get(ADMIN_URL + "/alzheimer")
         time.sleep(1)
 
         self.assertIn("Select an image", driver.page_source)

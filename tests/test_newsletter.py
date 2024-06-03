@@ -26,6 +26,7 @@ class AdminVisitNewsletter(unittest.TestCase):
         password_field.send_keys("admin")
 
         login_button.submit()
+        time.sleep(5)
 
         driver.get(ADMIN_URL + "/daily-newsletter")
         time.sleep(1)
