@@ -30,6 +30,7 @@ const Home = () => {
                     <MenuBox path={"/fetal"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Fetal Health"} />
                     <MenuBox path={"/drugsdatabank"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Drugs Databank"} />
                     <MenuBox path={"/blog"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"Blog"} />
+                    <MenuBox path={"/rag"} bgColor={bgColor} hoverBgColor={hoverBgColor} text={"RAG"} />
 
                 </Grid>
             </Container>

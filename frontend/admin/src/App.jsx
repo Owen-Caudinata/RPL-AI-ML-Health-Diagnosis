@@ -18,6 +18,7 @@ import EditDrugsDatabank from "./pages/DrugsDatabank/EditDrugsDatabank";
 import HealthEducation from './pages/HealthEducation/HealthEducation';
 import AddHealthEducation from './pages/HealthEducation/AddHealthEducation';
 import EditHealthEducation from "./pages/HealthEducation/EditHealthEducation";
+import RAG from "./pages/RAG";
 
 function App() {
 
@@ -53,6 +54,8 @@ function App() {
                 <Route path='/blog' element={<HealthEducation />} />
                 <Route path='/blog/add' element={<AddHealthEducation />} />
                 <Route path='/blog/edit/:id' element={<EditHealthEducation />} />
+
+                <Route path='/rag' element={<RAG />} />
 
 
               </Route>
