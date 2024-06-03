@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useToast, Box, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useToast, Box, Button, Table, Thead, Tbody, Tr, Th, Td, Checkbox } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const DailyNewsletter = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(mainApiUrl + '/blog/get-all', { 
+                const response = await fetch(mainApiUrl + '/blog/get-all', {
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
@@ -47,7 +47,7 @@ const DailyNewsletter = () => {
     const onDelete = async (id) => {
         if (confirm('Are you sure you want to delete this record?')) {
             try {
-                const response = await fetch(mainApiUrl + `/blog/delete/${id}`, { 
+                const response = await fetch(mainApiUrl + `/blog/delete/${id}`, {
                     method: 'DELETE',
                     headers: {
                         Authorization: `Bearer ${auth.token}`,
@@ -100,7 +100,9 @@ const DailyNewsletter = () => {
                             <Td>{item.content}</Td>
                             <Td>{item.author}</Td>
                             <Td>{item.category}</Td>
-                            <Td>{item.published}</Td>
+                            <Td><Checkbox isChecked={item.published} isReadOnly>
+                                Published
+                            </Checkbox></Td>
 
                             <Td>
                                 <Button

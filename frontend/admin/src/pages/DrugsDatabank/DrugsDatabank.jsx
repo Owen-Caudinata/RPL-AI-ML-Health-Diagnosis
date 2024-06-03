@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useToast, Box, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useToast, Box, Button, Table, Thead, Tbody, Tr, Th, Td, Checkbox} from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
@@ -100,7 +100,9 @@ const DailyNewsletter = () => {
                             <Td>{item.manufacturer}</Td>
                             <Td>{item.category}</Td>
                             <Td>{item.description}</Td>
-                            <Td>{item.published}</Td>
+                            <Td><Checkbox isChecked={item.published} isReadOnly>
+                                Published
+                            </Checkbox></Td>
 
                             <Td>
                                 <Button

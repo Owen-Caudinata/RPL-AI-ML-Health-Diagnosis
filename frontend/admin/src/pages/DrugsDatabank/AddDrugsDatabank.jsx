@@ -10,10 +10,10 @@ const AddEHR = () => {
     const auth = useAuth();
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: type === 'checkbox' ? checked : value,
         }));
     };
 
@@ -116,11 +116,7 @@ const AddEHR = () => {
                     id="published"
                     name="published"
                     isChecked={formData.published}
-                    onChange={(e) => {
-                        handleChange({
-                            target: { name: 'published', value: e.target.checked },
-                        });
-                    }}
+                    onChange={(e) => handleChange(e)}
                 >
                     Is Published
                 </Checkbox>

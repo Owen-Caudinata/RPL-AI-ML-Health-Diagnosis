@@ -45,6 +45,7 @@ const EditEHR = () => {
     const handleSave = async (e) => {
         e.preventDefault();
         try {
+            console.log(formData);
             const response = await fetch(mainApiUrl + `/blog/edit/${id}`, {
                 method: 'PUT',
                 headers: {
@@ -137,11 +138,7 @@ const EditEHR = () => {
                     id="published"
                     name="published"
                     isChecked={formData.published}
-                    onChange={(e) => {
-                        handleChange({
-                            target: { name: 'published', value: e.target.checked, type: 'checkbox' },
-                        });
-                    }}
+                    onChange={(e) => handleChange(e)}
                 >
                     Is Published
                 </Checkbox>
