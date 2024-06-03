@@ -4,6 +4,8 @@ import { IconButton } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
+
 const Alzheimer = () => {
     const navigate = useNavigate();
     const auth = useAuth();
@@ -12,7 +14,7 @@ const Alzheimer = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/alzheimer-report/get', {
+                const response = await fetch(mainApiUrl + '/alzheimer-report/get', { //TODO: CHANGE API URL
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
@@ -28,7 +30,7 @@ const Alzheimer = () => {
 
    
     return (
-        <Box>
+        <Box mt={32}>
             <Table variant="simple">
                 <Thead>
                     <Tr>
@@ -37,7 +39,7 @@ const Alzheimer = () => {
                         <Th key="updatedAt">Updated At</Th>
                         <Th key="title">Title</Th>
                         <Th key="content">Prediction ID</Th>
-                        <Th key="content">Description</Th>
+                        <Th key="description">Description</Th>
                         <Th key="print">Print</Th>
                     </Tr>
                 </Thead>

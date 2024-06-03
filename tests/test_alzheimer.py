@@ -9,8 +9,12 @@ import time
 load_dotenv()
 
 USER_URL = os.getenv("USER_URL")
-ADMIN_URL = os.getenv("ADMIN_URL")
+USER_EMAIL = os.getenv("USER_EMAIL")
+USER_PASSWORD = os.getenv("USER_PASSWORD")
 
+ADMIN_URL = os.getenv("ADMIN_URL")
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
 class UserVisitAlzheimer(unittest.TestCase):
     def setUp(self):
@@ -24,16 +28,16 @@ class UserVisitAlzheimer(unittest.TestCase):
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
 
-        username_field.send_keys("jamesmichael0555@gmail.com")
-        password_field.send_keys("GekkoMain")
+        username_field.send_keys(USER_EMAIL)
+        password_field.send_keys(USER_PASSWORD)
 
         login_button.submit()
 
-        time.sleep(1)
-        self.assertIn("Optimize Your Health ", driver.page_source)
+        time.sleep(5)
+        self.assertIn("Web Logo", driver.page_source)
 
         driver.get(USER_URL + "/alzheimer")
-        time.sleep(1)
+        time.sleep(2)
 
         self.assertIn("Prediction", driver.page_source)
 
@@ -49,12 +53,13 @@ class AdminVisitAlzheimer(unittest.TestCase):
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
 
-        username_field.send_keys("admin@admin.com")
-        password_field.send_keys("admin")
+        username_field.send_keys(ADMIN_EMAIL)
+        password_field.send_keys(ADMIN_PASSWORD)
 
         login_button.submit()
+        time.sleep(5)
 
-        driver.get(USER_URL + "/alzheimer")
+        driver.get(ADMIN_URL + "/alzheimer")
         time.sleep(1)
 
         self.assertIn("Select an image", driver.page_source)

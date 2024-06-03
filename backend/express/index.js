@@ -7,7 +7,11 @@ import feedbackRouter from "./routes/FeedbackRoutes.js";
 import alzheimerReportRouter from "./routes/AlzheimerReportRoutes.js";
 import userRouter from "./routes/UserRoutes.js";
 import adminRouter from "./routes/AdminRoutes.js";
-import pneuomaniaReport from "./routes/PneuomaniaReport.js"
+import pneumoniaReportRouter from "./routes/PneumoniaReport.js"
+import drugRouter from "./routes/DrugRoutes.js"
+import appointmentRouter from "./routes/AppointmentRoutes.js"
+import healthEducationRouter from "./routes/HealthEducationRoutes.js"
+import fetalHealthReportRouter from './routes/FetalHealthReportRoutes.js'
 
 const app = express();
 
@@ -21,9 +25,14 @@ app.use("/daily-newsletter", dailyNewsLetterRouter);
 app.use("/reminder", reminderRouter);
 app.use("/alzheimer-report", alzheimerReportRouter);
 app.use("/feedback", feedbackRouter);
-app.use("/pneuomania-report", pneuomaniaReport);
+app.use("/pneumonia-report", pneumoniaReportRouter);
+app.use("/fetal-report", fetalHealthReportRouter);
+app.use("/drug", drugRouter)
+app.use("/appointment", appointmentRouter)
+app.use("/blog", healthEducationRouter)
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

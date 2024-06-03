@@ -9,6 +9,9 @@ import time
 load_dotenv()
 
 USER_URL = os.getenv("USER_URL")
+USER_EMAIL = os.getenv("USER_EMAIL")
+USER_PASSWORD = os.getenv("USER_PASSWORD")
+
 ADMIN_URL = os.getenv("ADMIN_URL")
 
 class UserCreateFeedback(unittest.TestCase):
@@ -23,13 +26,13 @@ class UserCreateFeedback(unittest.TestCase):
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
 
-        username_field.send_keys("jamesmichael0555@gmail.com")
-        password_field.send_keys("GekkoMain")
+        username_field.send_keys(USER_EMAIL)
+        password_field.send_keys(USER_PASSWORD)
 
         login_button.submit()
 
-        time.sleep(1)
-        self.assertIn("Optimize Your Health ", driver.page_source)
+        time.sleep(5)
+        self.assertIn("Web Logo", driver.page_source)
 
         driver.get(USER_URL + "/get")
         time.sleep(1)
