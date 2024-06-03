@@ -32,7 +32,6 @@ class AdminVisitNewsletter(unittest.TestCase):
 
         self.assertIn("Add Daily Newsletter", driver.page_source)
 
-
-
     def tearDown(self):
         self.driver.close()
+

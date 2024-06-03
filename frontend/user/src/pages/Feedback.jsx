@@ -39,7 +39,7 @@ const Feedback = () => {
     };
 
     return (
-        <Box as="form" onSubmit={handleSubmit}>
+        <Box as="form" onSubmit={handleSubmit} position="relative" top="50px">
             <FormControl>
                 <FormLabel htmlFor="title">Title</FormLabel>
                 <Input
