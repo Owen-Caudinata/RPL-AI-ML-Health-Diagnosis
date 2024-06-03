@@ -20,6 +20,8 @@ const AddHealthEducation = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            console.log(formData)
+
             const response = await fetch(mainApiUrl + '/blog/create', {
                 method: 'POST',
                 headers: {
@@ -116,11 +118,7 @@ const AddHealthEducation = () => {
                     id="published"
                     name="published" // Corrected from title to name
                     isChecked={formData.published}
-                    onChange={(e) => {
-                        handleChange({
-                            target: { name: 'published', value: e.target.checked, type: 'checkbox' },
-                        });
-                    }}
+                    onChange={(e) => handleChange(e)}
                 >
                     Is Published
                 </Checkbox>

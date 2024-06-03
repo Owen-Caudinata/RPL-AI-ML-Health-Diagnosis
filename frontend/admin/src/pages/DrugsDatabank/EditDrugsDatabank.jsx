@@ -137,11 +137,7 @@ const EditEHR = () => {
                     id="published"
                     name="published"
                     isChecked={formData.published}
-                    onChange={(e) => {
-                        handleChange({
-                            target: { name: 'published', value: e.target.checked, type: 'checkbox' },
-                        });
-                    }}
+                    onChange={(e) => handleChange(e)}
                 >
                     Is Published
                 </Checkbox>
