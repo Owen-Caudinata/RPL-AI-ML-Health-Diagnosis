@@ -36,7 +36,7 @@ class UserVisitFetal(unittest.TestCase):
         time.sleep(2)
         
         driver.get(USER_URL + "/fetal")   
-        self.assertIn("Created", driver.page_source)  
+        self.assertIn("Created", driver.page_source) 
         
     def tearDown(self):
         self.driver.quit()

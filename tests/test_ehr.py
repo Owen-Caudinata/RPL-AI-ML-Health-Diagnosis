@@ -39,7 +39,24 @@ class UserCreateEHR(unittest.TestCase):
         time.sleep(1)
 
         self.assertIn("Add Data", driver.page_source)
+        time.sleep(1)
+        
+        title_field = driver.find_element(By.NAME, "title")
+        content_field = driver.find_element(By.NAME, "content")
+        published_field = driver.find_element(By.NAME, "published")
+        time.sleep(2)
+        
+        title_field.send_keys("ada kok")
+        content_field.send_keys("ini buat test content")
+        driver.execute_script("arguments[0].click();", published_field)
+        time.sleep(2)
+        
+        submit_button = driver.find_element(By.XPATH, "//button[@type='submit']")
+        submit_button.submit()
+        time.sleep(2)
+        
 
+        
 
     def tearDown(self):
         self.driver.close()
