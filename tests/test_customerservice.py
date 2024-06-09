@@ -32,13 +32,13 @@ class UserCreateFeedback(unittest.TestCase):
         login_button.submit()
 
         time.sleep(5)
-        self.assertIn("Web Logo", driver.page_source)
+        self.assertIn("Doc.ai", driver.page_source)
 
         driver.get(USER_URL + "/get")
-        time.sleep(1)
+        time.sleep(5)
 
         driver.get(USER_URL + "/create")
-        time.sleep(1)
+        time.sleep(5)
 
         self.assertIn("Add Data", driver.page_source)
 
@@ -49,7 +49,7 @@ class UserCreateFeedback(unittest.TestCase):
 
         submit_button.submit()
 
-        time.sleep(1)
+        time.sleep(5)
 
         self.assertIn("Feedback created successfully", driver.page_source)
 

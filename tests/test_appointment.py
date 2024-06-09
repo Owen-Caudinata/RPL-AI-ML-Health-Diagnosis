@@ -31,21 +31,21 @@ class UserCreateAppointment(unittest.TestCase):
         login_button.submit()
 
         time.sleep(5)
-        self.assertIn("Web Logo", driver.page_source)
+        self.assertIn("Doc.ai", driver.page_source)
 
         driver.get(USER_URL + "/appointment")
-        time.sleep(1)
+        time.sleep(5)
 
         self.assertIn("Add Appointment", driver.page_source)
 
         # driver.get(USER_URL + "/appointment-create")
-        # time.sleep(1)
+        # time.sleep(5)
         # driver.get(USER_URL + "/appointment-read")
-        # time.sleep(1)
+        # time.sleep(5)
         # driver.get(USER_URL + "/appointment-update")
-        # time.sleep(1)
+        # time.sleep(5)
         # driver.get(USER_URL + "/appointment-delete")
-        # time.sleep(1)
+        # time.sleep(5)
 
 
     def tearDown(self):
