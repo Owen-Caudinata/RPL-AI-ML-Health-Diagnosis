@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Checkbox, Box, Input, Button, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
@@ -8,6 +9,7 @@ const AddDailyNewsletter = () => {
     const toast = useToast();
     const [formData, setFormData] = useState({ title: '', content: '', published: '' });
     const auth = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -37,6 +39,7 @@ const AddDailyNewsletter = () => {
                     duration: 5000,
                     isClosable: true,
                 });
+                navigate(-1);
 
                 // Clear the form data
                 setFormData({

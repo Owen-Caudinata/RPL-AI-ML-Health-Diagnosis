@@ -14,12 +14,13 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Link
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { useAuth } from '../hooks/AuthProvider';
 
 
-const Links = ['Dashboard', 'About Us', 'Team'];
+// const Links = ['Dashboard', 'About Us', 'Team'];
 
 const NavLink = (props) => {
   const { children } = props;
@@ -40,7 +41,7 @@ const NavLink = (props) => {
 };
 
 export default function Navbar() {
-  const auth = useAuth()
+  const auth = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -55,12 +56,16 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box>Logo</Box>
-            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+            <Box>
+              <Link to="/">
+                <Box>Logo</Box>
+              </Link>
+            </Box>
+            {/* <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
-            </HStack>
+            </HStack> */}
           </HStack>
           <Flex alignItems={'center'}>
             <Button
@@ -86,12 +91,6 @@ export default function Navbar() {
                   }
                 />
               </MenuButton>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList>
             </Menu>
           </Flex>
         </Flex>

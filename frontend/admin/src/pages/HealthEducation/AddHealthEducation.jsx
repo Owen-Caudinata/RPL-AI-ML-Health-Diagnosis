@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Checkbox, Box, Input, Button, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
-const AddHealthEducation = () => {
+const AddBlog = () => {
     const toast = useToast();
     const [formData, setFormData] = useState({ title: '', content: '', author: '', category: '', published: false });
     const auth = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -20,7 +23,7 @@ const AddHealthEducation = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(formData)
+            console.log(formData);
 
             const response = await fetch(mainApiUrl + '/blog/create', {
                 method: 'POST',
@@ -42,6 +45,8 @@ const AddHealthEducation = () => {
 
                 // Clear the form data
                 setFormData({ title: '', content: '', author: '', category: '', published: false });
+
+                navigate(-1);
 
             } else {
                 const errorMessage = await response.text();
@@ -128,4 +133,4 @@ const AddHealthEducation = () => {
     );
 };
 
-export default AddHealthEducation;
+export default AddBlog;

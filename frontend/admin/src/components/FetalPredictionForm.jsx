@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, Input, Heading, Text, Grid, VStack, FormLabel } from '@chakra-ui/react';
+import { Box, Button, FormControl, Input, Heading, Text, Grid, VStack, FormLabel, useToast } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
 const PredictionForm = ({ inferenceAPI, reportAPI }) => {
     const auth = useAuth();
+    const toast = useToast()
 
     const [userId, setUserId] = useState(null);
     const [inputData, setInputData] = useState({
@@ -60,6 +61,13 @@ const PredictionForm = ({ inferenceAPI, reportAPI }) => {
 
             const data = await response.json();
             console.log(data);
+            toast({
+                title: "Feedback Published",
+                description: "Your feedback has been successfully published.",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+            });
         } catch (error) {
             console.error('Error publishing:', error);
         }

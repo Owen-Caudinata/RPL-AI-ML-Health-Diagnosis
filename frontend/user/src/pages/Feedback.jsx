@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Checkbox, Box, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
+import { Box, Input, Button, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
@@ -7,6 +7,7 @@ const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 const Feedback = () => {
     const [formData, setFormData] = useState({ title: '', content: '' });
     const auth = useAuth();
+    const toast = useToast();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,7 +30,12 @@ const Feedback = () => {
             });
 
             if (response.ok) {
-                console.log('Data added successfully');
+                toast({
+                    title: 'Feedback sent successfully',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                });
             } else {
                 console.error('Error adding data:', await response.text());
             }
@@ -39,7 +45,7 @@ const Feedback = () => {
     };
 
     return (
-        <Box as="form" onSubmit={handleSubmit} position="relative" top="50px">
+        <Box as="form" onSubmit={handleSubmit} mt={32}>
             <FormControl>
                 <FormLabel htmlFor="title">Title</FormLabel>
                 <Input
@@ -50,7 +56,7 @@ const Feedback = () => {
                     onChange={handleChange}
                 />
             </FormControl>
-            <FormControl>
+            <FormControl mt={4}>
                 <FormLabel htmlFor="content">Content</FormLabel>
                 <Input
                     id="content"
@@ -61,7 +67,7 @@ const Feedback = () => {
                 />
             </FormControl>
 
-            <Button type="submit">Add Data</Button>
+            <Button type="submit" mt={4} colorScheme="teal">Add Data</Button>
         </Box>
     );
 };
