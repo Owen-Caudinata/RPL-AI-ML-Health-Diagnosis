@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, Input, Image, Heading, Text, Grid, VStack } from '@chakra-ui/react';
+import { Box, Button, FormControl, Input, Image, Heading, Text, Grid, VStack, useToast } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
+
+const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
 const PredictionForm = ({ inferenceAPI, reportAPI }) => {
     const auth = useAuth();
+    const toast = useToast();
 
     const [userId, setUserId] = useState(null);
     const [file, setFile] = useState(null);
@@ -65,8 +68,22 @@ const PredictionForm = ({ inferenceAPI, reportAPI }) => {
             const data = await response.json();
             console.log(data);
 
+            toast({
+                title: 'Report published successfully',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+
         } catch (error) {
             console.error('Error publishing:', error);
+            toast({
+                title: 'Error publishing report',
+                description: 'An error occurred while publishing the report.',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            });
         }
     };
 

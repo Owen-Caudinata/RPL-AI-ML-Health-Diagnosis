@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Box, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
-import { IconButton } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
@@ -28,45 +27,41 @@ const Alzheimer = () => {
         fetchData();
     }, []);
 
-   
+    const handlePrint = (id) => () => { // Change handlePrint to return a function
+        const boxToPrint = document.getElementById(id);
+        if (boxToPrint) {
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write('<html><head><title>Print</title></head><body>');
+            printWindow.document.write(boxToPrint.outerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        } else {
+            console.error('Box element not found.');
+        }
+    };
+
+
     return (
         <Box mt={32}>
-            <Table variant="simple">
-                <Thead>
-                    <Tr>
-                        <Th key="id">ID</Th>
-                        <Th key="createdAt">Created At</Th>
-                        <Th key="updatedAt">Updated At</Th>
-                        <Th key="title">Title</Th>
-                        <Th key="content">Prediction ID</Th>
-                        <Th key="description">Description</Th>
-                        <Th key="print">Print</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {data.map((item, index) => (
-                        <Tr key={index}>
-                            <Td>{item.id}</Td>
-                            <Td>{item.userId}</Td>
-                            <Td>{item.createdAt}</Td>
-                            <Td>{item.updatedAt}</Td>
-                            <Td>{item.predictionId}</Td>
-                            <Td>{item.description}</Td>
-                            
-                            <Td>
-                                {/* <Button
-                                    colorScheme="blue"
-                                    size="sm"
-                                    onClick={window.print()}
-                                >
-                                    Print
-                                </Button> */}
-                            </Td>
-
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
+            {data.map((item, index) => (
+                <Box key={index} p={4} border="1px" borderRadius="md" m={2} id={item.id}>
+                    <Box>ID: {item.id}</Box>
+                    <Box>User ID: {item.userId}</Box>
+                    <Box>Created At: {item.createdAt}</Box>
+                    <Box>Updated At: {item.updatedAt}</Box>
+                    <Box>Prediction ID: {item.predictionId}</Box>
+                    <Box>Description: {item.description}</Box>
+                    <Button
+                        colorScheme="blue"
+                        size="sm"
+                        onClick={handlePrint(item.id)} // Pass a function reference
+                        mt={2}
+                    >
+                        Print
+                    </Button>
+                </Box>
+            ))}
         </Box>
     );
 };

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useToast, Box, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useToast, Box, Button, Text } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
-
 
 const DailyNewsletter = () => {
     const toast = useToast();
@@ -76,46 +75,34 @@ const DailyNewsletter = () => {
             <Button as="a" href="/daily-newsletter/add" colorScheme="teal" mb={4}>
                 Add Daily Newsletter
             </Button>
-            <Table variant="simple">
-                <Thead>
-                    <Tr>
-                        <Th key="id">ID</Th>
-                        <Th key="createdAt">Created At</Th>
-                        <Th key="updatedAt">Updated At</Th>
-                        <Th key="title">Title</Th>
-                        <Th key="content">Content</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {data.map((item, index) => (
-                        <Tr key={index}>
-                            <Td>{item.id}</Td>
-                            <Td>{item.createdAt}</Td>
-                            <Td>{item.updatedAt}</Td>
-                            <Td>{item.title}</Td>
-                            <Td>{item.content}</Td>
+            {data.map((item, index) => (
+                <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" p={4} mb={4}>
+                    <Text fontWeight="bold">ID: {item.id}</Text>
+                    <Text>Created At: {item.createdAt}</Text>
+                    <Text>Updated At: {item.updatedAt}</Text>
+                    <Text>Title: {item.title}</Text>
+                    <Text>Content: {item.content}</Text>
 
-                            <Td>
-                                <Button
-                                    colorScheme="blue"
-                                    size="sm"
-                                    onClick={() => onEdit(item.id)}
-                                >
-                                    Edit
-                                </Button>
+                    <Button
+                        colorScheme="blue"
+                        size="sm"
+                        onClick={() => onEdit(item.id)}
+                        mt={2}
+                        mr={2}
+                    >
+                        Edit
+                    </Button>
 
-                                <Button
-                                    colorScheme="red"
-                                    size="sm"
-                                    onClick={() => onDelete(item.id)}
-                                >
-                                    Delete
-                                </Button>
-                            </Td>
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
+                    <Button
+                        colorScheme="red"
+                        size="sm"
+                        onClick={() => onDelete(item.id)}
+                        mt={2}
+                    >
+                        Delete
+                    </Button>
+                </Box>
+            ))}
         </Box>
     );
 };

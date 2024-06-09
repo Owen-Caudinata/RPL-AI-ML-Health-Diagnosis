@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Box, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
-import { IconButton } from '@chakra-ui/react';
+import { Button, Box } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
@@ -61,51 +60,37 @@ const EHR = () => {
     };
 
     return (
-        <Box>
+        <Box mt={32}>
             <Button as="a" href="/ehr-add" colorScheme="teal" mb={4}>
                 Add EHR
             </Button>
 
-            <Table variant="simple">
-                <Thead>
-                    <Tr>
-                        <Th key="id">ID</Th>
-                        <Th key="createdAt">Created At</Th>
-                        <Th key="updatedAt">Updated At</Th>
-                        <Th key="title">Title</Th>
-                        <Th key="content">Content</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {data.map((item, index) => (
-                        <Tr key={index}>
-                            <Td>{item.id}</Td>
-                            <Td>{item.createdAt}</Td>
-                            <Td>{item.updatedAt}</Td>
-                            <Td>{item.title}</Td>
-                            <Td>{item.content}</Td>
-
-                            <Td>
-                                <Button
-                                    colorScheme="blue"
-                                    size="sm"
-                                    onClick={() => onEdit(item.id)}
-                                >
-                                    Edit
-                                </Button>
-
-                                <Button
-                                    colorScheme="red"
-                                    size="sm"
-                                    onClick={() => onDelete(item.id)} 
-                                >
-                                    Delete
-                                </Button>
-                            </Td>
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
+            <Box overflowX="auto">
+                {data.map((item, index) => (
+                    <Box key={index} display="inline-block" p={2} border="1px" borderRadius="md" m={2}>
+                        <Box>ID: {item.id}</Box>
+                        {/* <Box>Created At: {item.createdAt}</Box>
+                        <Box>Updated At: {item.updatedAt}</Box> */}
+                        <Box>Title: {item.title}</Box>
+                        <Box>Content: {item.content}</Box>
+                        <Button
+                            colorScheme="blue"
+                            size="sm"
+                            onClick={() => onEdit(item.id)}
+                            mr={2}
+                        >
+                            Edit
+                        </Button>
+                        <Button
+                            colorScheme="red"
+                            size="sm"
+                            onClick={() => onDelete(item.id)}
+                        >
+                            Delete
+                        </Button>
+                    </Box>
+                ))}
+            </Box>
         </Box>
     );
 };
