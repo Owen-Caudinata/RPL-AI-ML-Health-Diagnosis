@@ -29,7 +29,7 @@ class AdminVisitNewsletter(unittest.TestCase):
         time.sleep(5)
 
         driver.get(ADMIN_URL + "/daily-newsletter")
-        time.sleep(1)
+        time.sleep(5)
 
         self.assertIn("Add Daily Newsletter", driver.page_source)
 

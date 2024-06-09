@@ -30,22 +30,22 @@ class UserCreateReminder(unittest.TestCase):
 
         login_button.submit()
 
-        time.sleep(5)
-        self.assertIn("Web Logo", driver.page_source)
+        time.sleep(7)
+        self.assertIn("Doc.ai", driver.page_source)
 
         driver.get(USER_URL + "/reminder")
-        time.sleep(1)
+        time.sleep(5)
 
-        self.assertIn("Add REMINDER", driver.page_source)
+        self.assertIn("Add Reminder", driver.page_source)
 
         # driver.get(USER_URL + "/reminder-create")
-        # time.sleep(1)
+        # time.sleep(5)
         # driver.get(USER_URL + "/reminder-read")
-        # time.sleep(1)
+        # time.sleep(5)
         # driver.get(USER_URL + "/reminder-update")
-        # time.sleep(1)
+        # time.sleep(5)
         # driver.get(USER_URL + "/reminder-delete")
-        # time.sleep(1)
+        # time.sleep(5)
 
 
     def tearDown(self):

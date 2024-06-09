@@ -29,14 +29,14 @@ class UserCreateDrugs(unittest.TestCase):
         
         login_button.submit()
         
-        time.sleep(1)
+        time.sleep(5)
         self.assertIn("Welcome to the Homepage", driver.page_source)
         
         driver.get(ADMIN_URL + "/drugsdatabank")
-        time.sleep(1)
+        time.sleep(5)
         
         driver.get(ADMIN_URL + "drugsdatabank/add")
-        time.sleep(1)
+        time.sleep(5)
         
         self.assert_In("Add Data", driver.page_source)
         

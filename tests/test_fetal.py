@@ -10,7 +10,12 @@ import time
 load_dotenv()
 
 USER_URL = os.getenv("USER_URL")
+USER_EMAIL = os.getenv("USER_EMAIL")
+USER_PASSWORD = os.getenv("USER_PASSWORD")
+
 ADMIN_URL = os.getenv("ADMIN_URL")
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
 class UserVisitFetal(unittest.TestCase):
     def setUp(self):
@@ -24,19 +29,20 @@ class UserVisitFetal(unittest.TestCase):
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
 
-        username_field.send_keys("user@user.com")
-        password_field.send_keys("user")
+        username_field.send_keys(USER_EMAIL)
+        password_field.send_keys(USER_PASSWORD)
 
         login_button.click()
-        time.sleep(2)
+        time.sleep(5)
         
         
         driver.get(USER_URL)
         self.assertIn("Optimize Your Health", driver.page_source)
-        time.sleep(2)
+        time.sleep(5)
         
-        driver.get(USER_URL + "/fetal")   
-        self.assertIn("Created", driver.page_source) 
+        driver.get(USER_URL + "/fetal")
+        time.sleep(5)
+        self.assertIn("Print", driver.page_source) 
         
     def tearDown(self):
         self.driver.quit()
@@ -54,12 +60,12 @@ class AdminVisitFetal(unittest.TestCase):
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
 
-        username_field.send_keys("admin@admin.com")
-        password_field.send_keys("admin")
+        username_field.send_keys(ADMIN_EMAIL)
+        password_field.send_keys(ADMIN_PASSWORD)
 
         login_button.click()
     
-        time.sleep(2)
+        time.sleep(5)
         
         driver.get(ADMIN_URL + "/fetal")  
         user_id_field = driver.find_element(By.NAME, "userId")

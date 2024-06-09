@@ -39,7 +39,7 @@ const AddEHR = () => {
     };
 
     return (
-        <Box as="form" onSubmit={handleSubmit}>
+        <Box as="form" onSubmit={handleSubmit} mt={32}>
             <FormControl>
                 <FormLabel htmlFor="title">Title</FormLabel>
                 <Input

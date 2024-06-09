@@ -30,13 +30,13 @@ class AdminCreateBlog(unittest.TestCase):
         login_button.submit()
 
         time.sleep(5)
-        self.assertIn("Web Logo", driver.page_source)
+        self.assertIn("Doc.ai", driver.page_source)
 
         driver.get(ADMIN_URL + "/blog")
-        time.sleep(1)
+        time.sleep(5)
 
         driver.get(ADMIN_URL + "/blog-add")
-        time.sleep(1)
+        time.sleep(5)
 
         self.assertIn("Add Blog", driver.page_source)
 
