@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { useAuth } from '../hooks/AuthProvider';
-
+import { ProductLogo } from '../components/ProductLogo'
 
 // const Links = ['Dashboard', 'About Us', 'Team'];
 
@@ -46,7 +46,7 @@ export default function Navbar() {
 
   return (
     <>
-      <Box px={4}>
+      <Box px={4} mt={8}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -58,7 +58,7 @@ export default function Navbar() {
           <HStack spacing={8} alignItems={'center'}>
             <Box>
               <Link to="/">
-                <Box>Logo</Box>
+                <Box><ProductLogo size="80"/></Box>
               </Link>
             </Box>
             {/* <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>

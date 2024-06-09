@@ -1,15 +1,22 @@
 import React from 'react';
 import { Box, Heading, Button, Flex, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ProductLogo } from '../components/ProductLogo';
 
 const Navbar = ({ theme, auth }) => {
   return (
     <Box position="fixed" top="0" left="0" width="100%" zIndex="1000" bg={theme.colors.cyan[700]} p={4}>
       <Flex align="center" justify="space-between">
-        <Heading as="h1" size="lg" color="white">
-          Web Logo
-        </Heading>
+
+        <Flex align="center" justify="space-between" px={4}>
+          <ProductLogo size={60} />
+          <Heading as="h1" size="lg" color="white" ml={4}>
+            Doc.ai
+          </Heading>
+        </Flex>
+
         <Flex>
+
           <Button as="a" href="/reminder" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Reminder
           </Button>
@@ -37,7 +44,7 @@ const Navbar = ({ theme, auth }) => {
             </MenuList>
           </Menu>
 
-        
+
           <Button as="a" href="/appointment" mr={4} color={theme.colors.cyan[900]} bg={theme.colors.cyan[200]} _hover={{ bg: theme.colors.cyan[300] }}>
             Find a Doctor
           </Button>
