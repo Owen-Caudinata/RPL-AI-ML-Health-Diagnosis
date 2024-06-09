@@ -67,9 +67,6 @@ const Blog = () => {
           <Text mb={2}>Author: {item.author}</Text>
           <Text mb={2}>Category: {item.category}</Text>
           <Text>Description: {item.content}</Text>
-          <Text fontWeight="bold" mb={2}>
-            Pelajari lebih lanjut ....
-          </Text>
         </Box>
       ))}
     </SimpleGrid>
