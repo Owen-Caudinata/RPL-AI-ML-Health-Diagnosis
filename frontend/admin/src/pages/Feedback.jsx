@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Box, Text, Heading, Divider } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
@@ -11,7 +11,7 @@ const Feedback = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(mainApiUrl + '/feedback/get-all', { //TODO: CHANGE API URL
+                const response = await fetch(mainApiUrl + '/feedback/get-all', {
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
@@ -37,25 +37,20 @@ const Feedback = () => {
     }, []);
 
     return (
-        <Table variant="simple">
-            <Thead>
-                <Tr>
-                    {data.length > 0 &&
-                        Object.keys(data[0]).map((key) => (
-                            <Th key={key}>{key}</Th>
-                        ))}
-                </Tr>
-            </Thead>
-            <Tbody>
-                {data.map((item, index) => (
-                    <Tr key={index}>
-                        {Object.values(item).map((value, index) => (
-                            <Td key={index}>{value}</Td>
-                        ))}
-                    </Tr>
-                ))}
-            </Tbody>
-        </Table>
+        <Box>
+            <Heading as="h1" mb={4}>Feedback</Heading>
+            {data.map((item, index) => (
+                <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" p={4} mb={4}>
+                    {Object.entries(item).map(([key, value]) => (
+                        <Box key={key} mb={2}>
+                            <Text fontWeight="bold">{key}: </Text>
+                            <Text>{value}</Text>
+                        </Box>
+                    ))}
+                    <Divider mt={4} />
+                </Box>
+            ))}
+        </Box>
     );
 };
 

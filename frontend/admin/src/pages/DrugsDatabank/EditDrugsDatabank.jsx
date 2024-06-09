@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Input, Box, FormControl, FormLabel, Checkbox, Button, useToast } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
@@ -10,6 +12,7 @@ const EditEHR = () => {
     const { id } = useParams();
     const toast = useToast();
     const [formData, setFormData] = useState({ name: '', manufacturer: '', category: '', description: '', published: false });
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -62,6 +65,9 @@ const EditEHR = () => {
                     duration: 5000,
                     isClosable: true,
                 });
+
+                navigate(-1);
+
             } else {
                 const errorMessage = await response.text();
                 console.error('Error updating data:', errorMessage);

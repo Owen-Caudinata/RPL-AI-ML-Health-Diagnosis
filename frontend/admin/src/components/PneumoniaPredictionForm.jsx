@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, Input, Image, Heading, Text, Grid, VStack } from '@chakra-ui/react';
+import { Box, Button, FormControl, Input, Image, Heading, Text, Grid, VStack, useToast } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
 const PredictionForm = ({ inferenceAPI, reportAPI }) => {
     const auth = useAuth();
+    const toast = useToast();
 
     const [userId, setUserId] = useState(null);
     const [file, setFile] = useState(null);
@@ -40,6 +41,13 @@ const PredictionForm = ({ inferenceAPI, reportAPI }) => {
             setPrediction(data);
         } catch (error) {
             console.error('Error predicting:', error);
+            toast({
+                title: 'Error predicting',
+                description: 'An error occurred while predicting. Please try again.',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            });
         }
     };
 
@@ -65,8 +73,22 @@ const PredictionForm = ({ inferenceAPI, reportAPI }) => {
             const data = await response.json();
             console.log(data);
 
+            toast({
+                title: 'Report published successfully',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+
         } catch (error) {
             console.error('Error publishing:', error);
+            toast({
+                title: 'Error publishing report',
+                description: 'An error occurred while publishing the report. Please try again.',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            });
         }
     };
 
@@ -117,7 +139,6 @@ const PredictionForm = ({ inferenceAPI, reportAPI }) => {
                             <PredictionItem label="Admin ID" value={prediction.admin_id} />
                             <PredictionItem label="Normal" value={(prediction.normal * 100).toFixed(2) + '%'} />
                             <PredictionItem label="Pneumonia" value={(prediction.pneumonia * 100).toFixed(2) + '%'} />
-
                         </VStack>
                     </Box>
                 )}

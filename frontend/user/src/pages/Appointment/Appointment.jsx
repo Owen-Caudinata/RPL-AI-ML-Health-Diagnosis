@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useToast, Box, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useToast, Box, Button, Text } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useNavigate } from "react-router-dom";
 
@@ -44,7 +44,7 @@ const Appointment = () => {
     };
 
     const onDelete = async (id) => {
-        if (confirm('Are you sure you want to delete this record?')) {
+        if (window.confirm('Are you sure you want to delete this record?')) {
             try {
                 const response = await fetch(mainApiUrl + `/appointment/delete/${id}`, {
                     method: 'DELETE',
@@ -56,7 +56,7 @@ const Appointment = () => {
                     setData(data.filter(item => item.id !== id)); // Remove the deleted item from the state
                     toast({
                         title: 'Record deleted.',
-                        category: `Record with ID ${id} has been deleted.`,
+                        description: `Record with ID ${id} has been deleted.`,
                         status: 'success',
                         duration: 5000,
                         isClosable: true,
@@ -75,39 +75,20 @@ const Appointment = () => {
             <Button as="a" href="/appointment-add" colorScheme="teal" mb={4} mt={16}>
                 Add Appointment
             </Button>
-            <Table variant="simple">
-                <Thead>
-                    <Tr>
-                        <Th>ID</Th>
-                        <Th>Created At</Th>
-                        <Th>Updated At</Th>
-                        <Th>Title</Th>
-                        <Th>Description</Th>
-                        <Th>Appointment Date</Th>
-                        <Th>Status</Th>
-                        <Th>Location</Th>
-                        <Th>Action</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {data.map((item) => (
-                        <Tr key={item.id}>
-                            <Td>{item.id}</Td>
-                            <Td>{item.createdAt}</Td>
-                            <Td>{item.updatedAt}</Td>
-                            <Td>{item.title}</Td>
-                            <Td>{item.description}</Td>
-                            <Td>{new Date(item.appointmentDate).toLocaleString()}</Td> {/* Convert to readable format */}
-                            <Td>{item.status}</Td>
-                            <Td>{item.location}</Td>
-                            <Td>
-                                <Button colorScheme="blue" size="sm" onClick={() => onEdit(item.id)}>Edit</Button>
-                                <Button colorScheme="red" size="sm" onClick={() => onDelete(item.id)}>Delete</Button>
-                            </Td>
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
+            {data.map((item) => (
+                <Box key={item.id} borderWidth="1px" borderRadius="lg" p={4} mb={4}>
+                    <Text fontWeight="bold">ID: {item.id}</Text>
+                    <Text>Created At: {item.createdAt}</Text>
+                    <Text>Updated At: {item.updatedAt}</Text>
+                    <Text>Title: {item.title}</Text>
+                    <Text>Description: {item.description}</Text>
+                    <Text>Appointment Date: {new Date(item.appointmentDate).toLocaleString()}</Text>
+                    <Text>Status: {item.status}</Text>
+                    <Text>Location: {item.location}</Text>
+                    <Button colorScheme="blue" size="sm" onClick={() => onEdit(item.id)} mt={2} mr={2}>Edit</Button>
+                    <Button colorScheme="red" size="sm" onClick={() => onDelete(item.id)} mt={2}>Delete</Button>
+                </Box>
+            ))}
         </Box>
     );
 };

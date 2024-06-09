@@ -30,30 +30,30 @@ class UserCreateEHR(unittest.TestCase):
         login_button.submit()
 
         time.sleep(5)
-        self.assertIn("Web Logo", driver.page_source)
+        self.assertIn("Doc.ai", driver.page_source)
 
         driver.get(USER_URL + "/ehr")
-        time.sleep(1)
+        time.sleep(5)
 
         driver.get(USER_URL + "/ehr-add")
-        time.sleep(1)
+        time.sleep(5)
 
         self.assertIn("Add Data", driver.page_source)
-        time.sleep(1)
+        time.sleep(5)
         
         title_field = driver.find_element(By.NAME, "title")
         content_field = driver.find_element(By.NAME, "content")
         published_field = driver.find_element(By.NAME, "published")
-        time.sleep(2)
+        time.sleep(5)
         
         title_field.send_keys("ada kok")
         content_field.send_keys("ini buat test content")
         driver.execute_script("arguments[0].click();", published_field)
-        time.sleep(2)
+        time.sleep(5)
         
         submit_button = driver.find_element(By.XPATH, "//button[@type='submit']")
         submit_button.submit()
-        time.sleep(2)
+        time.sleep(5)
         
 
         

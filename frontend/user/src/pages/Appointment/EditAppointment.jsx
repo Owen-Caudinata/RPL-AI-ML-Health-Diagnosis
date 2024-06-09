@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Input, Box, FormControl, FormLabel, Checkbox, Button, useToast } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
@@ -10,6 +10,7 @@ const EditEHR = () => {
     const { id } = useParams();
     const toast = useToast();
     const [formData, setFormData] = useState({ title: '', description: '', appointmentDate: '', status: '', location: '' });
+    navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,7 +46,7 @@ const EditEHR = () => {
     const handleSave = async (e) => {
         e.preventDefault();
         try {
-            formData.appointmentDate = new Date(formData.appointmentDate)
+            formData.appointmentDate = new Date(formData.appointmentDate);
             const response = await fetch(mainApiUrl + `/appointment/edit/${id}`, {
                 method: 'PUT',
                 headers: {
@@ -63,6 +64,7 @@ const EditEHR = () => {
                     duration: 5000,
                     isClosable: true,
                 });
+                navigate(-1);
             } else {
                 const errorMessage = await response.text();
                 console.error('Error updating data:', errorMessage);

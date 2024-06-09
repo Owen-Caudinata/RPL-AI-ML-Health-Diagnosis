@@ -44,14 +44,14 @@ const Chat = () => {
                 url: chatbotApiUrl + '/chat',
             });
 
-            const result = await chain.invoke({ text: inputText });
+            const result = await chain.invoke(inputText);
 
             // const result = await response.json();
 
             console.log(result);
 
             const newAIMessage = {
-                "content": result.content,
+                "content": result,
                 "additional_kwargs": {},
                 "type": "ai",
                 "example": false

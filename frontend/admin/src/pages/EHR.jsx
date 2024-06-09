@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useAuth } from '../hooks/AuthProvider';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
@@ -19,7 +19,7 @@ const EHR = () => {
 
                 if (!response.ok) {
                     if (response.status === 401) {
-                        auth.logOut()
+                        auth.logOut();
                         return;
                     } else {
                         throw new Error('Failed to fetch data');
@@ -37,25 +37,17 @@ const EHR = () => {
     }, []);
 
     return (
-        <Table variant="simple">
-            <Thead>
-                <Tr>
-                    {data.length > 0 &&
-                        Object.keys(data[0]).map((key) => (
-                            <Th key={key}>{key}</Th>
-                        ))}
-                </Tr>
-            </Thead>
-            <Tbody>
-                {data.map((item, index) => (
-                    <Tr key={index}>
-                        {Object.values(item).map((value, index) => (
-                            <Td key={index}>{value}</Td>
-                        ))}
-                    </Tr>
-                ))}
-            </Tbody>
-        </Table>
+        <Box p={4} borderWidth="1px" borderRadius="lg">
+            {data.map((item, index) => (
+                <Box key={index} mb={4} p={2} borderWidth="1px" borderRadius="md">
+                    {Object.entries(item).map(([key, value]) => (
+                        <Box key={key}>
+                            <strong>{key}:</strong> {value}
+                        </Box>
+                    ))}
+                </Box>
+            ))}
+        </Box>
     );
 };
 

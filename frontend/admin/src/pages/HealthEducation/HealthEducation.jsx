@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
 
-const DailyNewsletter = () => {
+const Blog = () => {
     const toast = useToast();
     const navigate = useNavigate();
     const auth = useAuth();
@@ -76,57 +76,35 @@ const DailyNewsletter = () => {
             <Button as="a" href="/blog/add" colorScheme="teal" mb={4}>
                 Add Blog
             </Button>
-            <Table variant="simple">
-                <Thead>
-                    <Tr>
-                        <Th key="id">ID</Th>
-                        <Th key="createdAt">Created At</Th>
-                        <Th key="updatedAt">Updated At</Th>
-                        <Th key="title">Title</Th>
-                        <Th key="content">Content</Th>
-                        <Th key="author">Author</Th>
-                        <Th key="category">Category</Th>
-                        <Th key="published">Published</Th>
+            <Box display="flex" flexDirection="column" borderWidth="1px" borderRadius="lg" overflow="auto">
+                {data.map((item, index) => (
+                    <Box key={index} p={4} borderBottomWidth="1px" borderColor="gray.200">
+                        <Box fontWeight="bold">ID: {item.id}</Box>
+                        <Box>Created At: {item.createdAt}</Box>
+                        <Box>Updated At: {item.updatedAt}</Box>
+                        <Box>Title: {item.title}</Box>
+                        <Box>Content: {item.content}</Box>
+                        <Box>Author: {item.author}</Box>
+                        <Box>Category: {item.category}</Box>
+                        <Box>
+                            Published:
+                            <Checkbox isChecked={item.published} isReadOnly ml={2}>
 
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {data.map((item, index) => (
-                        <Tr key={index}>
-                            <Td>{item.id}</Td>
-                            <Td>{item.createdAt}</Td>
-                            <Td>{item.updatedAt}</Td>
-                            <Td>{item.title}</Td>
-                            <Td>{item.content}</Td>
-                            <Td>{item.author}</Td>
-                            <Td>{item.category}</Td>
-                            <Td><Checkbox isChecked={item.published} isReadOnly>
-                                Published
-                            </Checkbox></Td>
-
-                            <Td>
-                                <Button
-                                    colorScheme="blue"
-                                    size="sm"
-                                    onClick={() => onEdit(item.id)}
-                                >
-                                    Edit
-                                </Button>
-
-                                <Button
-                                    colorScheme="red"
-                                    size="sm"
-                                    onClick={() => onDelete(item.id)}
-                                >
-                                    Delete
-                                </Button>
-                            </Td>
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
+                            </Checkbox>
+                        </Box>
+                        <Box mt={2}>
+                            <Button colorScheme="blue" size="sm" onClick={() => onEdit(item.id)} mr={2}>
+                                Edit
+                            </Button>
+                            <Button colorScheme="red" size="sm" onClick={() => onDelete(item.id)}>
+                                Delete
+                            </Button>
+                        </Box>
+                    </Box>
+                ))}
+            </Box>
         </Box>
     );
 };
 
-export default DailyNewsletter;
+export default Blog;

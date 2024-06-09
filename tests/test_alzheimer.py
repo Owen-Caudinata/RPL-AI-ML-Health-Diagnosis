@@ -34,10 +34,10 @@ class UserVisitAlzheimer(unittest.TestCase):
         login_button.submit()
 
         time.sleep(5)
-        self.assertIn("Web Logo", driver.page_source)
+        self.assertIn("Doc.ai", driver.page_source)
 
         driver.get(USER_URL + "/alzheimer")
-        time.sleep(2)
+        time.sleep(5)
 
         self.assertIn("Prediction", driver.page_source)
 
@@ -60,7 +60,7 @@ class AdminVisitAlzheimer(unittest.TestCase):
         time.sleep(5)
 
         driver.get(ADMIN_URL + "/alzheimer")
-        time.sleep(1)
+        time.sleep(5)
 
         self.assertIn("Select an image", driver.page_source)
 

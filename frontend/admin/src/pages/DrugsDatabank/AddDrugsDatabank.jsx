@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Checkbox, Box, Input, Button, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const mainApiUrl = import.meta.env.VITE_MAIN_API_URL;
 
@@ -8,6 +9,7 @@ const AddEHR = () => {
     const toast = useToast();
     const [formData, setFormData] = useState({ name: '', manufacturer: '', category: '', description: '', published: false });
     const auth = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -38,6 +40,7 @@ const AddEHR = () => {
                     isClosable: true,
                 });
 
+                navigate(-1);
                 // Clear the form data
                 setFormData({});
 
